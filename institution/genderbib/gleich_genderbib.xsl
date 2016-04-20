@@ -6,24 +6,376 @@
 	<!--Nicht dargestellte Zeichen (sog. "Whitespace")  werden im XML Dokument entfernt um Speicherplatz zu sparen-->
 	<xsl:strip-space elements="*"/>
 	
-	
-<!--root knoten-->
+
+
+<!--Der Hauptknoten-->	
 	<xsl:template match="genderbib">
+		<xsl:element name="catalog">
+			<xsl:apply-templates select="//datensatz" />
+			<xsl:apply-templates select="//Erf_-stelle[1]" />
+			<xsl:apply-templates select="//tagesdatum[1]" />
+			<xsl:apply-templates select="//Erfassungsdatum[1]" />
+			<!--<xsl:apply-templates/>-->
+		</xsl:element>
+	</xsl:template>
+
+<!--root knoten-->
+<!--	<xsl:template match="genderbib">
 		<xsl:element name="catalog">
 			<xsl:apply-templates/>
 		</xsl:element>
-	</xsl:template>
+	</xsl:template>-->
+
+
+
+<!--Zeitschrift-->
+<!--Zeitschrift-->
+<!--Zeitschrift-->
+
+	<xsl:template match="//tagesdatum">
+
+	<xsl:for-each select="../objektart[text()='Artikel']">
+	
+	<xsl:if test="../Sammeltitel[string-length() != 0]">
+	
+		<xsl:element name="record">
+		
+		
+		<xsl:element name="vufind">
+
+			<!--Identifikator-->
+				<id>
+					<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+					<xsl:text>genderbib</xsl:text>
+					</id>
+					
+			<!--recordCreationDate-->
+				<recordCreationDate>
+						<xsl:value-of select="current-dateTime()"/>
+						</recordCreationDate>
+					
+			<!--recordChangeDate-->
+				<recordChangeDate>
+					<xsl:value-of select="current-dateTime()"/>
+					</recordChangeDate>
+	
+			<!--recordType-->
+				<recordType>
+					<xsl:text>library</xsl:text>
+					</recordType>
+				
+			</xsl:element>
+
+		<xsl:element name="institution">
+
+			<!--institutionShortname-->			
+				<institutionShortname>
+					<xsl:text>Genderbibliothek</xsl:text>
+					</institutionShortname>
+	
+			<!--institutionFullname-->
+				<institutionFull>
+					<xsl:text>Genderbibliothek am Zentrum für transdisziplinäre Geschlechterstudien</xsl:text>
+					</institutionFull>
+							
+				<institutionID>
+					<xsl:text>genderbib</xsl:text>
+					</institutionID>
+			
+			<!--collection-->				
+				<collection><xsl:text>GReTA</xsl:text></collection>
+	
+			<!--isil-->
+				<isil><xsl:text>DE-B1542</xsl:text></isil>
+	
+			<!--linkToWebpage-->
+				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/genderbibliothek-hub/</xsl:text></link>
+	
+			<!--geoLocation-->
+				<geoLocation>
+					<latitude>52.520326</latitude>
+					<longitude>13.394218799999976</longitude>
+					</geoLocation>
+
+			</xsl:element>
+
+		<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+				<xsl:choose>
+					<xsl:when test="contains(../Sammeltitel[1], ':')">
+						<title>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../Sammeltitel[1], ':'))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../Sammeltitel[1], ':'))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:otherwise>
+						<title>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							</title_short>
+						</xsl:otherwise>
+					</xsl:choose>
+
+<!--PUBLISHING-->
+
+	<!--displayDate-->
+				<displayPublishDate><xsl:value-of select="../Jahr[1]"/></displayPublishDate>
+
+	<!--publishDate Jahresangabe-->
+				<xsl:apply-templates select="../Jahr"/>
+			
+	<!--placeOfPublication-->
+				<xsl:apply-templates select="../Ort" />
+	<!--publisher-->
+				<xsl:apply-templates select="../Verlag" />
+				
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+				
+	<!--issue Heft-->
+				<xsl:apply-templates select="../Heft-Nr_"/>
+
+	<!--volume Jahrgang-->
+				<xsl:apply-templates select="../Jg_"/>
+				
+			</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../Sammeltitel" /></hierarchy_top_title>
+				
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+						<xsl:text>genderbib</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="../Sammeltitel" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:element>
+		
+		</xsl:if>
+		</xsl:for-each>
+
+</xsl:template>
+
+
+
+
+<!--Zeitschriftenheft-->
+<!--Zeitschriftenheft-->
+<!--Zeitschriftenheft-->
+
+	<xsl:template match="//Erf_-stelle">
+
+	<xsl:for-each select="../objektart[text()='Artikel']">
+	
+	<xsl:if test="../Sammeltitel[string-length() != 0]">
+	
+	
+		<xsl:element name="record">
+		
+		
+		<xsl:element name="vufind">
+
+			<!--Identifikator-->
+				<id>
+					<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+					<xsl:value-of select="replace(../Jahr[1],'/','')"/>
+					<xsl:value-of select="replace(../Heft-Nr_[1],'/','')"/>
+					<xsl:text>genderbib</xsl:text>
+					</id>
+					
+			<!--recordCreationDate-->
+				<recordCreationDate>
+						<xsl:value-of select="current-dateTime()"/>
+						</recordCreationDate>
+					
+			<!--recordChangeDate-->
+				<recordChangeDate>
+					<xsl:value-of select="current-dateTime()"/>
+					</recordChangeDate>
+	
+			<!--recordType-->
+				<recordType>
+					<xsl:text>library</xsl:text>
+					</recordType>
+				
+			</xsl:element>
+
+		<xsl:element name="institution">
+
+			<!--institutionShortname-->			
+				<institutionShortname>
+					<xsl:text>Genderbibliothek</xsl:text>
+					</institutionShortname>
+	
+			<!--institutionFullname-->
+				<institutionFull>
+					<xsl:text>Genderbibliothek am Zentrum für transdisziplinäre Geschlechterstudien</xsl:text>
+					</institutionFull>
+							
+				<institutionID>
+					<xsl:text>genderbib</xsl:text>
+					</institutionID>
+			
+			<!--collection-->				
+				<collection><xsl:text>GReTA</xsl:text></collection>
+	
+			<!--isil-->
+				<isil><xsl:text>DE-B1542</xsl:text></isil>
+	
+			<!--linkToWebpage-->
+				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/genderbibliothek-hub/</xsl:text></link>
+	
+			<!--geoLocation-->
+				<geoLocation>
+					<latitude>52.520326</latitude>
+					<longitude>13.394218799999976</longitude>
+					</geoLocation>
+
+			</xsl:element>
+
+		<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+	
+			<xsl:variable name="title_edition">
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="../Jg_" />
+				<xsl:text>(</xsl:text>
+				<xsl:value-of select="../Jahr" />
+				<xsl:text>)</xsl:text>
+				<xsl:value-of select="../Heft-Nr_" />
+				</xsl:variable>
+			
+				<xsl:choose>
+					<xsl:when test="contains(../Sammeltitel[1], ':')">
+						<title>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="$title_edition" />
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../Sammeltitel[1], ':'))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../Sammeltitel[1], ':'))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:otherwise>
+						<title>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="$title_edition" />
+							</title>
+						<title_short>
+							<xsl:value-of select="../Sammeltitel[1]"/>
+							</title_short>
+						</xsl:otherwise>
+					</xsl:choose>
+
+<!--PUBLISHING-->
+
+	<!--displayDate-->
+				<displayPublishDate><xsl:value-of select="../Jahr[1]"/></displayPublishDate>
+
+	<!--publishDate Jahresangabe-->
+				<xsl:apply-templates select="../Jahr"/>
+			
+	<!--placeOfPublication-->
+				<xsl:apply-templates select="../Ort" />
+	<!--publisher-->
+				<xsl:apply-templates select="../Verlag" />
+				
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+				
+	<!--issue Heft-->
+				<xsl:apply-templates select="../Heft-Nr_"/>
+
+	<!--volume Jahrgang-->
+				<xsl:apply-templates select="../Jg_"/>
+				
+			</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../Sammeltitel" /></hierarchy_top_title>
+				
+					<hierarchy_parent_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="../Sammeltitel" /></hierarchy_parent_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+						<xsl:value-of select="replace(../Jahr[1],'/','')"/>
+						<xsl:value-of select="replace(../Heft-Nr_[1],'/','')"/>
+						<xsl:text>genderbib</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="../Sammeltitel" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:element>
+		
+		</xsl:if>
+		</xsl:for-each>
+
+</xsl:template>
+
+
+
+
+
 
 <!--Der Objektknoten-->
 	<xsl:template match="datensatz">
 	<xsl:variable name="s_sachtitel" select="translate(s__Sachtitel[1], translate(.,'0123456789', ''), '')"/>
 			
 			
-			<xsl:if test="contains(objektart,'Einzeltitel')">
+			<xsl:if test="objektart[text()!='NutzerIn']">
 			
 			<!--
-			
-			<xsl:if test="objektart[text()!='NutzerIn']">
 			
 			<xsl:if test="objektart[text()='Zeitschrift']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
@@ -31,29 +383,7 @@
 			<xsl:if test="contains(objektart,'Einzeltitel')">
 			
 			-->
-			<!--<xsl:if test="objektart[text()!='NutzerIn']">-->
-			<!--<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">-->
-			<!--<xsl:if test="objektart[text()='Zeitschrift/Heftitel']">-->
-			<!--<xsl:if test="contains(objektart,'Einzeltitel')">-->
 			
-			
-			<!--<xsl:if test="(objektart[text()!='NutzerIn']) and (objektart[text()='Buch'])">
-			<xsl:if test="objektart[text()='Buch']">-->
-			<!--<xsl:if test="objektart[text()='Zeitschrift']">-->
-			<!--<xsl:if test="objektart[text()='Zeitschrift']">-->
-			
-			<!--<xsl:if test="(objektart[text()!='NutzerIn']) and (objektart[text()='Zeitschrift/Heftitel'])">-->
-			<!--<xsl:if test="contains(objektart,'Einzeltitel')">-->
-			<!---->
-			<!--<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">-->
-			<!--xsl:if test="objektart[text()='Online-Artikel']">-->
-			<!--<xsl:if test="objektart[text()='Artikel']">-->
-			
-		<!--<xsl:if test="(objektart[text()='Magistra/Magister Gender Studies']) or (objektart[text()='Abschlussarbeit'])
-		or (objektart[text()='Buch']) or (objektart[text()='Zeitschrift'])
-		or (contains(objektart,'Einzeltitel')) or objektart[text()='Zeitschrift/Heftitel']">--><!--Datensätze dieser Objektart werden nicht umgewandelt-->
-
-		<!--<xsl:if test="objektart[text()='Zeitschrift/Heftitel']">-->
 
 		<xsl:variable name="id" select="id"/>
 			<xsl:element name="record">
@@ -308,52 +638,31 @@ den Datenbestand angezeigt-->
 
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-	
+				
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
-			
+				
 	<!--searchfilter-->
-				<!--<xsl:choose>
-					<xsl:when test="not(s__Aufsatz)">
-						<searchfilter>
-							<xsl:text>BU - Monografie</xsl:text>
-							</searchfilter>
-						</xsl:when>
-					<xsl:otherwise>
-						<searchfilter>
-							<xsl:text>BU - Sammelband</xsl:text>
-							</searchfilter>
-						</xsl:otherwise>
-					</xsl:choose>-->
-	
-	<!--documentType Objektartinformationen-->
 				<xsl:choose>
 					<xsl:when test="not(s__Aufsatz)">
-						<documentType>
+						<searchfilter>
 							<xsl:text>Monografie</xsl:text>
-							</documentType>
+							</searchfilter>
 						</xsl:when>
 					<xsl:otherwise>
-						<documentType>
+						<searchfilter>
 							<xsl:text>Sammelband</xsl:text>
-							</documentType>
+							</searchfilter>
 						</xsl:otherwise>
 				</xsl:choose>
+				
+	<!--documentType-->		
 				<xsl:apply-templates select="Dok-art"/>
 
 <!--TITLE-->
 
 	<!--title Titelinformationen-->
 				<xsl:apply-templates select="Sachtitel[1]"/>
-				<!--<xsl:choose>
-					<xsl:when test="Sachtitel">
-						<xsl:apply-templates select="Sachtitel[1]"/>
-						</xsl:when>
-					<xsl:when test="Reihentitel">
-						<xsl:apply-templates select="Reihentitel[1]"/>
-						</xsl:when>
-					</xsl:choose>-->
-				
 
 <!--RESPONSIBLE-->
 
@@ -475,7 +784,10 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 				
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Hochschulschrift</xsl:text></format>
-				
+
+	<!--searchfilter-->
+				<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
+
 	<!--documentType Dokumentinformation-->
 				<xsl:if test="objektart[text()='Magistra/Magister Gender Studies']">
 					<documentType>
@@ -607,7 +919,8 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>
-	
+	<!--searchfilter-->
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 	<!--documentType-->
 				<documentType><xsl:text>Artikel (Aktenschrank)</xsl:text></documentType>
 
@@ -731,17 +1044,50 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 					                      </project>-->
 </xsl:element>
 
-<!--<xsl:element name="functions">-->
-	
-<!--loan-->			<!--<xsl:if test="Ausleihe_an[1]">
-					<xsl:apply-templates select="Ausleihe_an[1]"/>
-				</xsl:if>
-	-->
-<!--hierarchyFields--> 	<!--<xsl:if test="Sign_[1]">
-					<xsl:apply-templates select="Sign_[1]"/>
-				</xsl:if>-->
-<!--
-</xsl:element>	-->
+<xsl:element name="functions">
+			
+			<hierarchyFields>
+					<hierarchy_top_id>
+								<xsl:value-of select="translate(Sammeltitel, '. ()/:-äüö,', '')" />
+								<!--<xsl:value-of select="replace(Jahr[1],'/','')"/>
+								<xsl:value-of select="replace(Heft-Nr_[1],'/','')"/>-->
+								<xsl:text>genderbib</xsl:text>
+								</hierarchy_top_id>
+							<hierarchy_top_title><xsl:value-of select="Sammeltitel" /></hierarchy_top_title>
+							
+							<hierarchy_parent_id>
+								<xsl:value-of select="translate(Sammeltitel, '. ()/:-äüö,', '')" />
+								<xsl:value-of select="replace(Jahr[1],'/','')"/>
+								<xsl:value-of select="replace(Heft-Nr_[1],'/','')"/>
+								<xsl:text>genderbib</xsl:text>
+								</hierarchy_parent_id>
+							<hierarchy_parent_title><xsl:value-of select="Sammeltitel" /></hierarchy_parent_title>
+					
+				
+					<is_hierarchy_id><xsl:value-of select="id" /><xsl:text>genderbib</xsl:text></is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:choose>
+							<xsl:when test="Einzeltitel[string-length() != 0]">
+								<xsl:value-of select="normalize-space(Einzeltitel)"/>
+								</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="normalize-space(Sammeltitel)"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:choose>
+							<xsl:when test="Einzeltitel[string-length() != 0]">
+								<xsl:value-of select="normalize-space(substring(Einzeltitel,1,3))"/>
+								</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="normalize-space(substring(Sammeltitel,1,3))"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</hierarchy_sequence>
+					</hierarchyFields>
+			</xsl:element>
 
 </xsl:if>
 
@@ -771,8 +1117,31 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Artikel</xsl:text></format>
-	
+				<xsl:choose>
+					<xsl:when test="ISSN[string-length() != 0]">
+						<format><xsl:text>Zeitschrift</xsl:text></format>
+						</xsl:when>
+					<xsl:when test="ISBN[string-length() != 0]">
+						<format><xsl:text>Buch</xsl:text></format>
+						</xsl:when>
+					<xsl:otherwise>
+						<format><xsl:text>Artikel</xsl:text></format>
+						</xsl:otherwise>
+					</xsl:choose>
+
+	<!--searchfilter-->
+				<xsl:choose>
+					<xsl:when test="ISSN[string-length() != 0]">
+						<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:when test="ISBN[string-length() != 0]">
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
+
 	<!--documentType-->
 				<documentType><xsl:text>Online-Artikel</xsl:text></documentType>
 				<xsl:apply-templates select="Dok-art"/>
@@ -781,7 +1150,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 
 	<!--Titelinformationen-->			
 				<xsl:choose>
-					<xsl:when test="Titel">
+					<xsl:when test="Titel[string-length() != 0]">
 						<xsl:apply-templates select="Titel[1]"/></xsl:when>
 					<xsl:when test="Sammeltitel">
 						<title>
@@ -848,7 +1217,23 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<xsl:apply-templates select="Verlag[1]"/>
 	
 	<!--sourceInfo-->
-				<xsl:apply-templates select="Sammeltitel"/>
+			
+					<xsl:if test="Titel[string-length() != 0]">
+						<xsl:choose>
+							<xsl:when test="contains(.,'In: ')">
+								<sourceInfo>
+									<xsl:value-of select="substring-after(Sammeltitel,'In: ')" />
+									</sourceInfo>
+								</xsl:when>
+							<xsl:otherwise>
+								<sourceInfo>
+									<xsl:value-of select="Sammeltitel" />
+									</sourceInfo>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:if>
+				
+				<!--<xsl:apply-templates select="Sammeltitel"/>-->
 	
 <!--PHYSICAL INFORMATION-->
 
@@ -938,7 +1323,10 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Film</xsl:text></format>
-				
+
+	<!--searchfilter-->
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>
+					
 	<!--documentType-->
 				<documentType><xsl:text>Video / DVD</xsl:text></documentType>
 				<xsl:apply-templates select="Dok-art"/>
@@ -1043,7 +1431,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<format><xsl:text>Zeitschrift</xsl:text></format>
 	
 	<!--searchfilter-->
-				<searchfilter><xsl:text>ZP - Zeitschrift</xsl:text></searchfilter>
+				<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 	
 	<!--documentType Objektartinformationen-->
 				<documentType><xsl:text>Online-Zeitschrift</xsl:text></documentType>
@@ -1209,10 +1597,7 @@ Zeitschriften/Hefttiteln angereichert. Eine Zeitschrift kann nicht ausgeliehen w
 		<format><xsl:text>Zeitschrift</xsl:text></format>
 
 	<!--searchfilter-->
-		<searchfilter><xsl:text>ZP - Zeitschrift</xsl:text></searchfilter>
-
-	<!--documentType Objektartinformationen-->
-		<documentType><xsl:text>Zeitschriftenreihe</xsl:text></documentType>
+		<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -1332,10 +1717,8 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 				<format><xsl:text>Zeitschrift</xsl:text></format>
 	
 	<!--searchfilter-->
-				<searchfilter><xsl:text>ZP - Zeitschriftenheft</xsl:text></searchfilter>
+				<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 	
-	<!--documentType Objektartinformationen-->
-				<documentType><xsl:text>Zeitschriftenheft</xsl:text></documentType>
 
 <!--TITLE-->
 
@@ -1354,6 +1737,8 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 				
 				<title>
 					<xsl:value-of select="$title" />
+					<xsl:text> </xsl:text>
+					<xsl:value-of select="Ausgabe"></xsl:value-of>
 					</title>
 				
 				<title_short>
@@ -2094,63 +2479,17 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 
 	<xsl:template match="Sammeltitel">
 		<xsl:choose>
-			
 			<xsl:when test="contains(.,'In: ')">
 				<sourceInfo>
 					<xsl:value-of select="substring-after(.,'In: ')" />
-					<!--<xsl:text> (</xsl:text>
-					<xsl:value-of select="../Jahr[1]" />
-					<xsl:text>)</xsl:text>
-					<xsl:choose>
-					<xsl:when test="../Heft-Nr_">
-						<xsl:value-of select="../Heft-Nr_" />
-						</xsl:when>
-					<xsl:when test="../H">
-						<xsl:value-of select="../H" />
-						</xsl:when>
-					</xsl:choose>
-					<xsl:if test="../Seitenzahlen">
-						<xsl:text>, </xsl:text>
-						<xsl:value-of select="../Seitenzahlen" />
-						</xsl:if>-->
 					</sourceInfo>
 				</xsl:when>
-			
 			<xsl:otherwise>
-				
-			<sourceInfo>
-				<xsl:value-of select="." />
-				
-				<!--<xsl:choose>
-					<xsl:when test="../Jahr[1]">
-						<xsl:text> (</xsl:text>
-						<xsl:value-of select="../Jahr[1]" />
-						<xsl:text>)</xsl:text>
-						</xsl:when>
-					<xsl:when test="../J_[1]">
-						<xsl:text> (</xsl:text>
-						<xsl:value-of select="../J_[1]" />
-						<xsl:text>)</xsl:text>
-						</xsl:when>
-					</xsl:choose>
-				
-				<xsl:choose>
-					<xsl:when test="../Heft-Nr_">
-						<xsl:value-of select="../Heft-Nr_" />
-						</xsl:when>
-					<xsl:when test="../H">
-						<xsl:value-of select="../H" />
-						</xsl:when>
-					</xsl:choose>
-					<xsl:if test="../Seitenzahlen">
-						<xsl:text>, </xsl:text>
-						<xsl:value-of select="../Seitenzahlen" />
-						</xsl:if>-->
-			</sourceInfo>
-				
+				<sourceInfo>
+					<xsl:value-of select="." />
+					</sourceInfo>
 				</xsl:otherwise>
-			</xsl:choose>
-		
+			</xsl:choose>	
 		</xsl:template>
 
 	<xsl:template match="Digitale_Dokumente">
