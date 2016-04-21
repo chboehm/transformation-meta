@@ -1566,6 +1566,21 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 
 </xsl:element>
 
+
+<xsl:if test="s__Ausgabe">
+	<xsl:element name="functions">	
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="Zeitschr_-Titel[1]" /></hierarchy_top_title>
+				
+					<is_hierarchy_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="Zeitschr_-Titel[1]" /></is_hierarchy_title>
+				
+				</hierarchyFields>
+		</xsl:element>	
+	</xsl:if>	
+
 </xsl:if>
 
 
