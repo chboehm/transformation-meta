@@ -15,21 +15,598 @@
 	
 	<xsl:strip-space elements="*"/>
 	
+	<!--Der Hauptknoten-->	
 	<xsl:template match="FrauenMediaTurm">
+		<xsl:element name="catalog">
+			<xsl:apply-templates select="//Tagesdatum_x058x_[1]" />
+			<xsl:apply-templates select="//Eingabe-Datum_x058x_[1]" />
+			<xsl:apply-templates select="//Datensatz" />
+		</xsl:element>
+	</xsl:template>
+	
+	<!--<xsl:template match="FrauenMediaTurm">
 		<xsl:element name="catalog">
 			<xsl:apply-templates/>
 		</xsl:element>
-		</xsl:template>
+		</xsl:template>-->
+
+
+<!--Zeitschrift aus Zeitschriftenartikel-->	
+<!--Zeitschrift aus Zeitschriftenartikel-->	
+<!--Zeitschrift aus Zeitschriftenartikel-->	
+	
+<xsl:template match="//Tagesdatum_x058x_">
+
+	<xsl:for-each select="../Objektart_x058x_[text()='Zeitschriftenartikel']">
+	
+	<xsl:if test="(../In_x032x_Zeitschrift_x058x_[string-length() != 0]) and (../Sammelwerk_x032x__x040x_Link_x041x__x058x_[string-length() = 0])">
+	
+	<xsl:element name="record">
+	
+	<xsl:element name="vufind">
 		
-	<xsl:template match="Datensatz">
+	<!--Identifikator-->
+				<id>
+					<xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+					<xsl:text>fmt</xsl:text>
+					</id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>	
+	</xsl:element>
+
+<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
+		<institutionID><xsl:text>fmt</xsl:text></institutionID>
+		<collection><xsl:text>FMT</xsl:text></collection>
+		<isil><xsl:text>DE-Kn184</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
+		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
+	</xsl:element>	
+	
+	<xsl:element name="dataset">
 		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+				<xsl:choose>
+					<xsl:when test="contains(../In_x032x_Zeitschrift_x058x_[1], ':')">
+						<title>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../In_x032x_Zeitschrift_x058x_[1], ':'))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../In_x032x_Zeitschrift_x058x_[1], ':'))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:otherwise>
+						<title>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							</title_short>
+						</xsl:otherwise>
+					</xsl:choose>
+			</xsl:element>
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../In_x032x_Zeitschrift_x058x_" /></hierarchy_top_title>
+				
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+						<xsl:text>fmt</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="../In_x032x_Zeitschrift_x058x_" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../In_x032x_Zeitschrift_x058x_"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
 		
-		<!--<xsl:if test="Objektart_x058x_[text()='Zeitschriftenausgabe']">-->
+		</xsl:element>
+		</xsl:if>
+
+		</xsl:for-each>
+
+
+
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+
+<xsl:for-each select="../Objektart_x058x_[text()='Zeitschriftenausgabe']">
+	
+	<!--<xsl:if test="(not(../Zeitschrift_x032x__x040x_Link_x041x__x058x_)) and (not(../Artikel_x032x__x040x_Link_x041x__x058x_))">-->	
+	<xsl:if test="not(../Zeitschrift_x032x__x040x_Link_x041x__x058x_)">	
+	
+	<xsl:variable name="title_zeitschrift">
+		<xsl:choose>
+			<xsl:when test="contains(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1], ';')">
+				<xsl:value-of select="substring-before(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')" />
+				</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="../Zeitschr_x046x__x047x_Reihentitel_x058x_[1]" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+	
+<xsl:element name="record">
+
+<xsl:element name="vufind">
+
+	<!--Identifikator-->
+		<id>
+			<xsl:value-of select="translate($title_zeitschrift, '. ()/:;-äüö,', '')" />
+			<xsl:text>fmt</xsl:text>
+			</id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>	
+	</xsl:element>
+
+<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
+		<institutionID><xsl:text>fmt</xsl:text></institutionID>
+		<collection><xsl:text>FMT</xsl:text></collection>
+		<isil><xsl:text>DE-Kn184</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
+		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
+	</xsl:element>	
+	
+<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+					<title>
+						<xsl:value-of select="normalize-space($title_zeitschrift)" />
+						</title>
+					<title_short>
+						<xsl:value-of select="normalize-space($title_zeitschrift)" />
+						</title_short>
+	</xsl:element>
+	
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="normalize-space(translate($title_zeitschrift, '. ()/:;-äüö,', ''))" /><xsl:text>fmt</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="normalize-space($title_zeitschrift)" /></hierarchy_top_title>
+				
+					<is_hierarchy_id>
+						<xsl:value-of select="translate($title_zeitschrift, '. ()/:;-äüö,', '')" />
+						<xsl:text>fmt</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="normalize-space($title_zeitschrift)" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+	</xsl:element>
+	</xsl:if>
+</xsl:for-each>
+
+
+
+<!--Zeitschrift aus Artikel aus Sammelwerk-->	
+<!--Zeitschrift aus Artikel aus Sammelwerk-->	
+<!--Zeitschrift aus Artikel aus Sammelwerk-->	
+
+<xsl:for-each select="../Objektart_x058x_[text()='Aufsatz aus Sammelwerk']">
+	
+	<xsl:variable name="test_z-link">
+		<xsl:value-of select="substring-before(../Signatur_x058x_,'-')" />
+		</xsl:variable>
+	
+	<xsl:if test="//Datensatz[Signatur_x058x_=$test_z-link]/Zeitschrift_x032x__x040x_Link_x041x__x058x_[string-length() != 0]">
+	
+	<xsl:variable name="title_zeitschrift">
+		<xsl:choose>
+			<xsl:when test="contains(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1], ':')">
+				<xsl:value-of select="substring-before(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')" />
+				</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="../Zeitschr_x046x__x047x_Reihentitel_x058x_[1]" />
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:text> </xsl:text>
+		</xsl:variable>
+	
+<xsl:element name="record">
+	
+<xsl:element name="vufind">
+	
+	<!--Identifikator-->
+		<id>
+			<xsl:value-of select="translate($test_z-link, '. +()/:-äüö,', '')" />
+			<xsl:text>fmt</xsl:text>
+			</id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>	
+	</xsl:element>
+
+<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
+		<institutionID><xsl:text>fmt</xsl:text></institutionID>
+		<collection><xsl:text>FMT</xsl:text></collection>
+		<isil><xsl:text>DE-Kn184</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
+		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
+	</xsl:element>	
+	
+<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+					<title>
+						<xsl:value-of select="$title_zeitschrift" />
+						</title>
+					<title_short>
+						<xsl:value-of select="$title_zeitschrift" />
+						</title_short>
+						
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate($title_zeitschrift, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="$title_zeitschrift" /></hierarchy_top_title>
+				
+					<is_hierarchy_id>
+						<xsl:value-of select="translate($title_zeitschrift, '. +()/:-äüö,', '')" />
+						<xsl:text>fmt</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="$title_zeitschrift" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:element>
+	</xsl:element>
+	</xsl:if>
+</xsl:for-each>
+
+
+
+</xsl:template>
+	
+
+
+
+<!--Zeitschriftenheft aus Zeitschriftenartikel-->
+<!--Zeitschriftenheft aus Zeitschriftenartikel-->
+<!--Zeitschriftenheft aus Zeitschriftenartikel-->
+
+	<xsl:template match="//Eingabe-Datum_x058x_">
+	
+	<xsl:for-each select="../Objektart_x058x_[text()='Zeitschriftenartikel']">
+
+	<xsl:if test="(../In_x032x_Zeitschrift_x058x_[string-length() != 0]) and (../Sammelwerk_x032x__x040x_Link_x041x__x058x_[string-length() = 0]) ">
+	
+	<xsl:element name="record">
+		
+		<nix>
+		<xsl:value-of select="../Sammelwerk_x032x__x040x_Link_x041x__x058x_"></xsl:value-of></nix>
+		
+	<xsl:element name="vufind">
+				
+	<!--Identifikator-->
+				<id>
+					<xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+					<xsl:value-of select="replace(../Jahr_x058x_[1],'/','')"/>
+					<xsl:value-of select="translate(../Heft_x058x_[1], '. +()/:-äüö,', '')" />
+					<xsl:text>fmt</xsl:text>
+					
+					</id>
+				
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>	
+	</xsl:element>
+
+<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
+		<institutionID><xsl:text>fmt</xsl:text></institutionID>
+		<collection><xsl:text>FMT</xsl:text></collection>
+		<isil><xsl:text>DE-Kn184</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
+		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
+	</xsl:element>	
+
+		<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+	
+			<xsl:variable name="title_edition">
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="../Jg_x046x__x047x_Vol_x046x__x058x_" />
+				<xsl:text>(</xsl:text>
+				<xsl:value-of select="../Jahr_x058x_" />
+				<xsl:text>)</xsl:text>
+				<xsl:value-of select="../Heft_x058x_" />
+				</xsl:variable>
+			
+			<xsl:choose>
+					<xsl:when test="contains(../In_x032x_Zeitschrift_x058x_[1], ':')">
+						<title>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							<xsl:value-of select="$title_edition" />
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../In_x032x_Zeitschrift_x058x_[1], ':'))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../In_x032x_Zeitschrift_x058x_[1], ':'))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:otherwise>
+						<title>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							<xsl:value-of select="$title_edition" />
+							</title>
+						<title_short>
+							<xsl:value-of select="../In_x032x_Zeitschrift_x058x_[1]"/>
+							</title_short>
+						</xsl:otherwise>
+					</xsl:choose>
+
+<!--PUBLISHING-->
+
+	<!--displayDate-->
+				<!--<displayPublishDate><xsl:value-of select="../Jahr_x058x_[1]"/></displayPublishDate>-->
+
+	<!--publishDate Jahresangabe-->
+				<xsl:apply-templates select="../Jahr_x058x_"/>
+				
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+				
+	<!--issue Heft-->
+				<xsl:apply-templates select="../Heft_x058x_"/>
+
+	<!--volume Jahrgang-->
+				<xsl:apply-templates select="../Jg_x046x__x047x_Vol_x046x__x058x_"/>
+				
+			</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+				<hierarchy_top_id><xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="../In_x032x_Zeitschrift_x058x_" /></hierarchy_top_title>
+				
+				<hierarchy_parent_id><xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="../In_x032x_Zeitschrift_x058x_" /></hierarchy_parent_title>
+				
+				<is_hierarchy_id>
+					<xsl:value-of select="translate(../In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+					<xsl:value-of select="replace(../Jahr_x058x_[1],'/','')"/>
+					<xsl:value-of select="translate(../Heft_x058x_[1], '. +()/:-äüö,', '')" />
+					<xsl:text>fmt</xsl:text>
+					</is_hierarchy_id>
+				<is_hierarchy_title><xsl:value-of select="../In_x032x_Zeitschrift_x058x_" /></is_hierarchy_title>
+				
+				<hierarchy_sequence><xsl:value-of select="../Jahr_x058x_[1]"></xsl:value-of></hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:element>
+		
+		</xsl:if>
+		</xsl:for-each>
+
+
+
+
+
+<!--Zeitschriftenheft aus Artikel aus Sammelwerk-->
+<!--Zeitschriftenheft aus Artikel aus Sammelwerk-->
+<!--Zeitschriftenheft aus Artikel aus Sammelwerk-->
+
+<xsl:for-each select="../Objektart_x058x_[text()='Aufsatz aus Sammelwerk']">
+	
+	<xsl:variable name="test_z-link">
+		<xsl:value-of select="substring-before(../Signatur_x058x_,'-')" />
+		</xsl:variable>
+	
+	<xsl:if test="//Datensatz[Signatur_x058x_=$test_z-link]/Zeitschrift_x032x__x040x_Link_x041x__x058x_[string-length() != 0]">
+	
+	<xsl:variable name="title_edition">
+				<!--<xsl:text> </xsl:text>-->
+				<!--<xsl:value-of select="../Jg_x046x__x047x_Vol_x046x__x058x_" />-->
+				<xsl:text>(</xsl:text>
+				<xsl:value-of select="../Jahr_x058x_" />
+				<xsl:text>)</xsl:text>
+				<xsl:value-of select="../Heft_x058x_" />
+				</xsl:variable>
+			
+			<xsl:variable name="title">
+				<xsl:choose>
+					<xsl:when test="contains(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1], ';')">
+						<xsl:value-of select="normalize-space(substring-before(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';'))" />
+						</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="../Zeitschr_x046x__x047x_Reihentitel_x058x_[1]" />
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+	<!--
+	<xsl:if test="../Zeitschr_x046x__x047x_Reihentitel_x058x_[string-length() != 0]">-->
+	
+	<xsl:element name="record">
+		
+	<xsl:element name="vufind">
+				
+	<!--Identifikator-->
+				<id>
+				<xsl:choose>
+					<xsl:when test="contains(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')">
+						<xsl:value-of select="substring-before(translate(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1], '. +()/:-äüö,', ''),';')" />
+						</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="translate(../Zeitschr_x046x__x047x_Reihentitel_x058x_[1], '. +()/:-äüö,', '')" />
+						</xsl:otherwise>
+					</xsl:choose>	
+					<xsl:value-of select="translate($title_edition, '. +()/:-äüö,', '')"/>
+					<!--<xsl:value-of select="translate(../Heft_x058x_[1], '. +()/:-äüö,', '')" />-->
+					<xsl:text>fmt</xsl:text>
+					</id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>	
+	</xsl:element>
+
+<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
+		<institutionID><xsl:text>fmt</xsl:text></institutionID>
+		<collection><xsl:text>FMT</xsl:text></collection>
+		<isil><xsl:text>DE-Kn184</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
+		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
+	</xsl:element>	
+
+		<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+			
+				<title>
+					<xsl:value-of select="$title" />
+					<xsl:text> </xsl:text>
+					<xsl:value-of select="$title_edition" />
+					</title>
+				
+				<title_short>
+					<xsl:value-of select="$title" />
+					</title_short>
+						
+
+<!--PUBLISHING-->
+
+	<!--displayDate-->
+				<!--<displayPublishDate><xsl:value-of select="../Jahr_x058x_[1]"/></displayPublishDate>-->
+
+	<!--publishDate Jahresangabe-->
+				<xsl:apply-templates select="../Jahr_x058x_"/>
+				
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+				
+	<!--issue Heft-->
+				<xsl:apply-templates select="../Heft_x058x_"/>
+
+	<!--volume Jahrgang-->
+				<xsl:apply-templates select="../Jg_x046x__x047x_Vol_x046x__x058x_"/>
+				
+			</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+				<hierarchy_top_id><xsl:value-of select="translate($title, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title>
+				
+				<hierarchy_parent_id><xsl:value-of select="translate($title, '. +()/:-äüö,', '')" /><xsl:text>fmt</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title>
+				
+				<is_hierarchy_id>
+					<xsl:value-of select="translate($title, '. +()/:-äüö,', '')" />
+					<xsl:value-of select="replace(../Jahr_x058x_[1],'/','')"/>
+					<xsl:value-of select="translate(../Heft_x058x_[1], '. +()/:-äüö,', '')" />
+					<xsl:text>fmt</xsl:text>
+					</is_hierarchy_id>
+				<is_hierarchy_title><xsl:value-of select="$title_edition" /></is_hierarchy_title>
+				
+				<hierarchy_sequence><xsl:value-of select="../Jahr_x058x_[1]"></xsl:value-of></hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:element>
+		
+		</xsl:if>
+		</xsl:for-each>
+
+</xsl:template>
+
+	
+
+
+
+<xsl:template match="Datensatz">		
 		
 		<!--
+		
 		<xsl:if test="Objektart_x058x_[text()='Zeitschriftenausgabe']">
 		<xsl:if test="Objektart_x058x_[text()='Zeitschrift']">
-		
 		
 		-->
 		
@@ -140,26 +717,28 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Buch</xsl:text></format>
+	<!--searchfilter-->
+				<xsl:choose>
+					<xsl:when test="Aufs_x132x_tze_x032x__x040x_Link_x041x__x058x_">
+						<searchfilter>
+							<xsl:text>Sammelband</xsl:text>
+							</searchfilter>
+						</xsl:when>
+					<xsl:when test="Formen_x058x_[text()='Hochschulschrift']">
+						<searchfilter>
+							<xsl:text>Hochschulschrift</xsl:text>
+							</searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter>
+							<xsl:text>Monografie</xsl:text>
+							</searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 	<!--documentType-->
 					<xsl:apply-templates select="Formen_x058x_"/>
 					
-					<!--<xsl:choose>
-					<xsl:when test="Aufs_x132x_tze_x032x__x040x_Link_x041x__x058x_">
-						<documentType>
-							<xsl:text>Sammelband</xsl:text>
-							</documentType>
-						</xsl:when>
-					<xsl:when test="*[.='Hochschulschrift']">
-						<documentType>
-							<xsl:text>Hochschulschrift</xsl:text>
-							</documentType>
-						</xsl:when>
-					<xsl:otherwise>
-						<documentType>
-							<xsl:text>Monografie</xsl:text>
-							</documentType>
-						</xsl:otherwise>
-				</xsl:choose>-->
+					
 
 <!--TITLE-->
 
@@ -280,7 +859,7 @@
 					<format><xsl:text>Zeitschrift</xsl:text></format>
 	
 	<!--searchfilter-->
-					<searchfilter><xsl:text>ZP - Zeitschrift</xsl:text></searchfilter>
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 				
 	<!--documentType-->
 					<!--<documentType>
@@ -533,10 +1112,10 @@
 					<format><xsl:text>Zeitschrift</xsl:text></format>
 					
 	<!--searchfilter-->
-					<searchfilter><xsl:text>ZP - Zeitschriftenheft</xsl:text></searchfilter>
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 		
 	<!--documentType-->
-					<documentType><xsl:text>Zeitschriftenheft</xsl:text></documentType>
+					<!--<documentType><xsl:text>Zeitschriftenheft</xsl:text></documentType>-->
 					<xsl:apply-templates select="Formen_x058x_"/>
 					
 <!--TITLE-->
@@ -544,12 +1123,25 @@
 	<!--title Titelinformationen-->
 					<xsl:choose>
 						<xsl:when test="Titel_x058x_">
-							<xsl:apply-templates select="Titel_x058x_"/>
+							<title>
+								<xsl:value-of select="normalize-space(replace(Titel_x058x_,'_',''))"/>
+								<xsl:text> (</xsl:text>
+								<xsl:value-of select="Jahr_x058x_" />
+								<xsl:text>)</xsl:text>
+								<xsl:value-of select="Heft_x058x_" />
+								</title>
+							<title_short>
+								<xsl:value-of select="normalize-space(replace(Titel_x058x_,'_',''))"/>
+								</title_short>
+							<!--<xsl:apply-templates select="Titel_x058x_"/>-->
 						</xsl:when>
 						<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
 							<title>
 								<xsl:value-of select="normalize-space(replace(Zeitschrift_x032x__x040x_Link_x041x__x058x_,'_',''))"/>
-								<!--<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>-->
+								<xsl:text> (</xsl:text>
+								<xsl:value-of select="Jahr_x058x_" />
+								<xsl:text>)</xsl:text>
+								<xsl:value-of select="Heft_x058x_" />
 								</title>
 							<title_short>
 								<xsl:value-of select="normalize-space(replace(Zeitschrift_x032x__x040x_Link_x041x__x058x_,'_',''))"/>
@@ -559,7 +1151,10 @@
 						<xsl:otherwise>
 							<title>
 								<xsl:value-of select="substring-before(substring-after($connect,'title:'),':title')" />
-								<!--<xsl:value-of select="//Datensatz[Signatur_x058x_=$rel]/Zeitschriftentitel_x058x_"/>-->
+								<xsl:text> (</xsl:text>
+								<xsl:value-of select="Jahr_x058x_" />
+								<xsl:text>)</xsl:text>
+								<xsl:value-of select="Heft_x058x_" />
 								</title>
 							<title_short>
 								<xsl:value-of select="substring-before(substring-after($connect,'title:'),':title')" />
@@ -733,70 +1328,100 @@
 		<!--END OF DATASETELEMENT-->
 	
 <!--HIERARCHY-->		
-				<xsl:if test="(Artikel_x032x__x040x_Link_x041x__x058x_) or (Zeitschrift_x032x__x040x_Link_x041x__x058x_)">
+				<!--<xsl:if test="(Artikel_x032x__x040x_Link_x041x__x058x_) or (Zeitschrift_x032x__x040x_Link_x041x__x058x_) or (Zeitschr_x046x__x047x_Reihentitel_x058x_)">-->
+				<xsl:if test="(Zeitschrift_x032x__x040x_Link_x041x__x058x_) or (Zeitschr_x046x__x047x_Reihentitel_x058x_)">
 					<xsl:element name="functions">
 					<xsl:variable name="journaltitle" select="Zeitschrift_x032x__x040x_Link_x041x__x058x_" />
 						
 						<hierarchyFields>
 							
+							<hierarchy_top_id>
 							<xsl:choose>
 								<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
-									<hierarchy_top_id>
-										<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
-										<xsl:text>fmt</xsl:text>
-										</hierarchy_top_id>
-									<hierarchy_top_title>
-										<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>
-										</hierarchy_top_title>
-									<hierarchy_parent_id>
-										<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
-										<xsl:text>fmt</xsl:text>
-										</hierarchy_parent_id>
-									<hierarchy_parent_title>
-										<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>
-										</hierarchy_parent_title>
+									<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
+									<xsl:text>fmt</xsl:text>
 									</xsl:when>
-								<xsl:when test="Artikel_x032x__x040x_Link_x041x__x058x_">
-									<hierarchy_top_id>
-										<xsl:value-of select="Objektnummer_x058x_"/>
-										<xsl:text>fmt</xsl:text>
-										</hierarchy_top_id>
-									<hierarchy_top_title>
-										<xsl:choose>
-											<xsl:when test="Titel_x058x_">
-												<xsl:value-of select="Titel_x058x_"/>
-												</xsl:when>
-											<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
-												<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>
-												</xsl:when>
-											</xsl:choose>
-										</hierarchy_top_title>
-									</xsl:when>
+								<xsl:when test="Zeitschr_x046x__x047x_Reihentitel_x058x_">
+									<xsl:choose>
+										<xsl:when test="contains(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')">
+											<xsl:value-of select="substring-before(translate(Zeitschr_x046x__x047x_Reihentitel_x058x_[1], '. +()/:-äüö,', ''),';')" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="translate(Zeitschr_x046x__x047x_Reihentitel_x058x_[1], '. +()/:-äüö,', '')" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:otherwise>
+										</xsl:choose>		
+									</xsl:when>		
 								</xsl:choose>
-							<!--<hierarchy_top_id>
-								<xsl:value-of select="Objektnummer_x058x_"/>
-								<xsl:text>fmt</xsl:text>
-							</hierarchy_top_id>
+								</hierarchy_top_id>
+							
 							<hierarchy_top_title>
-								<xsl:choose>
-									<xsl:when test="Titel_x058x_">
-										<xsl:value-of select="Titel_x058x_"/>
+							<xsl:choose>
+								<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
+									<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
+									<xsl:text>fmt</xsl:text>
 									</xsl:when>
-									<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
-										<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>
-										</xsl:when>
-									<xsl:when test="//DatensatzZeitschrift_x032x__x040x_Link_x041x__x058x_">
-										<xsl:value-of select="substring-before(substring-after($connect,'title:'),':title')" />
-									</xsl:when>
+								<xsl:when test="Zeitschr_x046x__x047x_Reihentitel_x058x_">
+									<xsl:choose>
+										<xsl:when test="contains(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')">
+											<xsl:value-of select="substring-before(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')" />
+											</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="Zeitschr_x046x__x047x_Reihentitel_x058x_[1]" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:otherwise>
+										</xsl:choose>		
+									</xsl:when>		
 								</xsl:choose>
-							</hierarchy_top_title>-->
+								</hierarchy_top_title>
 							
+							<hierarchy_parent_id>
+							<xsl:choose>
+								<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
+									<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
+									<xsl:text>fmt</xsl:text>
+									</xsl:when>
+								<xsl:when test="Zeitschr_x046x__x047x_Reihentitel_x058x_">
+									<xsl:choose>
+										<xsl:when test="contains(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')">
+											<xsl:value-of select="substring-before(translate(Zeitschr_x046x__x047x_Reihentitel_x058x_[1], '. +()/:-äüö,', ''),';')" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="translate(Zeitschr_x046x__x047x_Reihentitel_x058x_, '. +()/:-äüö,', '')" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:otherwise>
+										</xsl:choose>		
+									</xsl:when>		
+								</xsl:choose>
+								</hierarchy_parent_id>
 							
+							<hierarchy_parent_title>
+							<xsl:choose>
+								<xsl:when test="Zeitschrift_x032x__x040x_Link_x041x__x058x_">
+									<xsl:value-of select="//Datensatz[Zeitschriftentitel_x058x_=$journaltitle]/Objektnummer_x058x_"/>
+									<xsl:text>fmt</xsl:text>
+									</xsl:when>
+								<xsl:when test="Zeitschr_x046x__x047x_Reihentitel_x058x_">
+									<xsl:choose>
+										<xsl:when test="contains(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')">
+											<xsl:value-of select="substring-before(Zeitschr_x046x__x047x_Reihentitel_x058x_[1],';')" />
+											</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="Zeitschr_x046x__x047x_Reihentitel_x058x_" />
+											<xsl:text>fmt</xsl:text>
+											</xsl:otherwise>
+										</xsl:choose>		
+									</xsl:when>		
+								</xsl:choose>
+								</hierarchy_parent_title>
 							
 							<is_hierarchy_id>
 								<xsl:value-of select="Objektnummer_x058x_"/>
 								<xsl:text>fmt</xsl:text>
-							</is_hierarchy_id>
+								</is_hierarchy_id>
+							
 							<is_hierarchy_title>
 								<xsl:choose>
 									<xsl:when test="Titel_x058x_">
@@ -806,10 +1431,14 @@
 										<xsl:value-of select="Zeitschrift_x032x__x040x_Link_x041x__x058x_"/>
 									</xsl:when>
 								</xsl:choose>
-							</is_hierarchy_title>
+								</is_hierarchy_title>
+							
 							<hierarchy_sequence>
-							<xsl:value-of select="normalize-space(Jahr_x058x_)"/>
-						</hierarchy_sequence>
+								<xsl:value-of select="normalize-space(Jahr_x058x_)"/>
+								</hierarchy_sequence>
+							
+							
+							
 						</hierarchyFields>
 					</xsl:element>
 				</xsl:if>
@@ -913,10 +1542,10 @@
 	
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
-					
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>		
 	<!--documentType-->
 					<xsl:apply-templates select="Formen_x058x_"/>
 					
@@ -1107,6 +1736,8 @@
 					
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 					
 	<!--documentType-->
 					<xsl:apply-templates select="Formen_x058x_"/>
@@ -1289,7 +1920,7 @@
 
 <!--Zeitschriftenartikel__________________________Zeitschriftenartikel__________________________Zeitschriftenartikel-->
 
-		<xsl:if test="(Objektart_x058x_[text()='Zeitschriftenartikel']) or   (Objektart_x058x_[text()='Artikel aus Hist. Frauenbewegungszeitschrift'])">
+		<xsl:if test="(Objektart_x058x_[text()='Zeitschriftenartikel']) or (Objektart_x058x_[text()='Artikel aus Hist. Frauenbewegungszeitschrift'])">
 				
 		<xsl:element name="dataset">
 
@@ -1349,6 +1980,8 @@
 	
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 					
 	<!--documentType-->
 					<xsl:apply-templates select="Formen_x058x_"/>
@@ -1502,18 +2135,14 @@
 				
 	<!--HIERARCHY-->
 				
-				<xsl:if test="(Sammelwerk_x032x__x040x_Link_x041x__x058x_) or (Heft_x032x__x040x_Link_x041x__x058x_)">
+				<xsl:if test="(Sammelwerk_x032x__x040x_Link_x041x__x058x_) or (Heft_x032x__x040x_Link_x041x__x058x_) or (In_x032x_Zeitschrift_x058x_) or (In_x032x_Zeitschrift_x032x__x040x_Link_x041x__x058x_)">
 				 <!--or (In_x032x_Zeitschrift_x032x__x040x_Link_x041x__x058x_)-->
 				<xsl:element name="functions">
 				
 					<hierarchyFields>
 					<xsl:choose>
 						
-						
-						
 					<xsl:when test="Sammelwerk_x032x__x040x_Link_x041x__x058x_">
-							
-						
 						
 						<xsl:variable name="connect">
 						<xsl:variable name="rel" select="Sammelwerk_x032x__x040x_Link_x041x__x058x_"/>
@@ -1561,10 +2190,6 @@
 							<xsl:value-of select="normalize-space(substring(Titel_x058x_[1],1,3))"/>
 							</hierarchy_sequence>
 							</xsl:when>
-						
-						
-						
-						
 						
 					<xsl:when test="Heft_x032x__x040x_Link_x041x__x058x_">
 							
@@ -1674,8 +2299,43 @@
 						
 							</xsl:when>
 						
+					<xsl:when test="In_x032x_Zeitschrift_x058x_">
+					
+						<hierarchy_top_id>
+							<xsl:value-of select="translate(In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+							<xsl:text>fmt</xsl:text>
+							</hierarchy_top_id>
+						<hierarchy_top_title>
+							<xsl:value-of select="In_x032x_Zeitschrift_x058x_" />
+							</hierarchy_top_title>
+							
+						<hierarchy_parent_id>
+							<xsl:value-of select="translate(In_x032x_Zeitschrift_x058x_, '. +()/:-äüö,', '')" />
+							<xsl:value-of select="replace(Jahr_x058x_[1],'/','')"/>
+							<xsl:value-of select="translate(Heft_x058x_[1], '. +()/:-äüö,', '')" />
+							<xsl:text>fmt</xsl:text>
+							</hierarchy_parent_id>
 						
-								</xsl:choose>
+						<hierarchy_parent_title>
+							<xsl:value-of select="In_x032x_Zeitschrift_x058x_" />
+							</hierarchy_parent_title>
+					
+				
+						<is_hierarchy_id>
+							<xsl:value-of select="Objektnummer_x058x_"/>
+							<xsl:text>fmt</xsl:text>
+							</is_hierarchy_id>
+					
+						<is_hierarchy_title>
+							<xsl:value-of select="normalize-space(Titel_x058x_)"/>
+							</is_hierarchy_title>
+					
+						<hierarchy_sequence>
+							<xsl:value-of select="normalize-space(Titel_x058x_)"/>
+							</hierarchy_sequence>
+						
+						</xsl:when>
+							</xsl:choose>
 						
 						</hierarchyFields>
 					
@@ -2326,12 +2986,15 @@
 			<xsl:when test="contains(.[1], ':')">
 				<title>
 					<xsl:value-of select="replace(.,'_','')"/>
+					
 				</title>
 				<title_short>
-					<xsl:value-of select="normalize-space(substring-before(.[1], ':'))"/>
+					<xsl:value-of select="normalize-space(replace((substring-before(.[1], ':')),'_',''))"/>
+					<!--<xsl:value-of select="normalize-space(substring-before(.[1], ':'))"/>-->
 				</title_short>
 				<title_sub>
-					<xsl:value-of select="normalize-space(substring-after(.[1], ':'))"/>
+					<xsl:value-of select="normalize-space(replace((substring-after(.[1], ':')),'_',''))"/>
+					<!--<xsl:value-of select="normalize-space(substring-after(.[1], ':'))"/>-->
 				</title_sub>
 			</xsl:when>
 			<xsl:otherwise>
