@@ -144,6 +144,7 @@
 									(contains(Dokumentart,'Interview')) or
 									(contains(Dokumentart,'Artikel'))">
 							<format><xsl:text>Artikel</xsl:text></format>
+							<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:when test="(contains(Dokumentart,'Diplomarbeit')) or
 									(contains(Dokumentart,'Diss')) or 
@@ -152,11 +153,13 @@
 									(contains(Dokumentart,'Magisterarbeit'))or 
 									(contains(Dokumentart,'Magistra'))">
 							<format><xsl:text>Hochschulschrift</xsl:text></format>
+							<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:when test="(contains(Dokumentart,'film')) or
 									(contains(Dokumentart,'DVD')) or
 									(contains(Dokumentart,'Video'))">
 							<format><xsl:text>Film</xsl:text></format>
+							<searchfilter><xsl:text>Film</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:when test="(contains(Dokumentart,'CD')) or
 									(contains(Dokumentart,'DVD')) or
@@ -164,14 +167,17 @@
 									(contains(Dokumentart,'MC')) or
 									(contains(Dokumentart,'Musik-Cassette'))">
 							<format><xsl:text>Tonträger</xsl:text></format>
+							<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:otherwise>
 							<xsl:choose>
 								<xsl:when test="contains(Seitenangabe_der_Zeitschrift,'-')">
 									<format><xsl:text>Artikel</xsl:text></format>
+									<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 									</xsl:when>
 								<xsl:otherwise>
 									<format><xsl:text>Buch</xsl:text></format>
+									<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:otherwise>
