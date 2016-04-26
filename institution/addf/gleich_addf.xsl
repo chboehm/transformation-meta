@@ -495,7 +495,7 @@
 						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Objektart[text()='Periodika']">
-						<format><xsl:text>Zeitschrift</xsl:text></format>
+						<format><xsl:text>Periodika</xsl:text></format>
 						<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
