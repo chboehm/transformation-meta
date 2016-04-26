@@ -838,6 +838,11 @@
 	
 	<xsl:template match="Quellenangabe_x032x_Aufsätze">
 		<xsl:choose>
+			<xsl:when test="contains(.,'In:')">
+				<sourceInfo>
+					<xsl:value-of select="normalize-space(substring-after(.,'In:'))"/>
+					</sourceInfo>
+				</xsl:when>
 			<xsl:when test="contains(.,'Aus')">
 				<sourceInfo>
 					<xsl:value-of select="normalize-space(substring-after(.,':'))"/>
