@@ -480,21 +480,31 @@
 				<xsl:choose>
 					<xsl:when test="Quellenang_x046x__x032x_Hochschulschriften">
 						<format><xsl:text>Hochschulschrift</xsl:text></format>
+						<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Quellenang_x046x__x032x_Monographien">
 						<format><xsl:text>Buch</xsl:text></format>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Quellenangabe_x032x_Aufsätze">
 						<format><xsl:text>Artikel</xsl:text></format>
+						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="//id[1]='11630'">
 						<format><xsl:text>Buch</xsl:text></format>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Objektart[text()='Periodika']">
 						<format><xsl:text>Zeitschrift</xsl:text></format>
+						<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
+						<format><xsl:text>Buch</xsl:text></format>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:otherwise>
-						<format><xsl:text>Akte</xsl:text></format>
+						<format><xsl:text>Archivgut</xsl:text></format>
+						<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 						</xsl:otherwise>
 					</xsl:choose>
 				
@@ -1109,8 +1119,8 @@
 		</xsl:template>
 	
 	<xsl:template match="prefTerm">
-		<title><xsl:value-of select="normalize-space(.)" /></title>
-		<title_short><xsl:value-of select="normalize-space(.)" /></title_short>
+		<title><xsl:value-of select="normalize-space(replace(.,'_',''))"/></title>
+		<title_short><xsl:value-of select="normalize-space(replace(.,'_',''))"/></title_short>
 		</xsl:template>
 	
 	<xsl:template match="Titel">
@@ -1119,8 +1129,8 @@
 		</xsl:template>
 	
 	<xsl:template match="Hauptsachtitel">
-		<title><xsl:value-of select="normalize-space(.)" /></title>
-		<title_short><xsl:value-of select="normalize-space(.)" /></title_short>
+		<title><xsl:value-of select="normalize-space(replace(.,'_',''))"/><!--<xsl:value-of select="normalize-space(.)" />--></title>
+		<title_short><xsl:value-of select="normalize-space(replace(.,'_',''))"/></title_short>
 		</xsl:template>
 
 	<xsl:template match="Zeitschriftentitel">
