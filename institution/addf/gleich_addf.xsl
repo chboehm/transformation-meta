@@ -819,9 +819,16 @@
 		</xsl:template>
 	
 	<xsl:template match="ZDB-ID">
-		<zdbId>
-			<xsl:value-of select="normalize-space(.)" />
-			</zdbId>
+		<xsl:choose>
+			<xsl:when test="contains(.,'keine')">
+				
+				</xsl:when>
+			<xsl:otherwise>
+				<zdbId>
+					<xsl:value-of select="normalize-space(.)" />
+					</zdbId>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:template>
 	
 	<xsl:template match="ISSN">
