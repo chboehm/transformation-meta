@@ -150,9 +150,7 @@
 			
 					<!--<shelfMark><xsl:value-of select="archdesc/did/unitid" /></shelfMark>-->
 					
-					<!--<sourceInfo>
-						<xsl:text>Bund Deutscher Frauenvereine (BDF)</xsl:text>
-						</sourceInfo>-->
+					<sourceInfo><xsl:text>Bund Deutscher Frauenvereine (BDF)</xsl:text></sourceInfo>
 					
 					</dataset>
 					
@@ -250,7 +248,9 @@
 					<!--<description><xsl:value-of select="archdesc/scopecontent/p"/></description>-->
 			
 					<!--<shelfMark><xsl:value-of select="archdesc/did/unitid" /></shelfMark>-->
-			
+					
+					<sourceInfo><xsl:text>Bund Deutscher Frauenvereine (BDF)</xsl:text></sourceInfo>
+					
 					</dataset>
 					
 				<functions>
