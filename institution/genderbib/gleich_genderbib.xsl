@@ -1119,7 +1119,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 	<!--format Objektartinformationen-->
 				<xsl:choose>
 					<xsl:when test="ISSN[string-length() != 0]">
-						<format><xsl:text>Zeitschrift</xsl:text></format>
+						<format><xsl:text>Periodika</xsl:text></format>
 						</xsl:when>
 					<xsl:when test="ISBN[string-length() != 0]">
 						<format><xsl:text>Buch</xsl:text></format>
@@ -1428,7 +1428,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Zeitschrift</xsl:text></format>
+				<format><xsl:text>Periodika</xsl:text></format>
 	
 	<!--searchfilter-->
 				<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
@@ -1609,7 +1609,7 @@ Zeitschriften/Hefttiteln angereichert. Eine Zeitschrift kann nicht ausgeliehen w
 		<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-		<format><xsl:text>Zeitschrift</xsl:text></format>
+		<format><xsl:text>Periodika</xsl:text></format>
 
 	<!--searchfilter-->
 		<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
@@ -1729,7 +1729,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 				
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Zeitschrift</xsl:text></format>
+				<format><xsl:text>Periodika</xsl:text></format>
 	
 	<!--searchfilter-->
 				<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
