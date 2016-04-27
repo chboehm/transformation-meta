@@ -78,56 +78,11 @@
 							<xsl:if test="not(useFor)">
 								<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
 								</xsl:if>
-							
-							
-							<!--<xsl:choose>
-								<xsl:when test="contains(prefTerm,'NL')">
-									<xsl:text>NL</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'NL')" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SP')">
-									<xsl:text>SP</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'SP')" />
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'ST')">
-									<xsl:text>ST</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'ST')" />
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SK')">
-									<xsl:text>SK</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'SK')" />
-									</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-									</xsl:otherwise>
-								</xsl:choose>-->
 							</xsl:when>
 					<!--andernfalls-->
 						<xsl:otherwise>
 							<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
 							<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-							<!--<xsl:choose>
-								<xsl:when test="contains(prefTerm,'NL')">
-									<xsl:text>NL</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'NL'))" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SP')">
-									<xsl:text>SP</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'SP'))" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'ST')">
-									<xsl:text>ST</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'ST'))" />
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SK')">
-									<xsl:text>SK</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'SK'))" />
-									</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-									</xsl:otherwise>
-								</xsl:choose>-->
-							
 							</xsl:otherwise>
 						</xsl:choose>
 					<!--<xsl:text>_</xsl:text>-->
@@ -167,23 +122,27 @@
 							<xsl:choose>
 								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Themen')">
 									<format>
-										<xsl:text>Bestandsübersicht</xsl:text>
+										<xsl:text>Archivgut</xsl:text>
 										</format>
+									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 									</xsl:when>
 								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Personen')">
 									<format>
-										<xsl:text>Bestandsübersicht</xsl:text>
+										<xsl:text>Archivgut</xsl:text>
 										</format>
+									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 									</xsl:when>
 								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Körperschaften')">
 									<format>
-										<xsl:text>Bestandsübersicht</xsl:text>
+										<xsl:text>Archivgut</xsl:text>
 										</format>
+									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 									</xsl:when>
 								<xsl:otherwise>
 									<format>
-										<xsl:text>Nachlass / Vorlass</xsl:text>
+										<xsl:text>Archivgut</xsl:text>
 										</format>
+									<searchfilter><xsl:text>Nachlass / Vorlass</xsl:text></searchfilter>
 									</xsl:otherwise>
 								</xsl:choose>
 							
@@ -285,34 +244,6 @@
 								<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /äüö,', '')" />
 								</xsl:if>
 								
-							<!--<xsl:choose>
-								
-								<xsl:when test="contains(//concept[notation=$broader]/prefTerm,'NL')">
-									<xsl:text>NL</xsl:text>
-									<xsl:value-of select="substring-after(//concept[notation=$top]/prefTerm,'NL')" />	
-									
-									</xsl:when>
-								<xsl:when test="contains(//concept[notation=$broader]/prefTerm,'SP')">
-									<xsl:text>SP</xsl:text>
-									<xsl:value-of select="substring-after(//concept[notation=$broader]/prefTerm,'SP')" />	
-									
-									</xsl:when>
-								<xsl:when test="contains(//concept[notation=$broader]/prefTerm,'ST')">
-									<xsl:text>ST</xsl:text>
-									<xsl:value-of select="substring-after(//concept[notation=$broader]/prefTerm,'ST')" />	
-									
-									</xsl:when>
-								<xsl:when test="contains(//concept[notation=$broader]/prefTerm,'SK')">
-									<xsl:text>SK</xsl:text>
-									<xsl:value-of select="substring-after(//concept[notation=$broader]/prefTerm,'SK')" />	
-									</xsl:when>
-								
-								<xsl:otherwise>
-									<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /äüö,', '')" />
-									
-									</xsl:otherwise>
-								</xsl:choose>-->
-								
 								<xsl:text>addf</xsl:text>
 							
 							</hierarchy_parent_id>
@@ -337,60 +268,12 @@
 								<xsl:if test="not(useFor)">
 									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
 									</xsl:if>
-							
-							<!--<xsl:choose>
-								<xsl:when test="contains(prefTerm,'NL')">
-									<xsl:text>NL</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'NL')" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SP')">
-									<xsl:text>SP</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'SP')" />
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'ST')">
-									<xsl:text>ST</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'ST')" />
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SK')">
-									<xsl:text>SK</xsl:text>
-									<xsl:value-of select="substring-after(prefTerm,'ST')" />
-									</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-									</xsl:otherwise>
-								</xsl:choose>-->		
 							</xsl:when>
-						
 						<xsl:otherwise>
-							
 							<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
 									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-							
-							<!--<xsl:choose>
-								<xsl:when test="contains(prefTerm,'NL')">
-									<xsl:text>NL</xsl:text>
-									<xsl:value-of select="substring-after(//concept[notation=$top]/prefTerm,'NL')" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SP')">
-									<xsl:text>SP</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'SP'))" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'ST')">
-									<xsl:text>ST</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'ST'))" />	
-									</xsl:when>
-								<xsl:when test="contains(prefTerm,'SK')">
-									<xsl:text>SK</xsl:text>
-									<xsl:value-of select="normalize-space(substring-after(translate(prefTerm, '. /äüö,', ''),'SK'))" />	
-									</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
-									<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-									</xsl:otherwise>
-								</xsl:choose>-->
-							
 							</xsl:otherwise>
-						</xsl:choose>
+							</xsl:choose>
 						
 						<xsl:text>addf</xsl:text>
 					
