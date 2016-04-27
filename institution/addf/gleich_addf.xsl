@@ -465,8 +465,8 @@
 		<xsl:variable name="topId" select="//id[1]" />
 		
 		<sourceInfo>
-						
-						<xsl:choose>
+						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
+						<!--<xsl:choose>
 							<xsl:when test="$topId='11181'">
 								<xsl:text>Sammlungen Personen</xsl:text>
 								</xsl:when>
@@ -476,19 +476,8 @@
 							<xsl:when test="$topId='11198'">
 								<xsl:text>Sammlungen Körperschaften</xsl:text>
 								</xsl:when>
-							<!--<xsl:when test="$topId='18769'">
-								<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
-								</xsl:when>
-							<xsl:when test="Thesaurus_x032x_Klassifikation">
-								<xsl:value-of select="Thesaurus_x032x_Klassifikation" />				
-								</xsl:when>
-							<xsl:when test="contains(Signatur,';')">
-								<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
-								</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="normalize-space(Signatur)" />
-								</xsl:otherwise>-->
-							</xsl:choose>
+							
+							</xsl:choose>-->
 						
 						
 						</sourceInfo>
