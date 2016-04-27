@@ -152,17 +152,24 @@
 							
 							</xsl:otherwise>
 						</xsl:choose>
-				
+			
+			<!--Title-->
 				<xsl:apply-templates select="prefTerm" />
-					
+				
+				<xsl:if test="$broader[string-length() != 0]">
+					<sourceInfo>
+						<xsl:value-of select="//concept[notation=$top]/prefTerm"></xsl:value-of>
+						</sourceInfo>
+						</xsl:if>
+		
 				</dataset>
 			
 		<functions>
 				<hierarchyFields>
 					
-					<top><xsl:value-of select="$top"></xsl:value-of></top>
+					<!--<top><xsl:value-of select="$top"></xsl:value-of></top>
 					
-					<broader><xsl:value-of select="$broader"></xsl:value-of></broader>
+					<broader><xsl:value-of select="$broader"></xsl:value-of></broader>-->
 			
 			<!--hierarchy_top-->
 					
@@ -454,6 +461,38 @@
 				<xsl:apply-templates select="Quellenang_x046x__x032x_Monographien[string-length() != 0]" />
 				<xsl:apply-templates select="Quellenangabe_x032x_Aufsätze[string-length() != 0]" />
 				
+		
+		<xsl:variable name="topId" select="//id[1]" />
+		
+		<sourceInfo>
+						
+						<xsl:choose>
+							<xsl:when test="$topId='11181'">
+								<xsl:text>Sammlungen Personen</xsl:text>
+								</xsl:when>
+							<xsl:when test="$topId='11184'">
+								<xsl:text>Sammlungen Themen</xsl:text>
+								</xsl:when>
+							<xsl:when test="$topId='11198'">
+								<xsl:text>Sammlungen Körperschaften</xsl:text>
+								</xsl:when>
+							<!--<xsl:when test="$topId='18769'">
+								<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
+								</xsl:when>
+							<xsl:when test="Thesaurus_x032x_Klassifikation">
+								<xsl:value-of select="Thesaurus_x032x_Klassifikation" />				
+								</xsl:when>
+							<xsl:when test="contains(Signatur,';')">
+								<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
+								</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="normalize-space(Signatur)" />
+								</xsl:otherwise>-->
+							</xsl:choose>
+						
+						
+						</sourceInfo>
+						
 <!--PHYSICAL INFORMATION-->
 			
 			<!--physical Seitenangabe-->
