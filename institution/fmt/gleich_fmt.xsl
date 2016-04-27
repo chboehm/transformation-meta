@@ -856,7 +856,7 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-					<format><xsl:text>Zeitschrift</xsl:text></format>
+					<format><xsl:text>Periodika</xsl:text></format>
 	
 	<!--searchfilter-->
 					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
@@ -1109,7 +1109,7 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>				
 	<!--format Objektartinformationen-->
-					<format><xsl:text>Zeitschrift</xsl:text></format>
+					<format><xsl:text>Periodika</xsl:text></format>
 					
 	<!--searchfilter-->
 					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
