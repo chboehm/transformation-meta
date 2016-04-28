@@ -466,6 +466,7 @@
 		
 		<sourceInfo>
 						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
+						<xsl:value-of select="Thesaurus_x032x_Akten" />
 						<!--<xsl:choose>
 							<xsl:when test="$topId='11181'">
 								<xsl:text>Sammlungen Personen</xsl:text>
