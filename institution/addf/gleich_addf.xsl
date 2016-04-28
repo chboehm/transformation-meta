@@ -468,6 +468,8 @@
 						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
 						<xsl:value-of select="Thesaurus_x032x_Akten" />
 						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />
+						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Personen" />
+						
 						
 						<!--<xsl:choose>
 							<xsl:when test="$topId='11181'">
