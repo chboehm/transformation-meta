@@ -42,6 +42,8 @@
 	
 	<xsl:element name="record">
 	
+	<xsl:variable name="broader" select="broader" />
+	
 	<vufind>
 			<id>
 				<xsl:value-of select="translate(prefTerm,'1234567890abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZ -_:.,!?/()', '1234567890abcdefghijklmnopqrstuvwxyzauoABCDEFGHIJKLMNOPQRSTUVWXYZ')" />	
@@ -80,10 +82,13 @@
 			
 			<title><xsl:value-of select="prefTerm" /></title>
 			<title_short><xsl:value-of select="prefTerm" /></title_short>
+			
+			<sourceInfo><xsl:value-of select="//concept[notation=$broader]/prefTerm" /></sourceInfo>
+			
 			</dataset>
 	
 	<functions>
-		<xsl:variable name="broader" select="broader" />
+		<!--<xsl:variable name="broader" select="broader" />-->
 			<hierarchyFields>
 				
 				<hierarchy_top_id>
@@ -592,6 +597,9 @@
 				
 	<!--description-->
 			<xsl:apply-templates select="Enth_x132x_lt" />
+			
+	<!--sourceInfo-->
+			<sourceInfo><xsl:value-of select="Bestand" /></sourceInfo>
 
 <!--OTHER-->
 
