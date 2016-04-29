@@ -74,7 +74,8 @@
 			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
 			<xsl:if test="not(contains(broader,'.'))">
-				<format><xsl:text>Bestandsübersicht</xsl:text></format>
+				<format><xsl:text>Archivgut</xsl:text></format>
+				<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 				</xsl:if>
 			
 			<title><xsl:value-of select="prefTerm" /></title>
