@@ -23,12 +23,143 @@
 <!--Der Hauptknoten-->	
 	<xsl:template match="collection">
 		<xsl:element name="catalog">
+			<!--<xsl:apply-templates select="//Tagesdatum_x058x_[1]" />
+			<xsl:apply-templates select="//Eingabe-Datum_x058x_[1]" />-->
+			<xsl:apply-templates select="//controlfield[@tag='003'][1]" />
+			<xsl:apply-templates select="//document" />
+		</xsl:element>
+	</xsl:template>
+	
+	
+	<!--<xsl:template match="collection">
+		<xsl:element name="catalog">
 			<xsl:apply-templates/>
 		</xsl:element>
+	</xsl:template>-->
+
+
+
+<!--Zeitschriftenheft aus Artikel-->	
+<!--Zeitschriftenheft aus Artikel-->	
+<!--Zeitschriftenheft aus Artikel-->	
+
+<xsl:template match="controlfield[@tag='003']">
+
+	<xsl:for-each select="../datafield[@tag='078'][text()='Artikel']">
+	
+	<!--<xsl:if test="datafield[@tag='QUE']/subfield[@code='a'][string-length() != 0]">-->
+	
+<xsl:element name="record">
+	
+	<xsl:variable name="year">
+		<xsl:choose>
+			<xsl:when test="../datafield[@tag='425']">
+				<xsl:value-of select="../datafield[@tag='425']" />
+				</xsl:when>
+			<xsl:when test="contains(../datafield[@tag='QUE']/subfield[@code='b'],'(')">
+				<xsl:value-of select="normalize-space(substring-before(substring-after(../datafield[@tag='QUE']/subfield[@code='b'],'('),')'))"></xsl:value-of>
+				</xsl:when>
+			<xsl:otherwise>
+			
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+	
+	<xsl:variable name="id">
+		<xsl:value-of select="translate(../datafield[@tag='QUE']/subfield[@code='a'], '. +()/:-äüö,', '')" />
+		<xsl:value-of select="$year" />
+		<xsl:text>frso</xsl:text>
+		</xsl:variable>
+		
+	<xsl:variable name="title">
+		<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='a']"/>
+		</xsl:variable>
+	
+	
+	
+	<xsl:element name="vufind">
+
+	<id><xsl:value-of select="$id" /></id>
+	<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+	<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+	<recordType><xsl:text>library</xsl:text></recordType>
+		</xsl:element>
+
+	<xsl:element name="institution">
+		<institutionShortname><xsl:text>Frauensolidarität</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>Frauensolidarität - Bibliothek und Dokumentationsstelle Frauen und "Dritte Welt"</xsl:text></institutionFull>
+		<institutionID><xsl:text>frso</xsl:text></institutionID>
+		<collection><xsl:text>FRSO</xsl:text></collection>
+		<isil><xsl:text>AT-FRSO</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/oesterreich/frauensolidaritaet/</xsl:text></link>
+		<geoLocation>
+			<latitude>48.219999</latitude>
+			<longitude>16.353449</longitude>
+			</geoLocation>
+		</xsl:element>
+	
+<xsl:element name="dataset">
+
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+		<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+		<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+		<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+
+<!--TITLE-->
+		<title>
+			<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='a']"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="$year" />	
+			</title>
+		<title_short>
+			<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='a']"/>
+			</title_short>
+
+<!--PUBLISHING-->
+
+	<!--displayDate-->
+				<displayPublishDate><xsl:value-of select="../datafield[@tag='425']" /></displayPublishDate>
+
+	<!--publishDate Jahresangabe-->				
+				<publishDate><xsl:value-of select="../datafield[@tag='425']" /></publishDate>
+
+		</xsl:element>
+
+<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+				<hierarchy_top_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title>
+				
+				<hierarchy_parent_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title>
+				
+				<is_hierarchy_id>
+					<xsl:value-of select="$id" />
+					</is_hierarchy_id>
+				<is_hierarchy_title><xsl:value-of select="$title" /></is_hierarchy_title>
+				
+				<hierarchy_sequence><xsl:value-of select="$year"></xsl:value-of></hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+
+
+	</xsl:element>
+	<!--</xsl:if>-->
+	</xsl:for-each>
 	</xsl:template>
 
 
 
+
+<!--Der Objektknoten-->
+<!--Der Objektknoten-->
 <!--Der Objektknoten-->
 	<xsl:template match="document">	
 		
@@ -153,11 +284,14 @@
 		<xsl:when test="(not(datafield[@tag='078'])) 
 		and (//document[@idn=$GT1]/datafield[@tag='078']='Zeitschrift')">
 			<format>
-				<xsl:text>Zeitschrift</xsl:text>
+				<xsl:text>Periodika</xsl:text>
 				</format>
-			<documentType>
+			<searchfilter>
 				<xsl:text>Zeitschriftenheft</xsl:text>
-				</documentType>
+				</searchfilter>
+			<!--<documentType>
+				<xsl:text>Zeitschriftenheft</xsl:text>
+				</documentType>-->
 			</xsl:when>
 			<xsl:otherwise>
 				<format><xsl:text>Buch</xsl:text></format>
@@ -452,8 +586,12 @@
 		<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>		
 
 	<!--format Objektartinformationen-->
-		<format><xsl:text>Zeitschrift</xsl:text></format>
-
+		<format>
+			<xsl:text>Periodika</xsl:text>
+			</format>
+		<searchfilter>
+			<xsl:text>Zeitschrift</xsl:text>
+			</searchfilter>
 	<!--documentType-->
 		<xsl:if test="datafield[@tag='078'][text()='ÖEZA-Zeitschrift']">
 			<documentType>
@@ -566,6 +704,13 @@
 			<xsl:apply-templates select="datafield[@tag='740']" />
 			<xsl:apply-templates select="datafield[@tag='902']" />
 			
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+	
+	<!--Collection Holding Bestandsangabe-->
+				
+			<xsl:apply-templates select="datafield[@tag='427']" />
+				
+				
 	</xsl:element>
 	<!--END OF DATASETELEMENT-->
 
@@ -599,7 +744,31 @@
 <!--Artikel________________Artikel___________________________Artikel-->
 
 <xsl:if test="datafield[@tag='078'][1][text()='Artikel']">
-
+	
+	<xsl:variable name="year">
+		<xsl:choose>
+			<xsl:when test="datafield[@tag='425']">
+				<xsl:value-of select="datafield[@tag='425']" />
+				</xsl:when>
+			<xsl:when test="contains(datafield[@tag='QUE']/subfield[@code='b'],'(')">
+				<xsl:value-of select="normalize-space(substring-before(substring-after(datafield[@tag='QUE']/subfield[@code='b'],'('),')'))"></xsl:value-of>
+				</xsl:when>
+			<xsl:otherwise>
+			
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+	
+	<xsl:variable name="id_issue">
+		<xsl:value-of select="translate(datafield[@tag='QUE']/subfield[@code='a'], '. +()/:-äüö,', '')" />
+		<xsl:value-of select="$year" />
+		<xsl:text>frso</xsl:text>
+		</xsl:variable>
+		
+	<xsl:variable name="title">
+		<xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']"/>
+		</xsl:variable>
+	
 	<xsl:element name="dataset">
 
 <!--FORMAT-->
@@ -609,6 +778,7 @@
 
 	<!--format Objektartinformationen-->
 		<format><xsl:text>Artikel</xsl:text></format>
+		<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 
 <!--TITLE-->	
 
@@ -633,7 +803,7 @@
 					</xsl:when>
 					<xsl:when test="//document[@idn=$rel]/datafield[@tag='542']/subfield[@code='a']">
 						<issn>
-							<xsl:value-of select="//document[@idn=$rel]/datafield[@tag='542']/subfield[@code='a']" />
+							<xsl:value-of select="//document[@idn=$rel]/datafield[@tag='542']/subfield[@code='a'][1]" />
 						</issn>
 					</xsl:when>
 				</xsl:choose>	
@@ -677,8 +847,8 @@
 	<!--sourceInfo-->
 			<sourceInfo>
 				<xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" />
-				<!--<xsl:text> </xsl:text>
-				<xsl:value-of select="datafield[@tag='QUE']/subfield[@code='b']" />-->
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="$year"></xsl:value-of>
 				</sourceInfo>
 
 <!--PHYSICAL INFORMATION-->
@@ -718,12 +888,15 @@
 <!--HIERARCHY-->
 	<xsl:if test="datafield[@tag='QUE']/subfield[@code='L']">
 		<xsl:element name="functions">	
+		
+	
+		
 			<hierarchyFields>
 					<hierarchy_top_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
 					<hierarchy_top_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_top_title>
 				
-					<hierarchy_parent_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_parent_title>
+					<hierarchy_parent_id><xsl:value-of select="$id_issue"/></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="$title" /><xsl:text> </xsl:text><xsl:value-of select="$year" /></hierarchy_parent_title>
 				
 					<is_hierarchy_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></is_hierarchy_id>
 					<is_hierarchy_title>
@@ -741,7 +914,7 @@
 						</xsl:choose>
 						<!--<xsl:value-of select="datafield[@tag='331']" />--></is_hierarchy_title>
 				
-					<hierarchy_sequence><xsl:value-of select="substring(datafield[@tag='331'],1,3)"/></hierarchy_sequence>
+					<hierarchy_sequence><xsl:value-of select="$year"/></hierarchy_sequence>
 				
 				</hierarchyFields>
 		</xsl:element>	
@@ -775,6 +948,7 @@
 
 	<!--format Objektartinformationen-->
 		<format><xsl:text>Film</xsl:text></format>
+		<searchfilter><xsl:text>Film</xsl:text></searchfilter>
 
 	<!--documentType-->
 		<documentType>
@@ -853,6 +1027,11 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template match="datafield[@tag='427']">
+		<collectionHolding>
+			<xsl:value-of select="." />
+			</collectionHolding>
+		</xsl:template>	
 	
 	<xsl:template match="datafield[@tag='653']">
 		<dimension>
