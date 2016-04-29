@@ -1175,7 +1175,7 @@
 	<!--format-->
 				<format><xsl:text>Visuelle Materialien</xsl:text></format>
 	<!--searchfilter-->
-				<searchfilter><xsl:text>Plakate</xsl:text></searchfilter>
+				<searchfilter><xsl:text>Plakat</xsl:text></searchfilter>
 	<!--documentType-->
 				<xsl:apply-templates select="Format[string-length() != 0]" />
 				<xsl:apply-templates select="Anlass[string-length() != 0]" />
