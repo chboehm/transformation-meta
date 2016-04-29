@@ -156,9 +156,13 @@
 			<!--Title-->
 				<xsl:apply-templates select="prefTerm" />
 				
+				<!--<top>
+				<xsl:value-of select="$top"></xsl:value-of>
+				</top>-->
+				
 				<xsl:if test="$broader[string-length() != 0]">
 					<sourceInfo>
-						<xsl:value-of select="//concept[notation=$top]/prefTerm"></xsl:value-of>
+						<xsl:value-of select="//concept[notation=$broader]/prefTerm"></xsl:value-of>
 						</sourceInfo>
 						</xsl:if>
 		
