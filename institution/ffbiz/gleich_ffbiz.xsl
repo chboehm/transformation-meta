@@ -331,7 +331,16 @@
 
 	<!--format Objektartinformationen-->
 			<format><xsl:text>Buch</xsl:text></format>
-			<!--<format><xsl:text>TEXT</xsl:text></format>-->
+			<xsl:choose>
+				<xsl:when test="Hrsg_x046x_">
+					<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+					</xsl:when>
+				<xsl:otherwise>
+					<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+					</xsl:otherwise>
+				</xsl:choose>
+			
+			
 
 	<!--documentType-->
 			<!--<documentType><xsl:text>Buch</xsl:text></documentType>-->
@@ -430,9 +439,8 @@
 			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-			<format><xsl:text>Zeitschrift</xsl:text></format>
-			<documentType><xsl:text>Zeitschriftenreihe</xsl:text></documentType>
-			<documentType><xsl:text>Periodika</xsl:text></documentType>
+			<format><xsl:text>Periodika</xsl:text></format>
+			<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -504,7 +512,7 @@
 			<xsl:apply-templates select="Bemerkung[string-length() != 0]" />
 	
 	<!--collectionHolding-->
-		<xsl:apply-templates select="Periodikumbestand[string-length() != 0]" />
+			<xsl:apply-templates select="Periodikumbestand[string-length() != 0]" />
 
 <!--OTHER-->
 
@@ -533,7 +541,8 @@
 			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-			<format><xsl:text>Akte</xsl:text></format>
+			<format><xsl:text>Archivgut</xsl:text></format>
+			<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 			<!--<format><xsl:text>TEXT</xsl:text></format>-->
 
 	<!--documentType-->
@@ -666,8 +675,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<!--<format><xsl:text>Bildmaterial</xsl:text></format>-->
-				<format><xsl:text>Ansichtskarte</xsl:text></format>	
+				<format><xsl:text>Visuelle Materialien</xsl:text></format>-->
+				<searchfilter><xsl:text>Ansichtskarte</xsl:text></searchfilter>	
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
 				<!--<documentType><xsl:text>Ansichtskarte</xsl:text></documentType>-->
@@ -751,7 +760,8 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Bildmaterial</xsl:text></format>	-->
-				<format><xsl:text>Fotografie</xsl:text></format>			
+				<format><xsl:text>Fotografie</xsl:text></format>	
+				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>			
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
 				<!--<documentType><xsl:text>Fotografie</xsl:text></documentType>-->
@@ -825,7 +835,7 @@
 				<format><xsl:text>Objekte</xsl:text></format>			
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
-				<documentType><xsl:text>Buttons und Sticker</xsl:text></documentType>
+				<searchfilter><xsl:text>Buttons und Sticker</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -902,7 +912,8 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Film</xsl:text></format>	-->
-				<format><xsl:text>Film</xsl:text></format>		
+				<format><xsl:text>Film</xsl:text></format>	
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>			
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
 				<!--<documentType><xsl:text>Film</xsl:text></documentType>-->
@@ -982,6 +993,7 @@
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Tonträger</xsl:text></format>	-->
 				<format><xsl:text>Tonträger</xsl:text></format>		
+				<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>
 	<!--documentType-->
 				<xsl:if test="Tontr_x132x_ger">
 					<documentType>
@@ -1065,8 +1077,8 @@
 			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-			<!--<format><xsl:text>Autograf</xsl:text></format>-->
-			<format><xsl:text>Autograf</xsl:text></format>
+			<format><xsl:text>Archivgut</xsl:text></format>-->
+			<searchfilter><xsl:text>Autograf</xsl:text></searchfilter>
 
 	<!--documentType-->
 			<!--<documentType><xsl:text>Autograf</xsl:text></documentType>	-->
@@ -1142,7 +1154,8 @@
 			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 
 	<!--format Objektartinformationen-->
-			<format>
+			<format><xsl:text>Archivgut</xsl:text></format>
+			<searchfilter>
 				<xsl:choose>
 					<xsl:when test="Vorwort">
 						<xsl:text>Nachlass / Vorlass</xsl:text>
@@ -1151,7 +1164,7 @@
 						<xsl:text>Akte</xsl:text>
 						</xsl:otherwise>
 					</xsl:choose>
-				</format>
+				</searchfilter>
 
 	<!--documentType-->
 <!--			<documentType>
@@ -1300,7 +1313,8 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Bildmaterial</xsl:text></format>-->
-				<format><xsl:text>Plakat</xsl:text></format>				
+				<format><xsl:text>Visuelle Materialien</xsl:text></format>	
+				<searchfilter><xsl:text>Plakat</xsl:text></searchfilter>			
 	<!--documentType-->
 				<!--<documentType><xsl:text>Plakat</xsl:text></documentType>-->
 
