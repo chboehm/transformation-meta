@@ -188,7 +188,7 @@
 <xsl:template match="Objekt">	
 		<xsl:variable name="id" select="id" />
 		
-		<xsl:if test="objektart[text()='Zeitschriften']">
+		<!--<xsl:if test="objektart[text()='Zeitschriften']">-->
 		<!--<xsl:if test="not(objektart[text()='Zeitschriften'])">-->
 		<!--<xsl:if test="objektart[text()='Akten, Graue Materialien, ZD']">-->
 		
@@ -1338,7 +1338,7 @@
 <!--ENDE_____________________________ENDE___________________________________ENDE-->
 
 		</xsl:element>
-		</xsl:if>
+		<!--</xsl:if>-->
 	</xsl:template>
 	
 <!--Templates-->
