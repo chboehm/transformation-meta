@@ -18,7 +18,146 @@
 
 	<xsl:template match="saar">
 		<xsl:element name="catalog">
-			<xsl:for-each select="object">
+			<xsl:apply-templates select="//Erfassungsdatum[1]" />
+			<xsl:apply-templates select="//object" />
+		</xsl:element>
+	</xsl:template>
+
+
+
+
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+<!--Zeitschrift aus Zeitschriftenausgabe-->	
+
+<xsl:template match="//Erfassungsdatum">
+
+	<!--<xsl:for-each select="contains(../Dokumentart,'Zeitschrift')">-->
+	
+	<xsl:if test="contains(../Dokumentart,'Zeitschrift')">
+	
+	<xsl:variable name="edition">
+		<xsl:value-of select="normalize-space(../Jahrgang__Bandangabe_der_Zeitschrift)" />
+		<xsl:text>(</xsl:text>
+		<xsl:value-of select="normalize-space(../Jahr)" />
+		<xsl:text>)</xsl:text>
+		<xsl:value-of select="normalize-space(../Heft-Nr._der_Zeitschrift)"></xsl:value-of>
+		</xsl:variable>
+	
+	<xsl:element name="record">
+	
+	<xsl:element name="vufind">
+		<id>
+			<xsl:value-of select="translate(../Zeitschriftentitel, '. +¬()/:-äüö,', '')" />
+			<!--<xsl:value-of select="translate($edition, '. +¬()/:-äüö,', '')" />-->
+			<xsl:text>saar</xsl:text>
+			</id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>library</xsl:text></recordType>
+		</xsl:element>
+	
+	<xsl:element name="institution">
+		<institutionShortname><xsl:text>FrauenGenderBibliothek Saar</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>FrauenGenderBibliothek Saar</xsl:text></institutionFull>
+		<institutionID><xsl:text>saar</xsl:text></institutionID>
+		<collection><xsl:text>Saar</xsl:text></collection>
+		<isil><xsl:text>ISIL DE-Sa24</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauengenderbibliothek-saar/</xsl:text></link>
+		<geoLocation>
+			<latitude>49.2307100</latitude>
+			<longitude>7.0074400</longitude>
+			</geoLocation>	
+		</xsl:element>
+	
+	<xsl:element name="dataset">
+	
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+		<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+		<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+		<!--<xsl:choose>
+			<xsl:when test=""></xsl:when>
+			</xsl:choose>-->
+		
+		<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+	
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+		<xsl:choose>
+					<xsl:when test="contains(../Zeitschriftentitel[1], ' : ')">
+						<title>
+							<xsl:value-of select="normalize-space(../Zeitschriftentitel[1])"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../Zeitschriftentitel[1], ' : '))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../Zeitschriftentitel[1], ' : '))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:when test="contains(../Zeitschriftentitel[1], '. ')">
+						<title>
+							<xsl:value-of select="normalize-space(../Zeitschriftentitel[1])"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(substring-before(../Zeitschriftentitel[1], '. '))"/>
+							</title_short>
+						<title_sub>
+							<xsl:value-of select="normalize-space(substring-after(../Zeitschriftentitel[1], '. '))"/>
+							</title_sub>
+						</xsl:when>
+					<xsl:otherwise>
+						<title>
+							<xsl:value-of select="normalize-space(../Zeitschriftentitel[1])"/>
+							</title>
+						<title_short>
+							<xsl:value-of select="normalize-space(../Zeitschriftentitel[1])"/>
+							</title_short>
+						</xsl:otherwise>
+					</xsl:choose>
+	
+		</xsl:element>
+	
+	<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(../Zeitschriftentitel, '. +¬()/:-äüö,', '')" /><xsl:text>saar</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="normalize-space(../Zeitschriftentitel)" /></hierarchy_top_title>
+					
+					<!--<hierarchy_parent_id><xsl:value-of select="translate(../Zeitschriftentitel, '. +¬()/:-äüö,', '')" /><xsl:text>saar</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="normalize-space(../Zeitschriftentitel)" /></hierarchy_parent_title>-->
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../Zeitschriftentitel, '. +¬()/:-äüö,', '')" /><xsl:text>saar</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="normalize-space(../Zeitschriftentitel)" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="normalize-space(../Zeitschriftentitel)"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+	
+		</xsl:element>
+		</xsl:if>
+	<!--</xsl:for-each>-->
+	
+	</xsl:template>
+
+
+
+
+
+	<xsl:template match="object">
+		<!--<xsl:element name="catalog">-->
+		<!--<xsl:for-each select="object">-->
 
 			
 		<xsl:if test="objektart[text()='Buch']">
@@ -136,7 +275,7 @@
 						<!--<xsl:when test="Dokumentart[text()=' Sammelwerk, Zeitschrift']">-->
 						<xsl:when test="(contains(Dokumentart,'Zeitschrift')) or
 									(contains(Dokumentart,'Zeitung')) ">
-							<format><xsl:text>Zeitschrift</xsl:text></format>
+							<format><xsl:text>Periodika</xsl:text></format>
 							<!--searchfilter-->
 							<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 							</xsl:when>
@@ -169,6 +308,10 @@
 							<format><xsl:text>Tonträger</xsl:text></format>
 							<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>
 							</xsl:when>
+						<xsl:when test="contains(Dokumentart,'Sammelwerk')">
+							<format><xsl:text>Buch</xsl:text></format>
+							<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+							</xsl:when>
 						<xsl:otherwise>
 							<xsl:choose>
 								<xsl:when test="contains(Seitenangabe_der_Zeitschrift,'-')">
@@ -184,7 +327,7 @@
 						</xsl:choose>
 					
 			<!--documentType-->
-					<xsl:apply-templates select="Dokumentart[string-length() != 0]" />
+					<!--<xsl:apply-templates select="Dokumentart[string-length() != 0]" />-->
 
 <!--TITLE-->
 	
@@ -305,14 +448,169 @@
 			
 <!--hierarchy-->
 	
-	
+	<xsl:if test="contains(Dokumentart,'Zeitschrift')">
+	<xsl:element name="functions">
 			
+			<hierarchyFields>
 				
+					<hierarchy_top_id><xsl:value-of select="translate(Zeitschriftentitel, '. +¬()/:-äüö,', '')" /><xsl:text>saar</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="normalize-space(Zeitschriftentitel)" /></hierarchy_top_title>
+				
+					<hierarchy_parent_id><xsl:value-of select="translate(Zeitschriftentitel, '. +¬()/:-äüö,', '')" /><xsl:text>saar</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="normalize-space(Zeitschriftentitel)" /></hierarchy_parent_title>
+				
+					<is_hierarchy_id>
+						<xsl:value-of select="objektnummer" />
+						<xsl:text>saar</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:choose>
+						<xsl:when test="Titel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel)" />
+							</xsl:when>
+						<xsl:when test="Titel_des_Sammelwerkes[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel_des_Sammelwerkes)" />
+							</xsl:when>
+						<xsl:when test="Zeitschriftentitel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Zeitschriftentitel)" />
+							</xsl:when>
+						</xsl:choose>
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:if>		
+				
+	<xsl:if test="contains(Dokumentart,'Sammelwerk')">
+	<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="objektnummer	" /><xsl:text>saar</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title>
+						<xsl:value-of select="normalize-space(Titel)" />
+						<xsl:if test="Untertitel[string-length() != 0]">
+							<xsl:text> : </xsl:text>
+							<xsl:value-of select="normalize-space(Untertitel)"></xsl:value-of>
+							</xsl:if>
+						</hierarchy_top_title>
+						
+					<is_hierarchy_id>
+						<xsl:value-of select="objektnummer" />
+						<xsl:text>saar</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:choose>
+						<xsl:when test="Titel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel)" />
+							<xsl:if test="Untertitel[string-length() != 0]">
+							<xsl:text> : </xsl:text>
+							<xsl:value-of select="normalize-space(Untertitel)" />
+							</xsl:if>
+							</xsl:when>
+						<xsl:when test="Titel_des_Sammelwerkes[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel_des_Sammelwerkes)" />
+							</xsl:when>
+						<xsl:when test="Zeitschriftentitel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Zeitschriftentitel)" />
+							</xsl:when>
+						</xsl:choose>
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:if>	
+		
+	<xsl:if test="contains(Dokumentart,'Aufsatz')">
+	<xsl:element name="functions">
+			
+		
+		<xsl:variable name="rel" select="Signatur" />
+			
+		<xsl:variable name="connect">
+				
+			<xsl:for-each select="//object[Signatur=$rel]">
+					
+				<xsl:if test="contains(Dokumentart,'Sammelwerk')">
+				
+				<xsl:text> id:</xsl:text>
+				<xsl:value-of select="objektnummer"></xsl:value-of>
+				<xsl:text>:id</xsl:text>
+				
+				<xsl:text> title:</xsl:text>
+				<xsl:value-of select="normalize-space(Titel)" />
+				<xsl:if test="Untertitel[string-length() != 0]">
+							<xsl:text> : </xsl:text>
+							<xsl:value-of select="normalize-space(Untertitel)"></xsl:value-of>
+							</xsl:if>
+				<xsl:text>:title</xsl:text>
+				
+					</xsl:if>
+					</xsl:for-each>
+				
+				</xsl:variable>
+			
+			<connect>
+				<xsl:value-of select="$connect"></xsl:value-of>
+				</connect>
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id>
+						<xsl:value-of select="substring-before(substring-after($connect,'id:'),':id')" /><xsl:text>saar</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title>
+						<xsl:value-of select="substring-before(substring-after($connect,'title:'),':title')" />
+						</hierarchy_top_title>
+					
+					<hierarchy_parent_id>
+						<xsl:value-of select="substring-before(substring-after($connect,'id:'),':id')" /><xsl:text>saar</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title>
+						<xsl:value-of select="substring-before(substring-after($connect,'title:'),':title')" />
+						</hierarchy_parent_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="objektnummer" />
+						<xsl:text>saar</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:choose>
+						<xsl:when test="Titel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel)" />
+							<xsl:if test="Untertitel[string-length() != 0]">
+							<xsl:text> : </xsl:text>
+							<xsl:value-of select="normalize-space(Untertitel)" />
+							</xsl:if>
+							</xsl:when>
+						<xsl:when test="Titel_des_Sammelwerkes[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Titel_des_Sammelwerkes)" />
+							</xsl:when>
+						<xsl:when test="Zeitschriftentitel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Zeitschriftentitel)" />
+							</xsl:when>
+						</xsl:choose>
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:if>	
+		
 					</xsl:element><!--closing tag record-->
 				</xsl:if><!--closing tag if in dataset-->
 		
 			
-				</xsl:for-each><!--closing tag for-each Schleife datansatz-->
+				<!--</xsl:for-each>--><!--closing tag for-each Schleife datansatz-->
 
 
 
@@ -331,7 +629,7 @@
 
 
 			
-	</xsl:element>
+	<!--</xsl:element>-->
 	</xsl:template>
 
 
