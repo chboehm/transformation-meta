@@ -140,6 +140,10 @@
 				<xsl:apply-templates select="../Ort" />
 	<!--publisher-->
 				<xsl:apply-templates select="../Verlag" />
+		
+	<!--publishDate-->
+				<xsl:apply-templates select="../Jahr" />
+				<xsl:apply-templates select="../Band-Nr_x046x_" />
 
 			</xsl:element>
 			
@@ -405,11 +409,15 @@
 				<xsl:apply-templates select="../ISBN_x047x_ISSN" />
 
 <!--PUBLISHING-->
-			
+	
 	<!--placeOfPublication-->
 				<xsl:apply-templates select="../Ort" />
 	<!--publisher-->
 				<xsl:apply-templates select="../Verlag" />
+
+	<!--publishDate-->
+				<xsl:apply-templates select="../Jahr" />
+				<xsl:apply-templates select="../Band-Nr_x046x_" />
 
 			</xsl:element>
 			
@@ -1261,7 +1269,9 @@
 							<xsl:text>Tasche</xsl:text>
 							</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="Objektart" />
+							<!--hier wird nur die Einzahl genommen um stringent zu bleiben-->
+							<xsl:text>Transparent</xsl:text>
+							<!--<xsl:value-of select="Objektart" />-->
 							</xsl:otherwise>
 						</xsl:choose>
 					</searchfilter>
