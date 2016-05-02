@@ -66,8 +66,10 @@
 		</xsl:variable>
 	
 	<xsl:variable name="id">
-		<xsl:value-of select="translate(../datafield[@tag='QUE']/subfield[@code='a'], '. +()/:-äüö,', '')" />
-		<xsl:value-of select="$year" />
+		<xsl:value-of select="translate(../datafield[@tag='QUE']/subfield[@code='a'], '. +¬()/:-äüö,', '')" />
+		<!--Im Jahr müssen Sonderzeichen entfernt werden-->
+		<xsl:value-of select="translate($year, '. +¬()/:-äüö,', '')" />
+		<!--<xsl:value-of select="$year" />-->
 		<xsl:text>frso</xsl:text>
 		</xsl:variable>
 		
@@ -283,18 +285,23 @@
 	<xsl:choose>
 		<xsl:when test="(not(datafield[@tag='078'])) 
 		and (//document[@idn=$GT1]/datafield[@tag='078']='Zeitschrift')">
-			<format>
-				<xsl:text>Periodika</xsl:text>
-				</format>
-			<searchfilter>
-				<xsl:text>Zeitschriftenheft</xsl:text>
-				</searchfilter>
-			<!--<documentType>
-				<xsl:text>Zeitschriftenheft</xsl:text>
-				</documentType>-->
+			<format><xsl:text>Periodika</xsl:text></format>
+			<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 			</xsl:when>
-			<xsl:otherwise>
-				<format><xsl:text>Buch</xsl:text></format>
+		<xsl:when test="datafield[@tag='078'][1][text()='Reihe']">
+			<format><xsl:text>Periodika</xsl:text></format>
+			<searchfilter><xsl:text>Reihe</xsl:text></searchfilter>
+			</xsl:when>
+		<xsl:otherwise>
+			<format><xsl:text>Buch</xsl:text></format>
+			<xsl:choose>
+				<xsl:when test="datafield[@tag='078'][1][text()='Monographie']">
+					<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 				<xsl:for-each select="datafield[@tag='078']">
 					<documentType><xsl:value-of select="." /></documentType>
 					</xsl:for-each>
@@ -543,6 +550,9 @@
 				<is_hierarchy_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></is_hierarchy_id>
 				<is_hierarchy_title>
 					<xsl:choose>
+						<xsl:when test="not(datafield[@tag='331'])">
+							<xsl:text>[Ohne Titelangabe]</xsl:text>
+							</xsl:when>
 						<xsl:when test="contains(datafield[@tag='331'],'¬')">
 							<xsl:value-of select="normalize-space(replace(datafield[@tag='331'],'¬',''))"/>
 							</xsl:when>
@@ -760,8 +770,10 @@
 		</xsl:variable>
 	
 	<xsl:variable name="id_issue">
-		<xsl:value-of select="translate(datafield[@tag='QUE']/subfield[@code='a'], '. +()/:-äüö,', '')" />
-		<xsl:value-of select="$year" />
+		<xsl:value-of select="translate(datafield[@tag='QUE']/subfield[@code='a'], '. +¬()/:-äüö,', '')" />
+		<!--Im Jahr müssen Sonderzeichen entfernt werden-->
+		<xsl:value-of select="translate($year, '. +¬()/:-äüö,', '')" />
+		<!--<xsl:value-of select="$year" />-->
 		<xsl:text>frso</xsl:text>
 		</xsl:variable>
 		
