@@ -191,52 +191,56 @@
 				 		</xsl:choose>
 				 	</typeOfRessource>
 				 
-				 <format>
+				<!-- <format>-->
 				 	<xsl:variable name="ldr_7" select="substring(marc:controlfield[@tag='LDR'],8,1)" />
 				 		
 				 	<xsl:choose>
 				 		<xsl:when test="(marc:controlfield[@tag='FMT']='BK') and ($ldr_7='a')">
-				 			<xsl:text>Artikel</xsl:text>
+				 			 <format><xsl:text>Artikel</xsl:text></format>
+				 			 <searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='BK'">
-				 			<xsl:text>Buch</xsl:text>
-				 			</xsl:when>
-				 		<xsl:when test="marc:controlfield[@tag='FMT']='BK'">
-				 			<xsl:text>Buch</xsl:text>
+				 			 <format><xsl:text>Buch</xsl:text></format>
+				 			 <xsl:choose>
+				 			 	<xsl:when test="marc:datafield[@tag='100']">
+				 			 		<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+				 			 		</xsl:when>
+				 			 	<xsl:otherwise>
+				 			 		<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+				 			 		</xsl:otherwise>
+				 			 	</xsl:choose>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='CF'">
-				 			<xsl:text>Datenträger</xsl:text>
+				 			 <format><xsl:text>Sonstiges</xsl:text></format>
+				 			  <searchfilter><xsl:text>Datenträger</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='MU'">
-				 			<xsl:text>Tonträger</xsl:text>
+				 			 <format><xsl:text>Tonträger</xsl:text></format>
+				 			   <searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='SE'">
-				 			<xsl:text>Zeitschrift</xsl:text>
+				 			 <format><xsl:text>Periodika</xsl:text></format>
+				 			  <searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='VM'">
 				 			<xsl:choose>
 				 				<xsl:when test="contains(marc:datafield[@tag='245'],'Film')">	
-				 					<xsl:text>Film</xsl:text>
+				 					 <format><xsl:text>Film</xsl:text></format>
+				 					   <searchfilter><xsl:text>Film</xsl:text></searchfilter>
 				 					</xsl:when>
 				 				<xsl:otherwise>
-				 					<xsl:text>Buch</xsl:text>
+				 					 <format><xsl:text>Buch</xsl:text></format>
+				 					 <searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 				 					</xsl:otherwise>
 				 				</xsl:choose>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='MX'">
-				 			<xsl:text>Buch</xsl:text>
+				 			 <format><xsl:text>Buch</xsl:text></format>
+				 			 <searchfilter><xsl:text>Buch</xsl:text></searchfilter>
 				 			</xsl:when>
-				 		<!--<xsl:otherwise>
-				 			<xsl:value-of select="marc:datafield[@tag='949']/marc:subfield[@code='3']" />
-				 			</xsl:otherwise>-->
+				 		
 				 		</xsl:choose>
-				 	</format>
-					
-					<!--<xsl:if test="marc:controlfield[@tag='FMT']='VM'">
-					<documentType>
-						<xsl:text>Visuelles Material</xsl:text>
-						</documentType>
-						</xsl:if>-->
+				 	
 					
 				<xsl:apply-templates select="marc:datafield[@tag='906']" />
 					
