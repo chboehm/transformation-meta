@@ -902,6 +902,20 @@
 						<xsl:text> : </xsl:text>
 						<xsl:value-of select="normalize-space(../Untertitel)" />
 					</xsl:if>
+					
+					<xsl:variable name="edition">
+						<xsl:value-of select="normalize-space(../Jahrgang__Bandangabe_der_Zeitschrift)" />
+						<xsl:text>(</xsl:text>
+						<xsl:value-of select="normalize-space(../Jahr)" />
+						<xsl:text>)</xsl:text>
+						<xsl:value-of select="normalize-space(../Heft-Nr._der_Zeitschrift)" />
+						</xsl:variable>
+					
+					<xsl:if test="(contains(../Dokumentart,'Zeitschrift')) or
+									(contains(../Dokumentart,'Zeitung'))">
+						<xsl:text> </xsl:text>
+						<xsl:value-of select="$edition"></xsl:value-of>
+									</xsl:if>
 					</title>
 				<title_short>
 					<xsl:value-of select="normalize-space(.)" />
