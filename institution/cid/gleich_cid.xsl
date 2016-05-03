@@ -236,7 +236,7 @@
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='MX'">
 				 			 <format><xsl:text>Buch</xsl:text></format>
-				 			 <searchfilter><xsl:text>Buch</xsl:text></searchfilter>
+				 			 <searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		
 				 		</xsl:choose>
