@@ -115,7 +115,9 @@
 		<title>
 			<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='a']"/>
 			<xsl:text> </xsl:text>
-			<xsl:value-of select="$year" />	
+			<xsl:text>(</xsl:text>
+			<xsl:value-of select="$year" />
+			<xsl:text>)</xsl:text>	
 			</title>
 		<title_short>
 			<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='a']"/>
