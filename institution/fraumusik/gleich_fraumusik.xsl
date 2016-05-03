@@ -171,12 +171,37 @@
 				<xsl:choose>
 					<xsl:when test="$root='konser'">
 						<format><xsl:text>Tonträger</xsl:text></format>	
+						<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>	
 						</xsl:when>
 					<xsl:when test="$root='litarchiv'">
-						<format><xsl:text>Buch</xsl:text></format>	
+						
+						
+						<xsl:variable name="format">
+							<xsl:for-each select="Deskriptoren">
+								<xsl:if test="contains('Aufsätze/Artikel',.)">
+									<xsl:text>Artikel</xsl:text>
+									</xsl:if>
+								</xsl:for-each>
+							</xsl:variable>
+						
+						<xsl:choose>
+							<xsl:when test="$format='Artikel'">
+								<format><xsl:text>Artikel</xsl:text></format>	
+								<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	
+								</xsl:when>
+							<xsl:when test="contains(Verfasser,'Hg.')">
+								<format><xsl:text>Buch</xsl:text></format>	
+								<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+								</xsl:when>
+							<xsl:otherwise>
+								<format><xsl:text>Buch</xsl:text></format>	
+								<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+								</xsl:otherwise>	
+							</xsl:choose>
 						</xsl:when>
 					<xsl:when test="$root='archnoten'">
 						<format><xsl:text>Noten</xsl:text></format>	
+						<searchfilter><xsl:text>Noten</xsl:text></searchfilter>	
 						</xsl:when>
 					</xsl:choose>
 				
@@ -277,9 +302,22 @@
 		</xsl:template>
 	
 	<xsl:template match="Deskriptoren">
-		<subjectTopic>
+		<xsl:variable name="match">
+			Aufsätze/Artikel
+			Spende/ Schenkung
+			Buchtitel
+			2001-2010
+			Fachzeitschrift
+			Eintrag 2000-2011
+			Schatzkammer
+			2012
+			</xsl:variable>
+		<xsl:if test="not(contains($match,.))">
+			<subjectTopic>
 			<xsl:value-of select="normalize-space(.)" />
 			</subjectTopic>
+			</xsl:if>
+		
 		</xsl:template>
 	
 	<xsl:template match="Originaltitel">
