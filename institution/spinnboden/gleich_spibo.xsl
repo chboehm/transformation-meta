@@ -189,8 +189,13 @@
 							<!--CONTENTRELATED INFORMATION -->
 							<!--subjectTopic Deskriptoren -->
 							<xsl:apply-templates select="Schlagwortliste_x032x_-B[string-length() != 0]" />
+							<xsl:apply-templates select="Systematik[string-length() !=0]"/>
 							<!--subjectPerson -->
 							<xsl:apply-templates select="Personen[string-length() != 0]" />
+							<!-- annotation -->
+							<xsl:apply-templates select="Uni_x047x_HS[string-length() != 0]"/>
+							<xsl:apply-templates select="Fachrichtung[string-length() != 0]"/>
+							<xsl:apply-templates select="Bemerkungen[string-length() != 0]"/>
 						</xsl:element><!--closing tag dataset -->
 					</xsl:element><!--closing tag record -->
 				</xsl:if><!--closing tag if in dataset -->
@@ -291,10 +296,16 @@
 							<!--PUBLISHING -->
 							<!--displayPublishDate -->
 							<xsl:apply-templates select="Ersch_x046x_-zeitraum[string-length() != 0]" />
+							<xsl:apply-templates select="Ersch_x046x_-weise[string-length() != 0]" />
 							<!--placeOfPublication Ortsangabe -->
 							<xsl:apply-templates select="Ort[string-length() != 0]" />
+							<xsl:apply-templates select="Erscheinungsland[string-length() != 0]" />
 							<!--publisher Verlagsangabe -->
 							<xsl:apply-templates select="Verlag[string-length() != 0]" />
+							<!-- publishDate -->
+							<xsl:apply-templates select="J[string-length() != 0]" />
+							<!-- subjectTopic -->
+							<xsl:apply-templates select="Kateg_x046x_-Zs[string-length() != 0]"/>
 						</xsl:element><!--closing tag dataset -->
 						<!--FUNCTIONS -->
 						<xsl:choose>
@@ -593,7 +604,7 @@
 						</xsl:element><!--closing tag dataset -->
 					</xsl:element><!--closing tag record -->
 				</xsl:if><!--closing tag if in dataset -->
-			</xsl:for-each><!--closing tag for-eacht Schleife datansatz -->
+			</xsl:for-each><!--closing tag for-each Schleife datensatz -->
 		</xsl:element>
 	</xsl:template>
 	<!--Templates -->
@@ -612,6 +623,12 @@
 		</publishDate>
 	</xsl:template>
 
+	<xsl:template match="Ersch_x046x_-weise">
+		<publicationFrequency>
+			<xsl:value-of select="."></xsl:value-of>
+		</publicationFrequency>
+	</xsl:template>
+
 	<xsl:template match="Jahrgang">
 		<volume>
 			<xsl:value-of select="." />
@@ -625,6 +642,14 @@
 	</xsl:template>
 
 	<xsl:template match="Schlagwortliste_x032x_-B">
+		<xsl:for-each select=".">
+			<subjectTopic>
+				<xsl:value-of select="." />
+			</subjectTopic>
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="Systematik">
 		<xsl:for-each select=".">
 			<subjectTopic>
 				<xsl:value-of select="." />
@@ -981,6 +1006,14 @@
 			<xsl:value-of select="translate(.[1], translate(.,'0123456789', ''), '')" />
 		</publishDate>
 	</xsl:template>
+	<xsl:template match="J">
+		<displayPublishDate>
+			<xsl:value-of select="." />
+		</displayPublishDate>
+		<publishDate>
+			<xsl:value-of select="." />
+		</publishDate>
+	</xsl:template>
 
 	<xsl:template match="RegisseurIn">
 		<xsl:for-each select=".">
@@ -1156,6 +1189,10 @@
 	<xsl:template match="Hefttitel_x032x_-Zh[1]">
 		<title>
 			<xsl:value-of select="normalize-space(.)" />
+			<xsl:text> (</xsl:text>
+			<xsl:value-of select="Jahr" />
+			<xsl:text>)</xsl:text>
+			<xsl:value-of select="Heftnummer_x032x_-Z" />
 		</title>
 		<title_short>
 			<xsl:value-of select="normalize-space(.)" />
@@ -1255,11 +1292,30 @@
 			</subjectTopic>
 		</xsl:for-each>
 	</xsl:template>
+	<xsl:template match="Kateg_x046x_-Zs">
+		<xsl:for-each select=".">
+			<subjectTopic>
+				<xsl:value-of select="." />
+			</subjectTopic>
+		</xsl:for-each>
+	</xsl:template>
 	<xsl:template match="Hrsg_x032x_-_x032x_P">
 		<xsl:for-each select=".">
 			<editor>
 				<xsl:value-of select="." />
 			</editor>
 		</xsl:for-each>
+	</xsl:template>
+	<xsl:template match="Uni_x047x_HS">
+		<annotation>
+			<xsl:text>Hochschule: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
+	<xsl:template match="Fachrichtung">
+		<annotation>
+			<xsl:text>Fachrichtung: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
 	</xsl:template>
 </xsl:stylesheet>
