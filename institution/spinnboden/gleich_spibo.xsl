@@ -578,6 +578,7 @@
 							<xsl:apply-templates select="Jahr[1][string-length() != 0]" />
 							<!--placeOfPublication Ortsangabe -->
 							<xsl:apply-templates select="Ort[string-length() != 0]" />
+							<xsl:apply-templates select="Erscheinungsland[string-length() != 0]" />
 							<!--publisher Verlagsangabe -->
 							<xsl:apply-templates select="Sender_x047x_ProduzentIn[string-length() != 0]" />
 							<!--PHYSICAL INFORMATION -->
@@ -601,6 +602,9 @@
 							<!--OTHER -->
 							<!--shelfMark Signatur -->
 							<xsl:apply-templates select="Signatur[string-length() != 0]" />
+							<!-- annotation -->
+							<xsl:apply-templates select="Datum_x032x_der_x032x_Aufzeichnung[string-length() != 0]"/>
+							<xsl:apply-templates select="Original-Filmtitel[string-length() != 0]"/>
 						</xsl:element><!--closing tag dataset -->
 					</xsl:element><!--closing tag record -->
 				</xsl:if><!--closing tag if in dataset -->
@@ -1315,6 +1319,18 @@
 	<xsl:template match="Fachrichtung">
 		<annotation>
 			<xsl:text>Fachrichtung: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
+	<xsl:template match="Datum_x032x_der_x032x_Aufzeichnung">
+		<annotation>
+			<xsl:text>Datum der Aufzeichnung: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
+	<xsl:template match="Original-Filmtitel">
+		<annotation>
+			<xsl:text>Original Filmtitel: </xsl:text>
 			<xsl:value-of select="." />
 		</annotation>
 	</xsl:template>
