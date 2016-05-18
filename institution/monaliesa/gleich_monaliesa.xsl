@@ -133,13 +133,16 @@
 	<!--format Objektartinformationen-->
 				<xsl:choose>
 					<xsl:when test="ART='V'">
-						<format><xsl:text>Film</xsl:text></format>	
+						<format><xsl:text>Film</xsl:text></format>
+						<searchfilter><xsl:text>Film</xsl:text></searchfilter>		
 						</xsl:when>
 					<xsl:when test="ART='A'">
 						<format><xsl:text>Tonträger</xsl:text></format>	
+						<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		
 						</xsl:when>
 					<xsl:otherwise>
 						<format><xsl:text>Buch</xsl:text></format>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>		
 						</xsl:otherwise>
 					</xsl:choose>
 
