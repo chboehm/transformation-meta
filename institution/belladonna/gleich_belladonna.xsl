@@ -330,8 +330,19 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<!--<format><xsl:text>Buch</xsl:text></format>		-->
 				<format><xsl:text>Buch</xsl:text></format>
+				<xsl:choose>
+					<xsl:when test="HerausgeberIn">
+						<searchfilter>
+							<xsl:text>Sammelband</xsl:text>
+							</searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter>
+							<xsl:text>Monografie</xsl:text>
+							</searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -432,7 +443,19 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Buch</xsl:text></format>		
+				<format><xsl:text>Buch</xsl:text></format>
+				<xsl:choose>
+					<xsl:when test="HerausgeberIn">
+						<searchfilter>
+							<xsl:text>Sammelband</xsl:text>
+							</searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter>
+							<xsl:text>Monografie</xsl:text>
+							</searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -568,6 +591,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>		
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -775,6 +799,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Hochschulschrift</xsl:text></format>		
+				<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>	
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -860,7 +885,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Artikel</xsl:text></format>		
+				<format><xsl:text>Artikel</xsl:text></format>	
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -1067,6 +1093,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>		
+				<searchfilter><xsl:text>Graue Literatur</xsl:text></searchfilter>
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -1209,7 +1236,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>ton</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Tonträger</xsl:text></format>		
+				<format><xsl:text>Tonträger</xsl:text></format>	
+				<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="ergänz__Angaben!=''">
@@ -1302,7 +1330,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>ton</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Tonträger</xsl:text></format>		
+				<format><xsl:text>Tonträger</xsl:text></format>	
+				<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="Objektart" /></documentType>-->
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1394,7 +1423,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Film</xsl:text></format>		
+				<format><xsl:text>Film</xsl:text></format>	
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>		
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1490,6 +1520,7 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Film</xsl:text></format>		
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>		
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="Objektart" /></documentType>-->
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1581,7 +1612,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Zeitschrift</xsl:text></format>
+				<format><xsl:text>Periodika</xsl:text></format>
+				<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>		
 	<!--documentType Objektartinformationen-->
 			<!--	<documentType><xsl:text>Zeitschrift</xsl:text></documentType>-->
 
@@ -1589,6 +1621,11 @@
 
 	<!--title Titelinformationen-->
 				<xsl:apply-templates select="Z-Titel_"/>
+	<!--formerTitle-->
+				<xsl:apply-templates select="Titeländerung"/>
+				<!--<formerTitle>
+				<xsl:value-of select="Titeländerung"></xsl:value-of>
+				</formerTitle>-->
 	
 <!--RESPONSIBLE-->
 	
@@ -1644,6 +1681,13 @@
 		
 	<!--description-->
 				<xsl:apply-templates select="Inhalt"/>	
+
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+
+	<!--collectionHolding-->
+				<xsl:apply-templates select="Bestandsumfang"/>	
+	<!--publicationFrequency-->
+				<xsl:apply-templates select="Erscheinen"/>
 
 <!--OTHER-->
 
@@ -1718,6 +1762,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>		
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="Dokumentenart!=''">
@@ -1920,7 +1965,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Plakat</xsl:text></format>		
+				<format><xsl:text>Visuelle Materialien</xsl:text></format>		
+				<searchfilter><xsl:text>Plakat</xsl:text></searchfilter>	
 	<!--documentType-->
 				<!--<documentType><xsl:text>Plakat</xsl:text></documentType>-->
 
@@ -1981,7 +2027,23 @@
 
 <!--Templates-->
 	
+	<xsl:template match="Titeländerung">
+		<formerTitle>
+			<xsl:value-of select="normalize-space(.)" />
+			</formerTitle>
+		</xsl:template>
 	
+	<xsl:template match="Erscheinen">
+		<publicationFrequency>
+			<xsl:value-of select="normalize-space(.)" />
+			</publicationFrequency>
+		</xsl:template>
+	
+	<xsl:template match="Bestandsumfang">
+		<collectionHolding>
+			<xsl:value-of select="normalize-space(.)" />
+			</collectionHolding>
+		</xsl:template>
 	
 	<xsl:template match="Bildbeschreibung">
 		<specificMaterialDesignation>
@@ -2359,6 +2421,8 @@
 			</title_short>
 		
 		</xsl:template>
+	
+	
 	
 	<xsl:template match="Sachtitel[1]">
 	
