@@ -878,7 +878,7 @@
 <!--Einzelbeitrag________Einzelbeitrag__________________Einzelbeitrag-->	
 	
 	<xsl:if test="Objektart[text()='Einzelbeitrag']">
-	<xsl:element name="dataset">
+	<xsl:element name="dataset">  
 	
 <!--FORMAT-->
 
