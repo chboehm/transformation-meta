@@ -150,6 +150,15 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
+				<xsl:choose>
+					<xsl:when test="Herausgeber[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
+				
 
 <!--TITLE-->
 
