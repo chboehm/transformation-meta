@@ -210,7 +210,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(Hrsg.)'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'HG.')">
@@ -220,7 +220,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'HG.'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'(Hg')">
@@ -230,7 +230,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(Hg'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'[Hg')">
@@ -240,7 +240,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'[Hg'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'(hg')">
@@ -250,7 +250,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(hg'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'hg')">
@@ -270,7 +270,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'Hg'))"></xsl:value-of>
 
 				</editor>
-
+			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 			</xsl:when>
 
 		<xsl:otherwise>
@@ -280,7 +280,7 @@
 				<xsl:value-of select="@name"></xsl:value-of>
 
 				</author>
-
+			<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 			</xsl:otherwise>
 
 		</xsl:choose>
