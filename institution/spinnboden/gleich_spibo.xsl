@@ -370,12 +370,16 @@
 								<xsl:text>text</xsl:text>
 							</typeOfRessource>
 							<!--format Objektartinformationen -->
-							<!--<format><xsl:text>Graue Materialien</xsl:text></format> -->
 							<format>
 								<xsl:text>Buch</xsl:text>
 							</format>
+							<documentType>
+								<xsl:text>Graue Materialien</xsl:text>
+							</documentType>
 							<!--documentType -->
-							<xsl:apply-templates select="Dokumentenart[string-length() != 0]" />
+							<annotation>
+								<xsl:value-of select="Dokumentenart"/>
+							</annotation>
 							<!--TITLE -->
 							<!--title Titelinformationen -->
 							<xsl:apply-templates select="Titel_x032x_-GP[1][string-length() != 0]" />
@@ -385,14 +389,16 @@
 							<!--author Autorinneninformation -->
 							<xsl:apply-templates select="UrheberIn[string-length() != 0]" />
 							<!--editor Herausgeberinneninformationen -->
-							<xsl:apply-templates select="HerausgeberIn[string-length() != 0]" />
+							<editor>
+								<xsl:value-of select="Aut_x046x__x047x_Hrsg_x032x_-G"/>
+							</editor>
 							<!--entity -->
-							<xsl:apply-templates select="Organisation[string-length() != 0]" />
+							<xsl:apply-templates select="Org_x046x_[string-length() != 0]" />
 							<!--PUBLISHING -->
 							<!--display / publishDate Jahresangabe -->
 							<xsl:apply-templates select="Jahr[1][string-length() != 0]" />
 							<!--placeOfPublication Ortsangabe -->
-							<xsl:apply-templates select="Ort[string-length() != 0]" />
+							<xsl:apply-templates select="Herkunft_x032x_[string-length() != 0]" />
 							<!--publisher Verlagsangabe -->
 							<xsl:apply-templates select="Verlag[string-length() != 0]" />
 							<!--PHYSICAL INFORMATION -->
@@ -402,16 +408,22 @@
 							<xsl:apply-templates select="Ausstattung[1][string-length() != 0]" />
 							<!--CONTENTRELATED INFORMATION -->
 							<!--subjectTopic Deskriptoren -->
-							<xsl:apply-templates select="Deskriptor_x032x__[string-length() != 0]" />
+							<xsl:apply-templates select="Deskriptor_x032x_[string-length() != 0]" />
 							<!--subjectPerson -->
 							<xsl:apply-templates select="Personen[string-length() != 0]" />
 							<!--subjectGeographic Ortsangaben -->
 							<xsl:apply-templates select="Ort_x047x_Land_x032x_d_x046x__x032x_Handlung_x047x_Inhalts[string-length() != 0]" />
 							<!--description -->
 							<xsl:apply-templates select="Annotation[1][string-length() != 0]" />
+							<annotation>
+								<xsl:text>Anlass: </xsl:text>
+								<xsl:value-of select="Anla_x225x_typ_x032x_-P"/>
+							</annotation>
 							<!--OTHER -->
 							<!--shelfMark Signatur -->
-							<xsl:apply-templates select="Signatur[string-length() != 0]" />
+							<shelfMark>
+								<xsl:value-of select="Standort"/>
+							</shelfMark>
 						</xsl:element><!--closing tag dataset -->
 					</xsl:element><!--closing tag record -->
 				</xsl:if><!--closing tag if in dataset -->
@@ -453,6 +465,8 @@
 							<xsl:apply-templates select="Ort[string-length() != 0]" />
 							<!--publisher Verlagsangabe -->
 							<xsl:apply-templates select="Verlag[string-length() != 0]" />
+							<!-- placeOfPublication Erscheinungsland -->
+							<xsl:apply-templates select="Erscheinungsland[string-length() != 0]"/>
 							<!--PHYSICAL INFORMATION -->
 							<!--physical Seitenangabe -->
 							<xsl:apply-templates select="Umfang[1][string-length() != 0]" />
@@ -460,7 +474,7 @@
 							<xsl:apply-templates select="Ausstattung[1][string-length() != 0]" />
 							<!--CONTENTRELATED INFORMATION -->
 							<!--subjectTopic Deskriptoren -->
-							<xsl:apply-templates select="Deskriptor_x032x__[string-length() != 0]" />
+							<xsl:apply-templates select="Genre"/>
 							<!--subjectPerson -->
 							<xsl:apply-templates select="Personen[string-length() != 0]" />
 							<!--subjectGeographic Ortsangaben -->
@@ -470,6 +484,10 @@
 							<!--OTHER -->
 							<!--shelfMark Signatur -->
 							<xsl:apply-templates select="Signatur[string-length() != 0]" />
+							<!-- annotation -->
+							<xsl:apply-templates select="Art_x032x_der_x032x_Tonkassette[string-length() != 0]"/>
+							<!--  Sendereihe -->
+							<xsl:apply-templates select="Sendereihe[string-length() != 0]"/>
 						</xsl:element><!--closing tag dataset -->
 					</xsl:element><!--closing tag record -->
 				</xsl:if><!--closing tag if in dataset -->
@@ -612,12 +630,6 @@
 		</xsl:element>
 	</xsl:template>
 	<!--Templates -->
-	<xsl:template match="Sendereihe">
-		<series>
-			<xsl:value-of select="." />
-		</series>
-	</xsl:template>
-
 	<xsl:template match="Ersch_x046x_-zeitraum">
 		<displayPublishDate>
 			<xsl:value-of select="."></xsl:value-of>
@@ -870,7 +882,7 @@
 		</runTime>
 	</xsl:template>
 
-	<xsl:template match="Ausstattung">
+	<xsl:template match="Ausstattung[1]">
 		<specificMaterialDesignation>
 			<xsl:value-of select="." />
 		</specificMaterialDesignation>
@@ -956,7 +968,14 @@
 			</subjectTopic>
 		</xsl:for-each>
 	</xsl:template>
-
+	
+	<xsl:template match="Deskriptor_x032x_">
+		<xsl:for-each select=".">
+			<subjectTopic>
+				<xsl:value-of select="." />
+			</subjectTopic>
+		</xsl:for-each>
+	</xsl:template>
 
 	<xsl:template match="Deskriptoren">
 		<xsl:for-each select=".">
@@ -997,6 +1016,12 @@
 	</xsl:template>
 
 	<xsl:template match="Ort">
+		<placeOfPublication>
+			<xsl:value-of select="." />
+		</placeOfPublication>
+	</xsl:template>
+	
+	<xsl:template match="Herkunft_x032x_">
 		<placeOfPublication>
 			<xsl:value-of select="." />
 		</placeOfPublication>
@@ -1052,11 +1077,15 @@
 	</xsl:template>
 
 	<xsl:template match="Organisation">
-		<!--<xsl:for-each select="."> -->
 		<entity>
 			<xsl:value-of select="." />
 		</entity>
-		<!--</xsl:for-each> -->
+	</xsl:template>
+
+	<xsl:template match="Org_x046x_">
+		<entity>
+			<xsl:value-of select="." />
+		</entity>
 	</xsl:template>
 
 	<xsl:template match="Hrsg_x032x_-_x032x_Zs">
@@ -1333,5 +1362,23 @@
 			<xsl:text>Original Filmtitel: </xsl:text>
 			<xsl:value-of select="." />
 		</annotation>
+	</xsl:template>
+	<xsl:template match="Genre">
+		<xsl:for-each select=".">
+			<subjectTopic>
+				<xsl:value-of select="." />
+			</subjectTopic>
+		</xsl:for-each>
+	</xsl:template>
+	<xsl:template match="Art_x032x_der_x032x_Tonkassette">
+		<annotation>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
+	<xsl:template match="Sendereihe">
+		<description>
+			<xsl:text>Sendereihe: </xsl:text>
+			<xsl:value-of select="." />
+		</description>
 	</xsl:template>
 </xsl:stylesheet>
