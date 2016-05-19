@@ -148,6 +148,15 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
+				<xsl:choose>
+					<xsl:when test="contains(Autorin1,'Hrsgin')">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
+				
 
 <!--TITLE-->
 
