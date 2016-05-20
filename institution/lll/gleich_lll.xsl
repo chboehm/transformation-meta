@@ -143,9 +143,29 @@
 		<xsl:choose>
 			<xsl:when test="Dok-Nummer">
 				<format><xsl:text>Film</xsl:text></format>
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>
 				</xsl:when>
 			<xsl:when test="DokumentenNr">
 				<format><xsl:text>Buch</xsl:text></format>
+				
+				<xsl:variable name="hrsg">
+					<xsl:for-each select="Autorin_x047x_Hrsg_x047x_Veranstalterin_x047x_Regie">
+						<xsl:value-of select="." />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				<xsl:choose>
+					<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:when>
 			</xsl:choose>
 		
