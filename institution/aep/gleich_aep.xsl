@@ -269,7 +269,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(hg'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'hg')">
