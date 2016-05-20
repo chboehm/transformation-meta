@@ -59,7 +59,8 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
 			<!--format Objektartinformationen-->
-					<format><xsl:text>Akte</xsl:text></format>
+					<format><xsl:text>Archivgut</xsl:text></format>
+					<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -148,6 +149,17 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Buch</xsl:text></format>
+					
+					<xsl:choose>
+						<xsl:when test="Hrsg.[string-length() != 0]">
+							<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+							</xsl:when>
+						<xsl:otherwise>
+							<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+							</xsl:otherwise>
+						</xsl:choose>
+					
+					
 
 <!--TITLE-->
 	
@@ -363,6 +375,7 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -637,7 +650,8 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
 			<!--format Objektartinformationen-->
-					<format><xsl:text>Fotografie</xsl:text></format>
+					<format><xsl:text>Visuelle Materialien</xsl:text></format>
+					<searchfilter><xsl:text>Plakat</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -753,6 +767,7 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Film</xsl:text></format>
+					<searchfilter><xsl:text>Film</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -896,6 +911,7 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Hochschulschrift</xsl:text></format>
+					<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -1050,7 +1066,8 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
 			<!--format Objektartinformationen-->
-					<format><xsl:text>Zeitschrift</xsl:text></format>
+					<format><xsl:text>Periodika</xsl:text></format>
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
@@ -1252,7 +1269,7 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
-
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 <!--TITLE-->
 	
 			<!--title Titelinformationen-->	
@@ -1477,6 +1494,7 @@
 			
 			<!--format Objektartinformationen-->
 					<format><xsl:text>Artikel</xsl:text></format>
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 
 <!--TITLE-->
 	
