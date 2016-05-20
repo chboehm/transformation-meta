@@ -165,16 +165,22 @@
 				<xsl:choose>
 					<xsl:when test="@Level='Bestand'">
 						<format>
-							<xsl:text>Bestandsübersicht</xsl:text>
+							<xsl:text>Archivgut</xsl:text>
 							</format>
+						<searchfilter>
+							<xsl:text>Bestandsübersicht</xsl:text>
+							</searchfilter>
 						</xsl:when>
 					<xsl:when test="@Level='Klassifikationsgruppe'">
 						
 						</xsl:when>
 					<xsl:when test="@Level='Archivalieneinheit'">
 						<format>
-							<xsl:text>Akte</xsl:text>
+							<xsl:text>Archivgut</xsl:text>
 							</format>
+						<searchfilter>
+							<xsl:text>Akte</xsl:text>
+							</searchfilter>
 						</xsl:when>
 					</xsl:choose>
 				
@@ -515,7 +521,26 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
-
+				
+				<xsl:variable name="hrsg">
+					<xsl:for-each select="AutorIn">
+						<xsl:value-of select="." />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				<xsl:choose>
+					<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
+				
 <!--TITLE-->
 
 	<!--title Titelinformationen-->
