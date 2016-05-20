@@ -123,6 +123,25 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
+				
+				<xsl:variable name="hrsg">
+					<xsl:for-each select="attributes/person[@role='AUTHOR']">
+						<xsl:value-of select="@name" />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				<xsl:choose>
+					<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 
 <!--TITLE-->
 
@@ -210,7 +229,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(Hrsg.)'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'HG.')">
@@ -220,7 +239,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'HG.'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'(Hg')">
@@ -230,7 +249,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'(Hg'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'[Hg')">
@@ -240,7 +259,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'[Hg'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:when test="contains(@name,'(hg')">
@@ -270,7 +289,7 @@
 				<xsl:value-of select="normalize-space(substring-before(@name,'Hg'))"></xsl:value-of>
 
 				</editor>
-			<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+			
 			</xsl:when>
 
 		<xsl:otherwise>
@@ -280,7 +299,7 @@
 				<xsl:value-of select="@name"></xsl:value-of>
 
 				</author>
-			<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+			
 			</xsl:otherwise>
 
 		</xsl:choose>
