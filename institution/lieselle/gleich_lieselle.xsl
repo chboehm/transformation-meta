@@ -134,6 +134,22 @@
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
 
+				<xsl:variable name="hrsg">
+					<xsl:for-each select="Autorin">
+						<xsl:value-of select="." />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				<xsl:choose>
+					<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hg.'))">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
+
 <!--TITLE-->
 
 	<!--title Titelinformationen-->
