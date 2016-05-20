@@ -1074,7 +1074,7 @@
 			<!--title Titelinformationen-->	
 					<xsl:choose>
 						<xsl:when test="Hefttitel[string-length() != 0]">
-							<xsl:apply-templates select="Hefttitel" />
+							<xsl:apply-templates select="Hefttitel[1]" />
 							</xsl:when>
 						<xsl:when test="($connect[string-length() != 0]) and (substring(substring-after($connect,'title:'),1,1)!=':')">
 							<title>
