@@ -151,6 +151,25 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
+				
+				<xsl:variable name="hrsg">
+					<xsl:for-each select="AutorIn-Hrsg_">
+						<xsl:value-of select="." />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				<xsl:choose>
+					<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:otherwise>
+					</xsl:choose>
 
 <!--TITLE-->
 
@@ -239,6 +258,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Hochschulschrift</xsl:text></format>	
+				<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 	
 	<!--documentType-->
 				<documentTyp><xsl:text>Diplomarbeit</xsl:text></documentTyp>
@@ -308,7 +328,8 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Akte</xsl:text></format>	
+				<format><xsl:text>Archivgut</xsl:text></format>	
+				<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 	<!--documentType-->
 				<documentTyp><xsl:text>Graue Materialien</xsl:text></documentTyp>
 
@@ -408,7 +429,8 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Akte</xsl:text></format>	
+				<format><xsl:text>Archivgut</xsl:text></format>	
+				<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -544,6 +566,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>	
+				<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -752,7 +775,9 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Zeitschrift</xsl:text></format>	
+				<format><xsl:text>Periodika</xsl:text></format>	
+				<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
+				
 	<!--documentType-->
 				<documentType><xsl:text>Zeitschriftenheft</xsl:text></documentType>
 
@@ -846,6 +871,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Fotografie</xsl:text></format>	
+				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>
 
 <!--TITLE-->
 
