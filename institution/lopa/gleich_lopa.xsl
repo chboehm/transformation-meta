@@ -871,7 +871,7 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Visuelle Materialien</xsl:text></format>
-					<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+					<searchfilter><xsl:text>Plakat</xsl:text></searchfilter>	
 	<!--documentType-->
 					<documentType><xsl:text>Grafik</xsl:text></documentType>
 <!--TITLE-->
