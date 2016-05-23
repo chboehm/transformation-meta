@@ -67,6 +67,16 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>
+				
+				<xsl:choose>
+					<xsl:when test="Herausgeber[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+						</xsl:otherwise>
+					</xsl:choose>
+				
 	<!--documentType-->
 
 <!--TITLE-->
@@ -150,6 +160,16 @@
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Buch</xsl:text></format>		-->
 				<format><xsl:text>Buch</xsl:text></format>
+				
+				<xsl:choose>
+					<xsl:when test="autorin2[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+						</xsl:otherwise>
+					</xsl:choose>
+					
 	<!--documentType-->
 				
 <!--TITLE-->
@@ -164,6 +184,9 @@
 				<xsl:apply-templates select="autorin" />
 				<xsl:apply-templates select="autorin2" />
 				<xsl:apply-templates select="autorin3" />
+				
+	<!--editor-->	
+				<xsl:apply-templates select="herausgeberin" />
 				
 	<!--series-->
 				<xsl:apply-templates select="untertitel1" />
