@@ -117,19 +117,54 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
 			<!--format Objektartinformationen-->
+			
+			<xsl:variable name="hrsg">
+					<xsl:for-each select="AutorIn-Hrsg_">
+						<xsl:value-of select="." />
+						</xsl:for-each>
+					</xsl:variable>
+				
+				
+			
 					<xsl:choose>
 						<!--<xsl:when test="Dokumentart[text()=' Sammelwerk, Zeitschrift']">-->
 						<xsl:when test="(contains(mab501_fussnote[1],'Hochschulschrift')) or (contains(mab501_fussnote[2],'Hochschulschrift'))">
 							<format><xsl:text>Hochschulschrift</xsl:text></format>
+							<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:when test="contains(typ2,'Buchbestand')">
 							<format><xsl:text>Buch</xsl:text></format>
+							<xsl:choose>
+								<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+								<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+								</xsl:when>
+								<xsl:otherwise>
+								<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+								</xsl:otherwise>
+								</xsl:choose>
 							</xsl:when>
 						<xsl:when test="contains(typ2,'Zeitschriften')">
-							<format><xsl:text>Zeitschrift</xsl:text></format>
+							<format><xsl:text>Periodika</xsl:text></format>
+							<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 							</xsl:when>
 						<xsl:otherwise>
 							<format><xsl:text>Buch</xsl:text></format>
+							<xsl:choose>
+								<xsl:when test="(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'Hrsg.')) or
+								(contains($hrsg,'HG.')) or
+								(contains($hrsg,'Hg')) or
+								(contains($hrsg,'hg'))">
+								<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+								</xsl:when>
+								<xsl:otherwise>
+								<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+								</xsl:otherwise>
+								</xsl:choose>
 							</xsl:otherwise>
 						</xsl:choose>
 
