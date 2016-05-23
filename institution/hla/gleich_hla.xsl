@@ -64,7 +64,8 @@
 		<dataset>
 			
 			 <typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-			<format><xsl:text>Bestandsübersicht</xsl:text></format>
+			<format><xsl:text>Archivgut</xsl:text></format>
+			<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 			
 			<title><xsl:text>Bund Deutscher Frauenvereine (BDF)</xsl:text></title>
 			<title_short><xsl:text>Bund Deutscher Frauenvereine (BDF)</xsl:text></title_short>
@@ -338,7 +339,8 @@
 				<dataset>
 			
 					 <typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-					<format><xsl:text>Akte</xsl:text></format>
+					<format><xsl:text>Archivgut</xsl:text></format>
+					<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 			
 					<title><xsl:value-of select="did/unittitle" /></title>
 					<title_short><xsl:value-of select="did/unittitle"/></title_short>
@@ -481,7 +483,8 @@
 				<dataset>
 			
 					 <typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-					<format><xsl:text>Akte</xsl:text></format>
+					<format><xsl:text>Archivgut</xsl:text></format>
+					<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 			
 					<title><xsl:value-of select="did/unittitle" /></title>
 					<title_short><xsl:value-of select="did/unittitle"/></title_short>
