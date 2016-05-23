@@ -153,16 +153,29 @@
 	<!--format Objektartinformationen-->
 				<xsl:choose>
 					<xsl:when test="Aktentitel">
-						<format><xsl:text>Akte</xsl:text></format>	
+						<format><xsl:text>Archivgut</xsl:text></format>	
+						<searchfilter><xsl:text>Akte</xsl:text></searchfilter>	
 						</xsl:when>
 					<xsl:when test="Erscheinungsform[text()='Aufsatz']">
 						<format><xsl:text>Artikel</xsl:text></format>	
+						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	
 						</xsl:when>
 					<xsl:when test="Erscheinungsform[text()='Zeitschrift']">
-						<format><xsl:text>Zeitschrift</xsl:text></format>	
+						<format><xsl:text>Periodika</xsl:text></format>	
+						<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>	
 						</xsl:when>
 					<xsl:otherwise>
 						<format><xsl:text>Buch</xsl:text></format>	
+						
+						<xsl:choose>
+							<xsl:when test="HerausgeberInnen[string-length() != 0]">
+								<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+								</xsl:when>
+							<xsl:otherwise>
+								<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+								</xsl:otherwise>
+							</xsl:choose>
+						
 						</xsl:otherwise>
 					</xsl:choose>
 	
