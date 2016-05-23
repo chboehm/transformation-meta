@@ -345,7 +345,7 @@
 					</title_short>
 				<xsl:if test="../mab335_zusatz_hauptsachtitel[string-length() != 0]">
 					<title_sub>
-						<xsl:value-of select="normalize-space(.)" />
+						<xsl:value-of select="normalize-space(../mab335_zusatz_hauptsachtitel)" />
 						</title_sub>
 					</xsl:if>
 				</xsl:template>
