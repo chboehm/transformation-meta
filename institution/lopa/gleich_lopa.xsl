@@ -218,6 +218,15 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Buch</xsl:text></format>
+					
+					<xsl:choose>
+					<xsl:when test="Herausgeber[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+						</xsl:otherwise>
+					</xsl:choose>
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -337,7 +346,8 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-					<format><xsl:text>Akte</xsl:text></format>
+					<format><xsl:text>Archivgut</xsl:text></format>
+					<searchfilter><xsl:text>Akte</xsl:text></searchfilter>	
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -472,7 +482,8 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-					<format><xsl:text>Autograf</xsl:text></format>
+					<format><xsl:text>Archivgut</xsl:text></format>
+					<searchfilter><xsl:text>Autograf</xsl:text></searchfilter>	
 	<!--documentType-->
 					<documentType><xsl:text>Brief</xsl:text></documentType>
 <!--TITLE-->
@@ -602,6 +613,15 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Buch</xsl:text></format>
+					
+					<xsl:choose>
+					<xsl:when test="Herausgeber[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+						</xsl:otherwise>
+					</xsl:choose>
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -731,6 +751,7 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 					<format><xsl:text>Fotografie</xsl:text></format>
+					<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>	
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -849,7 +870,8 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-					<format><xsl:text>Plakat</xsl:text></format>
+					<format><xsl:text>Visuelle Materialien</xsl:text></format>
+					<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
 	<!--documentType-->
 					<documentType><xsl:text>Grafik</xsl:text></documentType>
 <!--TITLE-->
@@ -967,9 +989,8 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--at Objektartinformationen-->
-					<format>
-						<xsl:text>Zeitschrift</xsl:text>
-						</format>
+					<format><xsl:text>Periodika</xsl:text></format>
+					<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>	
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -1061,9 +1082,8 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--at Objektartinformationen-->
-					<format>
-						<xsl:text>Artikel</xsl:text>
-						</format>
+					<format><xsl:text>Artikel</xsl:text></format>
+					<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	
 	<!--documentType-->
 	
 <!--TITLE-->
@@ -1188,8 +1208,9 @@
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--at Objektartinformationen-->
 					<format>
-						<xsl:text>Akte</xsl:text>
+						<xsl:text>Archivgut</xsl:text>
 						</format>
+					<searchfilter><xsl:text>Akte</xsl:text></searchfilter>	
 	<!--documentType-->
 					<documentType>
 						<xsl:value-of select="Bestand"></xsl:value-of>
