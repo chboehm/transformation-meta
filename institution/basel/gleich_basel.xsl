@@ -132,7 +132,16 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Buch</xsl:text></format>	
-
+				
+				<xsl:choose>
+					<xsl:when test="Name_zweiter_Verfasserin[string-length() != 0]">
+						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>	
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>	
+						</xsl:otherwise>
+					</xsl:choose>
+				
 <!--TITLE-->
 
 	<!--title Titelinformationen-->
