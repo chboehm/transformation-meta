@@ -18,8 +18,8 @@
 	<!--Der Hauptknoten-->	
 	<xsl:template match="FrauenMediaTurm">
 		<xsl:element name="catalog">
-			<!--<xsl:apply-templates select="//Tagesdatum_x058x_[1]" />
-			<xsl:apply-templates select="//Eingabe-Datum_x058x_[1]" />-->
+			<xsl:apply-templates select="//Tagesdatum_x058x_[1]" />
+			<xsl:apply-templates select="//Eingabe-Datum_x058x_[1]" />
 			<xsl:apply-templates select="//Datensatz" />
 		</xsl:element>
 	</xsl:template>
