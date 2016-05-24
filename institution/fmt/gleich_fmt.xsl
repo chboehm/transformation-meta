@@ -23,12 +23,7 @@
 			<xsl:apply-templates select="//Datensatz" />
 		</xsl:element>
 	</xsl:template>
-	
-	<!--<xsl:template match="FrauenMediaTurm">
-		<xsl:element name="catalog">
-			<xsl:apply-templates/>
-		</xsl:element>
-		</xsl:template>-->
+
 
 
 <!--Zeitschrift aus Zeitschriftenartikel-->	
@@ -603,6 +598,9 @@
 
 <xsl:template match="Datensatz">		
 		
+		
+		<xsl:if test="Formen_x058x_[text()='Hochschulschrift']">
+		
 		<!--
 		
 		<xsl:if test="Objektart_x058x_[text()='Zeitschriftenausgabe']">
@@ -716,6 +714,19 @@
 	<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
+					<xsl:choose>
+					<xsl:when test="Formen_x058x_[text()='Hochschulschrift']">
+						<format>
+							<xsl:text>Hochschulschrift</xsl:text>
+							</format>
+						</xsl:when>
+					<xsl:otherwise>
+						<format>
+							<xsl:text>Buch</xsl:text>
+							</format>
+						</xsl:otherwise>
+					</xsl:choose>
+					
 					<format><xsl:text>Buch</xsl:text></format>
 	<!--searchfilter-->
 				<xsl:choose>
@@ -2556,7 +2567,7 @@
 
 
 </xsl:element>
-		<!--</xsl:if>-->
+		</xsl:if>
 
 </xsl:template>
 
