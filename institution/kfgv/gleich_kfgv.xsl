@@ -137,9 +137,10 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Zeitschrift</xsl:text></format>	
-				<documentType><xsl:text>Zeitschriftenreihe</xsl:text>
-				</documentType>
+				<format><xsl:text>Periodika</xsl:text></format>	
+				<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+				<!--<documentType><xsl:text>Zeitschriftenreihe</xsl:text>
+				</documentType>-->
 
 <!--TITLE-->
 
