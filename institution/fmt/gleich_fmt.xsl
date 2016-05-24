@@ -727,7 +727,6 @@
 						</xsl:otherwise>
 					</xsl:choose>
 					
-					<format><xsl:text>Buch</xsl:text></format>
 	<!--searchfilter-->
 				<xsl:choose>
 					<xsl:when test="Aufs_x132x_tze_x032x__x040x_Link_x041x__x058x_">
