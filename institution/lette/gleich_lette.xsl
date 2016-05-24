@@ -171,7 +171,7 @@
 <!--TITLE-->
 	
 			<!--title Titelinformationen-->	
-					<xsl:apply-templates select="mab331_hauptsachtitel[string-length() != 0]" />
+					<xsl:apply-templates select="mab331_hauptsachtitel[1][string-length() != 0]" />
 
 <!--RESPONSIBLE-->
 					
