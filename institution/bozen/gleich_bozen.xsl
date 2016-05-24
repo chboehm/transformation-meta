@@ -136,7 +136,8 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Akte</xsl:text></format>	
+				<format><xsl:text>Archivgut</xsl:text></format>	
+				<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
 	
 	<!--documentType-->		
 
