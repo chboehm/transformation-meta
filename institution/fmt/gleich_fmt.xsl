@@ -599,10 +599,10 @@
 <xsl:template match="Datensatz">		
 		
 		
-		<xsl:if test="Formen_x058x_[text()='Hochschulschrift']">
+		
 		
 		<!--
-		
+		<xsl:if test="Formen_x058x_[text()='Hochschulschrift']">
 		<xsl:if test="Objektart_x058x_[text()='Zeitschriftenausgabe']">
 		<xsl:if test="Objektart_x058x_[text()='Zeitschrift']">
 		
@@ -2567,7 +2567,7 @@
 
 
 </xsl:element>
-		</xsl:if>
+		<!--</xsl:if>-->
 
 </xsl:template>
 
