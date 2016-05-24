@@ -211,8 +211,8 @@
 				 			 	</xsl:choose>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='CF'">
-				 			 <format><xsl:text>Sonstiges</xsl:text></format>
-				 			  <searchfilter><xsl:text>Datenträger</xsl:text></searchfilter>
+				 			 <format><xsl:text>Buch</xsl:text></format>
+				 			  <searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='MU'">
 				 			 <format><xsl:text>Tonträger</xsl:text></format>
