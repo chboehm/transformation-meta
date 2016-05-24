@@ -119,7 +119,7 @@
 			<!--format Objektartinformationen-->
 			
 			<xsl:variable name="hrsg">
-					<xsl:for-each select="AutorIn-Hrsg_">
+					<xsl:for-each select="mab359_verfasser">
 						<xsl:value-of select="." />
 						</xsl:for-each>
 					</xsl:variable>
