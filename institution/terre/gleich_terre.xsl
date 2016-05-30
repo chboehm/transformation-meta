@@ -785,10 +785,22 @@
 	</xsl:template>
 
 <xsl:template match="COL[28]">
+
+	<xsl:variable name="titleedition">
+				<xsl:text> </xsl:text>
+				<xsl:text>(</xsl:text>
+				<xsl:value-of select="../COL[10]" />
+				<xsl:text>)</xsl:text>
+				<xsl:value-of select="normalize-space(substring-before(../COL[16],'/'))" />
+				</xsl:variable>
+
 	<xsl:choose>
 		<xsl:when test="contains(.,':')">
 			<title>
 				<xsl:value-of select="." />
+				<xsl:if test="contains(../COL[1],'Zeitschrift')">
+					<xsl:value-of select="normalize-space($titleedition)" />
+					</xsl:if>
 				</title>
 			<title_short>
 				<xsl:value-of select="normalize-space(substring-before(.,':'))" />
@@ -800,9 +812,12 @@
 		<xsl:otherwise>
 			<title>
 				<xsl:value-of select="." />
+				<xsl:if test="contains(../COL[1],'Zeitschrift')">
+					<xsl:value-of select="normalize-space($titleedition)" />
+					</xsl:if>
 				</title>
 			<title_short>
-				<xsl:value-of select="." />
+				<xsl:value-of select="normalize-space(.)" />
 				</title_short>
 			</xsl:otherwise>
 		</xsl:choose>
