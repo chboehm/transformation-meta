@@ -244,6 +244,134 @@
 	</xsl:template>
 
 
+<!--Zeitschriften aus Zeitschriftenheft-->	
+<!--Zeitschriften aus Zeitschriftenheft-->	
+<!--Zeitschriften aus Zeitschriftenheft-->	
+
+
+<xsl:template match="DATABASE">
+	
+	<!--<xsl:value-of select="../RESULTSET/ROW/COL[1]/DATA[1]"></xsl:value-of>
+	häh-->
+		
+	<xsl:for-each select="../RESULTSET/ROW/COL[1]/DATA[2][text()='Zeitschrift']">
+	
+	<xsl:if test="../../COL[31][string-length() != 0]">
+	
+				<xsl:variable name="title_edition">
+				<xsl:text> </xsl:text>
+				<xsl:text>(</xsl:text>
+				<xsl:value-of select="../../COL[10]" />
+				<xsl:text>)</xsl:text>
+				<xsl:value-of select="normalize-space(substring-before(../../COL[16],'/'))" />
+				</xsl:variable>
+	
+	<!--<xsl:value-of select="../../COL[18]"></xsl:value-of>-->
+
+<xsl:element name="record">
+
+<xsl:element name="vufind">
+	<id>
+		<xsl:value-of select="translate(../../COL[31], '. +()/:-äüö,', '')" />
+		<!--<xsl:value-of select="translate(../../COL[10], '. +()/:-äüö,', '')" />
+		<xsl:value-of select="normalize-space(substring-before(../../COL[16],'/'))" />-->
+		<xsl:text>terredesfemmes</xsl:text></id>
+	<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+	<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+	<recordType><xsl:text>library</xsl:text></recordType>			
+</xsl:element>
+
+<xsl:element name="institution">
+	<institutionShortname><xsl:text>TERRE DES FEMMES</xsl:text></institutionShortname>
+	<institutionFull><xsl:text>TERRE DES FEMMES - Dokumentationsstelle</xsl:text></institutionFull>
+	<institutionID><xsl:text>terredesfemmes</xsl:text></institutionID>
+	<collection><xsl:text>terredesfemmes</xsl:text></collection>
+	<isil><xsl:text>o. A.</xsl:text></isil>
+	<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenbibliothek-lieselle/</xsl:text></link>
+	<geoLocation>
+		<latitude>52.5394800</latitude>
+		<longitude>13.3946500</longitude>
+		</geoLocation>	
+</xsl:element>
+
+<xsl:element name="dataset">
+
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+					<format><xsl:text>Periodika</xsl:text></format>
+	<!--searchfilter-->
+					<searchfilter><xsl:text>Zeitschrift</xsl:text></searchfilter>
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+	
+
+			
+			<title>
+				<xsl:value-of select="../../COL[31]"/>
+				<!--<xsl:value-of select="$title_edition" />-->
+				</title>
+			
+			<title_short>
+				<xsl:value-of select="../../COL[31]"/>
+				</title_short>
+
+<!--PUBLISHING-->
+
+	<!--publishDate Jahresangabe-->
+				<!--<xsl:apply-templates select="../../COL[10][string-length() != 0]"/>-->
+	
+	<!--placeOfPublication publisher Verlagsangabe-->
+				<xsl:apply-templates select="../../COL[29][string-length() != 0]"/>
+				<xsl:apply-templates select="../../COL[30][string-length() != 0]"/>
+			
+<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+				
+	<!--issue Heft-->
+				<!--<issue><xsl:value-of select="normalize-space(substring-before(../../COL[16],'/'))" /></issue>-->		
+
+</xsl:element>
+
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(../../COL[31], '. +()/:-äüö,', '')" /><xsl:text>terredesfemmes</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../../COL[31]"/></hierarchy_top_title>
+					
+					<!--<hierarchy_parent_id><xsl:value-of select="translate(../../COL[31], '. +()/:-äüö,', '')" /><xsl:text>terredesfemmes</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="../../COL[31]"/></hierarchy_parent_title>-->
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../../COL[31], '. +()/:-äüö,', '')" />
+						<!--<xsl:value-of select="translate(../../COL[10], '. +()/:-äüö,', '')" />
+						<xsl:value-of select="normalize-space(substring-before(../../COL[16],'/'))" />-->
+						<xsl:text>terredesfemmes</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:value-of select="../../COL[31]"/>
+						<!--<xsl:value-of select="$title_edition" />--></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../../COL[31]"/>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+	
+
+
+</xsl:element>
+	</xsl:if>
+		</xsl:for-each>
+	
+	</xsl:template>
+
+
 <!--Der Objektknoten-->
 	<xsl:template match="ROW">
 						
