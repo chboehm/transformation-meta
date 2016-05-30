@@ -576,7 +576,7 @@
 						<xsl:value-of select="normalize-space(substring-before(COL[16],'/'))" />
 						<xsl:text>terredesfemmes</xsl:text>
 						</hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="../../COL[31]"/></hierarchy_parent_title>
+					<hierarchy_parent_title><xsl:value-of select="COL[31]"/></hierarchy_parent_title>
 					
 					<is_hierarchy_id>
 						<xsl:value-of select="$id"/>
@@ -592,7 +592,36 @@
 			</xsl:element>
 	</xsl:if>
 
-
+<xsl:if test="(contains(COL[1],'Zeitschrift')) and (COL[31][string-length() != 0])">
+		
+<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id><xsl:value-of select="translate(COL[31], '. +()/:-äüö,', '')" /><xsl:text>terredesfemmes</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="COL[31]"/></hierarchy_top_title>
+					
+					<hierarchy_parent_id>
+						<xsl:value-of select="translate(COL[31], '. +()/:-äüö,', '')" />
+						<!--<xsl:value-of select="translate(COL[10], '. +()/:-äüö,', '')" />
+						<xsl:value-of select="normalize-space(substring-before(COL[16],'/'))" />-->
+						<xsl:text>terredesfemmes</xsl:text>
+						</hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="COL[31]"/></hierarchy_parent_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="$id"/>
+						<xsl:text>terredesfemmes</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="COL[28]"/></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="COL[28]"/>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+	</xsl:if>
 
 
 	
