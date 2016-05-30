@@ -643,7 +643,21 @@ den Datenbestand angezeigt-->
 				<format><xsl:text>Buch</xsl:text></format>	
 				
 	<!--searchfilter-->
+				
 				<xsl:choose>
+					<xsl:when test="Hrsg_[string-length() != 0]">
+						<searchfilter>
+							<xsl:text>Sammelband</xsl:text>
+							</searchfilter>
+						</xsl:when>
+					<xsl:otherwise>
+						<searchfilter>
+							<xsl:text>Monografie</xsl:text>
+							</searchfilter>
+						</xsl:otherwise>
+				</xsl:choose>
+				
+				<!--<xsl:choose>
 					<xsl:when test="not(s__Aufsatz)">
 						<searchfilter>
 							<xsl:text>Monografie</xsl:text>
@@ -654,7 +668,7 @@ den Datenbestand angezeigt-->
 							<xsl:text>Sammelband</xsl:text>
 							</searchfilter>
 						</xsl:otherwise>
-				</xsl:choose>
+				</xsl:choose>-->
 				
 	<!--documentType-->		
 				<xsl:apply-templates select="Dok-art"/>
