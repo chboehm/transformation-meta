@@ -102,6 +102,8 @@
 					<is_hierarchy_title><xsl:value-of select="../../COL[31]"/></is_hierarchy_title>
 					
 					<hierarchy_sequence>
+						<xsl:value-of select="../../COL[10]"/>
+						<xsl:text> </xsl:text>
 						<xsl:value-of select="../../COL[31]"/>
 						</hierarchy_sequence>
 				
@@ -229,6 +231,8 @@
 						<xsl:value-of select="$title_edition" /></is_hierarchy_title>
 					
 					<hierarchy_sequence>
+						<xsl:value-of select="../../COL[10]"/>
+						<xsl:text> </xsl:text>
 						<xsl:value-of select="../../COL[31]"/>
 						</hierarchy_sequence>
 				
@@ -357,6 +361,8 @@
 						<!--<xsl:value-of select="$title_edition" />--></is_hierarchy_title>
 					
 					<hierarchy_sequence>
+						<xsl:value-of select="../../COL[10]"/>
+						<xsl:text> </xsl:text>
 						<xsl:value-of select="../../COL[31]"/>
 						</hierarchy_sequence>
 				
@@ -585,6 +591,7 @@
 					<is_hierarchy_title><xsl:value-of select="COL[28]"/></is_hierarchy_title>
 					
 					<hierarchy_sequence>
+						
 						<xsl:value-of select="COL[28]"/>
 						</hierarchy_sequence>
 				
@@ -616,6 +623,8 @@
 					<is_hierarchy_title><xsl:value-of select="COL[28]"/></is_hierarchy_title>
 					
 					<hierarchy_sequence>
+						<xsl:value-of select="COL[10]"/>
+						<xsl:text> </xsl:text>
 						<xsl:value-of select="COL[28]"/>
 						</hierarchy_sequence>
 				
