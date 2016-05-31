@@ -1244,7 +1244,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 								</xsl:when>
 							<xsl:otherwise>
 								<sourceInfo>
-									<xsl:value-of select="Sammeltitel" />
+									<xsl:value-of select="normalize-space(Sammeltitel)" />
 									</sourceInfo>
 								</xsl:otherwise>
 							</xsl:choose>
