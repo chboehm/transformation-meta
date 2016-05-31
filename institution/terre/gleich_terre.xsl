@@ -599,7 +599,7 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id><xsl:value-of select="translate(COL[31], '. +()/:-äüö,', '')" /><xsl:text>terredesfemmes</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="COL[31]"/></hierarchy_top_title>
+					<hierarchy_top_title><xsl:value-of select="normalize-space(COL[31])"/></hierarchy_top_title>
 					
 					<hierarchy_parent_id>
 						<xsl:value-of select="translate(COL[31], '. +()/:-äüö,', '')" />
