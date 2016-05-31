@@ -2217,6 +2217,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>
+				
 				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 	
 	<!--documentType Objektartinformationen-->
