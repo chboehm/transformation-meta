@@ -1131,6 +1131,11 @@
 						<!--closing tag dataset-->
 		
 	<xsl:if test="vorrät._Hefte[string-length() != 0]">
+		
+		<xsl:variable name="rel" select="translate(vorrät._Hefte[1], translate(.,'0123456789', ''), '')"/>
+		
+		<xsl:if test="//objektnummer=$rel">
+		
 		<functions>
 			<hierarchyFields>
 				
@@ -1145,6 +1150,7 @@
 				</hierarchyFields>
 	
 			</functions>
+		</xsl:if>
 		</xsl:if>
 			
 				
