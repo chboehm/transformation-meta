@@ -23,7 +23,9 @@
 <xsl:template match="//Reihe_1">
 
 	<xsl:for-each select="../Erscheinungsform[text()='Aufsatz']">
-
+	
+	<xsl:if test="../Reihe_1[string-length() != 0]">
+	
 	<xsl:element name="record">
 
 <!--vufind_______________________________vufind_______________________________vufind-->		
@@ -83,9 +85,11 @@
 	
 			<title>
 				<xsl:value-of select="../Hefttitel"/>
-				<xsl:text> (</xsl:text>
-				<xsl:value-of select="normalize-space(substring-after(../Heftnummer,'.'))" />
-				<xsl:text>)</xsl:text>
+				<xsl:if test="../Heftnummer[string-length() != 0]">
+					<xsl:text> (</xsl:text>
+					<xsl:value-of select="normalize-space(substring-after(../Heftnummer,'.'))" />
+					<xsl:text>)</xsl:text>
+					</xsl:if>
 				</title>
 				
 			<title_short>
@@ -142,6 +146,8 @@
 			</xsl:element>
 		
 		</xsl:element>
+		
+		</xsl:if>
 		
 		</xsl:for-each>
 	</xsl:template>
