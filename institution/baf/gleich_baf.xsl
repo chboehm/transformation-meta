@@ -36,6 +36,7 @@
 		
 		<id>
 			<xsl:value-of select="translate(../Reihe_1, '.&quot; +()/:-äüö,', '')" />
+			<xsl:value-of select="translate(../ISSN, '.&quot; +()/:-äüö,', '')" />
 			<xsl:value-of select="translate(../Heftnummer, '.&quot; +()/:-äüö,', '')" />
 			<xsl:text>baf</xsl:text></id>
 		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
@@ -128,22 +129,24 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						
 						<xsl:value-of select="translate(../Reihe_1, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(../ISSN, '.&quot; +()/:-äüö,', '')" />
+						<!--<xsl:value-of select="translate(../Heftnummer, '.&quot; +()/:-äüö,', '')" />-->
 						<xsl:text>baf</xsl:text></hierarchy_top_id>
 					<hierarchy_top_title><xsl:value-of select="../Reihe_1" /></hierarchy_top_title>
 					
-					<xsl:if test="../Hefttitel[string-length() != 0]">
+				<xsl:if test="../Hefttitel[string-length() != 0]">
 					<hierarchy_parent_id>
 						<xsl:value-of select="translate(../Reihe_1, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(../ISSN, '.&quot; +()/:-äüö,', '')" />
+						<!--<xsl:value-of select="translate(../Heftnummer, '.&quot; +()/:-äüö,', '')" />-->
 						<xsl:text>baf</xsl:text></hierarchy_parent_id>
 					<hierarchy_parent_title><xsl:value-of select="../Reihe_1" /></hierarchy_parent_title>
 					</xsl:if>
 					
 					<is_hierarchy_id>
 						<xsl:value-of select="translate(../Reihe_1, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../ISSN, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(../Heftnummer, '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text>
 						</is_hierarchy_id>
@@ -314,6 +317,7 @@
 				<xsl:value-of select="translate(Titel[1], '.&quot; +()/:-äüö,', '')" />
 				<!--<xsl:value-of select="substring(translate(Titel[1],'1234567890abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZ -_:.,!?/()', '1234567890abcdefghijklmnopqrstuvwxyzauoABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,8)" />-->
 				<xsl:value-of select="translate(ISSN, '.&quot; +()/:-äüö,', '')" />
+				<xsl:value-of select="translate(Heftnummer, '.&quot; +()/:-äüö,', '')" />
 				</xsl:when>	
 			<xsl:otherwise>
 				<xsl:value-of select="substring(translate(Titel[1],'1234567890abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZ -_:.,!?/()', '1234567890abcdefghijklmnopqrstuvwxyzauoABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,8)" />
@@ -547,6 +551,7 @@
 						<xsl:value-of select="translate(ISBN, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(Reihe_1, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(ISSN, '.&quot; +()/:-äüö,', '')" />
+						<!--<xsl:value-of select="translate(Heftnummer, '.&quot; +()/:-äüö,', '')" />-->
 						<xsl:text>baf</xsl:text>
 						</hierarchy_top_id>
 					<hierarchy_top_title>
@@ -558,6 +563,7 @@
 						<xsl:value-of select="translate(Titel_Hauptband, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(ISBN, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(Reihe_1, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(ISSN, '.&quot; +()/:-äüö,', '')" />
 						<xsl:value-of select="translate(Heftnummer, '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text>
 						</hierarchy_parent_id>
