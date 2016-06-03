@@ -317,7 +317,7 @@
 				<xsl:value-of select="translate(Titel[1], '.&quot; +()/:-äüö,', '')" />
 				<!--<xsl:value-of select="substring(translate(Titel[1],'1234567890abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZ -_:.,!?/()', '1234567890abcdefghijklmnopqrstuvwxyzauoABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,8)" />-->
 				<xsl:value-of select="translate(ISSN, '.&quot; +()/:-äüö,', '')" />
-				<xsl:value-of select="translate(Heftnummer, '.&quot; +()/:-äüö,', '')" />
+				<!--<xsl:value-of select="translate(Heftnummer, '.&quot; +()/:-äüö,', '')" />-->
 				</xsl:when>	
 			<xsl:otherwise>
 				<xsl:value-of select="substring(translate(Titel[1],'1234567890abcdefghijklmnopqrstuvwxyzäüöABCDEFGHIJKLMNOPQRSTUVWXYZ -_:.,!?/()', '1234567890abcdefghijklmnopqrstuvwxyzauoABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,8)" />
