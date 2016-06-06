@@ -686,7 +686,7 @@
 				
 				<xsl:if test="Bestand[string-length() != 0]">
 					<sourceInfo>
-						<xsl:value-of select="normalize-space(Bestand)" />
+						<xsl:value-of select="normalize-space(Bestand[1])" />
 						</sourceInfo>
 					</xsl:if>
 				<!--<xsl:apply-templates select="Bestand[string-length() != 0]"/>-->
