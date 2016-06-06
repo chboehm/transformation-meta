@@ -10,7 +10,7 @@
 <!--root knoten-->
 	<xsl:template match="baf">
 		<xsl:element name="catalog">
-			<xsl:apply-templates select="//Bestand[1]" />
+			<xsl:apply-templates select="//Bestand[1][1]" />
 			<xsl:apply-templates select="//Reihe_1[1]" />
 			<xsl:apply-templates select="//Titel_Hauptband[1]" />
 			<xsl:apply-templates select="object" />
@@ -20,12 +20,12 @@
 
 
 
-<!--Tektonik aus Bestand aus Aktentiteln-->
-<!--Tektonik aus Bestand aus Aktentiteln-->
-<!--Tektonik aus Bestand aus Aktentiteln-->
+<!--Tektonik aus Bestand[1] aus Aktentiteln-->
+<!--Tektonik aus Bestand[1] aus Aktentiteln-->
+<!--Tektonik aus Bestand[1] aus Aktentiteln-->
 
 
-<xsl:template match="//Bestand">
+<xsl:template match="//Bestand[1]">
 
 	<xsl:for-each select="../Aktentitel">
 	
@@ -37,7 +37,7 @@
 	<xsl:element name="vufind">
 		
 		<id>
-			<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
+			<xsl:value-of select="translate(../Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 			<xsl:text>baf</xsl:text></id>
 		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
 		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
@@ -79,8 +79,8 @@
 	
 	<!--title Titelinformationen-->
 	
-			<title><xsl:value-of select="../Bestand"/></title>
-			<title_short><xsl:value-of select="../Bestand"/></title_short>
+			<title><xsl:value-of select="../Bestand[1]"/></title>
+			<title_short><xsl:value-of select="../Bestand[1]"/></title_short>
 			
 		</xsl:element>
 			
@@ -89,20 +89,20 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
+					<hierarchy_top_title><xsl:value-of select="../Bestand[1]" /></hierarchy_top_title>
 					
 					<is_hierarchy_id>
-						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text>
 						</is_hierarchy_id>
 					<is_hierarchy_title>
-						<xsl:value-of select="../Bestand" />
+						<xsl:value-of select="../Bestand[1]" />
 						</is_hierarchy_title>
 					
 					<hierarchy_sequence>
-						<xsl:value-of select="../Bestand"></xsl:value-of>
+						<xsl:value-of select="../Bestand[1]"></xsl:value-of>
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
@@ -175,14 +175,14 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
+					<hierarchy_top_title><xsl:value-of select="../Bestand[1]" /></hierarchy_top_title>
 					
 					<hierarchy_parent_id>
-						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="../Bestand" /></hierarchy_parent_title>
+					<hierarchy_parent_title><xsl:value-of select="../Bestand[1]" /></hierarchy_parent_title>
 					
 					<is_hierarchy_id>
 						<xsl:value-of select="translate(../Klassifikation, '.&quot; +()/:-äüö,', '')" />
@@ -684,12 +684,12 @@
 	
 	<!--collectionHolding-->
 				
-				<xsl:if test="Bestand[string-length() != 0]">
+				<xsl:if test="Bestand[1][string-length() != 0]">
 					<sourceInfo>
-						<xsl:value-of select="normalize-space(Bestand[1])" />
+						<xsl:value-of select="normalize-space(Bestand[1][1])" />
 						</sourceInfo>
 					</xsl:if>
-				<!--<xsl:apply-templates select="Bestand[string-length() != 0]"/>-->
+				<!--<xsl:apply-templates select="Bestand[1][string-length() != 0]"/>-->
 				
 				<xsl:if test="Erscheinungsform[text()='Zeitschrift']">
 					<collectionHolding>
@@ -719,10 +719,10 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						<xsl:value-of select="translate(Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(Bestand[1][1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text>
 						</hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="Bestand" /></hierarchy_top_title>
+					<hierarchy_top_title><xsl:value-of select="Bestand[1][1]" /></hierarchy_top_title>
 					
 					<hierarchy_parent_id>
 						<xsl:value-of select="translate(Klassifikation, '.&quot; +()/:-äüö,', '')" />
@@ -897,17 +897,17 @@
 			</description>
 		</xsl:template>
 		
-	<xsl:template match="Bestand">
+	<xsl:template match="Bestand[1]">
 		<sourceInfo>
 			<xsl:value-of select="normalize-space(.)" />
 			</sourceInfo>
 		</xsl:template>
 	
 	<!--<xsl:template match="Enthaelt">
-		<xsl:variable name="bestand" select="../Bestand[1]" />
+		<xsl:variable name="Bestand[1]" select="../Bestand[1][1]" />
 		<xsl:variable name="lfr"><xsl:text>Landesfrauenrat</xsl:text></xsl:variable>
 		<description>
-			<xsl:value-of select="../Bestand[1]"></xsl:value-of>
+			<xsl:value-of select="../Bestand[1][1]"></xsl:value-of>
 			<xsl:text>: </xsl:text>
 			<xsl:for-each select="../Enthaelt">
 				<xsl:value-of select="normalize-space(.)" />
@@ -922,10 +922,10 @@
 	
 	<xsl:template match="Darin">
 		<xsl:if test="not(../Enthaelt)">
-		<xsl:variable name="bestand" select="../Bestand[1]" />
+		<xsl:variable name="Bestand[1]" select="../Bestand[1][1]" />
 		<xsl:variable name="lfr"><xsl:text>Landesfrauenrat</xsl:text></xsl:variable>
 		<description>
-			<xsl:value-of select="../Bestand[1]"></xsl:value-of>
+			<xsl:value-of select="../Bestand[1][1]"></xsl:value-of>
 			<xsl:text>: </xsl:text>
 			<xsl:for-each select="../Darin">
 				<xsl:value-of select="normalize-space(.)" />
@@ -976,10 +976,10 @@
 		</xsl:template>
 	
 	<xsl:template match="Aktentitel[1]">
-		<xsl:variable name="bestand" select="../Bestand[1]" />
+		<xsl:variable name="Bestand[1]" select="../Bestand[1][1]" />
 		<xsl:variable name="lfr"><xsl:text>Landesfrauenrat</xsl:text></xsl:variable>
 		<xsl:choose>
-			<xsl:when test="contains($bestand,$lfr)">
+			<xsl:when test="contains($Bestand[1],$lfr)">
 				<title>
 					<xsl:value-of select="normalize-space(.)" />
 					</title>
