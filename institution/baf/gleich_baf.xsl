@@ -10,12 +10,202 @@
 <!--root knoten-->
 	<xsl:template match="baf">
 		<xsl:element name="catalog">
+			<xsl:apply-templates select="//Bestand[1]" />
 			<xsl:apply-templates select="//Reihe_1[1]" />
 			<xsl:apply-templates select="//Titel_Hauptband[1]" />
 			<xsl:apply-templates select="object" />
 			<xsl:apply-templates/>
 		</xsl:element>
 	</xsl:template>
+
+
+
+<!--Tektonik aus Bestand aus Aktentiteln-->
+<!--Tektonik aus Bestand aus Aktentiteln-->
+<!--Tektonik aus Bestand aus Aktentiteln-->
+
+
+<xsl:template match="//Bestand">
+
+	<xsl:for-each select="../Aktentitel">
+	
+	<xsl:element name="record">
+	
+
+<!--vufind_______________________________vufind_______________________________vufind-->		
+		
+	<xsl:element name="vufind">
+		
+		<id>
+			<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+			<xsl:text>baf</xsl:text></id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>systematics</xsl:text></recordType>
+		
+		</xsl:element>
+
+<!--institution_______________________________institution_______________________________institution-->
+	
+	<xsl:element name="institution">
+		
+		<institutionShortname><xsl:text>BAF</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>BAF e.V., Bildungszentrum und Archiv zur Frauengeschichte Baden-Württembergs</xsl:text></institutionFull>
+		<institutionID><xsl:text>baf</xsl:text></institutionID>
+		<collection><xsl:text>baf</xsl:text></collection>
+		<isil><xsl:text>Tü 133</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/baf/</xsl:text></link>
+		<geoLocation>
+			<latitude>48.5232420</latitude>
+			<longitude>9.0527320</longitude>
+			</geoLocation>
+			
+		</xsl:element>
+		
+<!--dataset_______________________________dataset_______________________________dataset-->
+
+	<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+			<!--<format><xsl:text>Periodika</xsl:text></format>-->
+	<!--searchfilter-->
+			<!--<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>-->
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+	
+			<title><xsl:value-of select="../Bestand"/></title>
+			<title_short><xsl:value-of select="../Bestand"/></title_short>
+			
+		</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id>
+						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:value-of select="../Bestand" />
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Bestand"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		
+		</xsl:element>
+
+
+<!--Tektonik aus Klassifikation aus Aktentiteln-->
+<!--Tektonik aus Klassifikation aus Aktentiteln-->
+<!--Tektonik aus Klassifikation aus Aktentiteln-->
+
+<xsl:element name="record">
+	
+
+<!--vufind_______________________________vufind_______________________________vufind-->		
+		
+	<xsl:element name="vufind">
+		
+		<id>
+			<xsl:value-of select="translate(../Klassifikation, '.&quot; +()/:-äüö,', '')" />
+			<xsl:text>baf</xsl:text></id>
+		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
+		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
+		<recordType><xsl:text>systematics</xsl:text></recordType>
+		
+		</xsl:element>
+
+<!--institution_______________________________institution_______________________________institution-->
+	
+	<xsl:element name="institution">
+		
+		<institutionShortname><xsl:text>BAF</xsl:text></institutionShortname>
+		<institutionFull><xsl:text>BAF e.V., Bildungszentrum und Archiv zur Frauengeschichte Baden-Württembergs</xsl:text></institutionFull>
+		<institutionID><xsl:text>baf</xsl:text></institutionID>
+		<collection><xsl:text>baf</xsl:text></collection>
+		<isil><xsl:text>Tü 133</xsl:text></isil>
+		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/baf/</xsl:text></link>
+		<geoLocation>
+			<latitude>48.5232420</latitude>
+			<longitude>9.0527320</longitude>
+			</geoLocation>
+			
+		</xsl:element>
+		
+<!--dataset_______________________________dataset_______________________________dataset-->
+
+	<xsl:element name="dataset">
+		
+<!--FORMAT-->
+
+	<!--typeOfRessource-->
+			<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
+	<!--format Objektartinformationen-->
+			<!--<format><xsl:text>Periodika</xsl:text></format>-->
+	<!--searchfilter-->
+			<!--<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>-->
+
+<!--TITLE-->
+	
+	<!--title Titelinformationen-->
+	
+			<title><xsl:value-of select="../Klassifikation"/></title>
+			<title_short><xsl:value-of select="../Klassifikation"/></title_short>
+			
+		</xsl:element>
+			
+		<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id>
+						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
+					
+					<hierarchy_parent_id>
+						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="../Bestand" /></hierarchy_parent_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="translate(../Klassifikation, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title>
+						<xsl:value-of select="../Klassifikation" />
+						</is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="../Klassifikation"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		
+		</xsl:element>
+		
+		</xsl:for-each>
+	</xsl:template>
+
+
+
 
 <!--Zeitschriftenheft aus Artikel-->
 <!--Zeitschriftenheft aus Artikel-->
@@ -493,7 +683,13 @@
 				<xsl:apply-templates select="Darin[string-length() != 0]"/>
 	
 	<!--collectionHolding-->
-				<xsl:apply-templates select="Bestand[string-length() != 0]"/>
+				
+				<xsl:if test="Bestand[string-length() != 0]">
+					<sourceInfo>
+						<xsl:value-of select="normalize-space(Bestand)" />
+						</sourceInfo>
+					</xsl:if>
+				<!--<xsl:apply-templates select="Bestand[string-length() != 0]"/>-->
 				
 				<xsl:if test="Erscheinungsform[text()='Zeitschrift']">
 					<collectionHolding>
@@ -516,6 +712,38 @@
 		
 		</xsl:element>	
 
+
+<xsl:if test="Aktentitel">
+<xsl:element name="functions">
+			
+			<hierarchyFields>
+				
+					<hierarchy_top_id>
+						<xsl:value-of select="translate(Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text>
+						</hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="Bestand" /></hierarchy_top_title>
+					
+					<hierarchy_parent_id>
+						<xsl:value-of select="translate(Klassifikation, '.&quot; +()/:-äüö,', '')" />
+						<xsl:text>baf</xsl:text>
+						</hierarchy_parent_id>
+					<hierarchy_parent_title>
+						<xsl:value-of select="Klassifikation" />
+						</hierarchy_parent_title>
+					
+					<is_hierarchy_id>
+						<xsl:value-of select="$id"/><xsl:text>baf</xsl:text>
+						</is_hierarchy_id>
+					<is_hierarchy_title><xsl:value-of select="Aktentitel" /></is_hierarchy_title>
+					
+					<hierarchy_sequence>
+						<xsl:value-of select="Aktentitel"></xsl:value-of>
+						</hierarchy_sequence>
+				
+				</hierarchyFields>
+			</xsl:element>
+		</xsl:if>	
 
 <xsl:if test="Erscheinungsform[text()='Zeitschrift']">
 <xsl:element name="functions">
