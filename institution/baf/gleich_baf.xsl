@@ -37,7 +37,7 @@
 	<xsl:element name="vufind">
 		
 		<id>
-			<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+			<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
 			<xsl:text>baf</xsl:text></id>
 		<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
 		<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
@@ -89,12 +89,12 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_top_id>
 					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
 					
 					<is_hierarchy_id>
-						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text>
 						</is_hierarchy_id>
 					<is_hierarchy_title>
@@ -175,12 +175,12 @@
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
-						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_top_id>
 					<hierarchy_top_title><xsl:value-of select="../Bestand" /></hierarchy_top_title>
 					
 					<hierarchy_parent_id>
-						<xsl:value-of select="translate(../Bestand, '.&quot; +()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Bestand[1], '.&quot; +()/:-äüö,', '')" />
 						<xsl:text>baf</xsl:text></hierarchy_parent_id>
 					<hierarchy_parent_title><xsl:value-of select="../Bestand" /></hierarchy_parent_title>
 					
