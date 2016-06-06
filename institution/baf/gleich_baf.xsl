@@ -976,7 +976,7 @@
 		</xsl:template>
 	
 	<xsl:template match="Aktentitel[1]">
-		<xsl:variable name="Bestand[1]" select="../Bestand[1][1]" />
+		<xsl:variable name="Bestand[1]" select="../Bestand[1]" />
 		<xsl:variable name="lfr"><xsl:text>Landesfrauenrat</xsl:text></xsl:variable>
 		<xsl:choose>
 			<xsl:when test="contains($Bestand[1],$lfr)">
