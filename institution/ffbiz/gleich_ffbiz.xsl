@@ -1207,6 +1207,13 @@
 			
 	<!--placeOfPublication Ortsangabe-->
 			<xsl:apply-templates select="Ort" />	
+			
+	<!--sourceInfo-->
+			<xsl:if test="Bestand[string-length() != 0]">
+				<sourceInfo>
+					<xsl:value-of select="Bestand" />
+					</sourceInfo>
+				</xsl:if>
 
 <!--PHYSICAL INFORMATION-->
 	

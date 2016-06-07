@@ -566,7 +566,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>	
-				<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 
 <!--TITLE-->
 
