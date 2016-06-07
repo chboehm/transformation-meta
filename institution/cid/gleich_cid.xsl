@@ -197,7 +197,7 @@
 				 	<xsl:choose>
 				 		<xsl:when test="(marc:controlfield[@tag='FMT']='BK') and ($ldr_7='a')">
 				 			 <format><xsl:text>Artikel</xsl:text></format>
-				 			<!-- <searchfilter><xsl:text>Artikel</xsl:text></searchfilter>-->
+				 			<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='BK'">
 				 			 <format><xsl:text>Buch</xsl:text></format>
@@ -216,7 +216,7 @@
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='MU'">
 				 			 <format><xsl:text>Tonträger</xsl:text></format>
-				 			 <!--  <searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>-->
+				 			 <searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>
 				 			</xsl:when>
 				 		<xsl:when test="marc:controlfield[@tag='FMT']='SE'">
 				 			 <format><xsl:text>Periodika</xsl:text></format>
@@ -226,7 +226,7 @@
 				 			<xsl:choose>
 				 				<xsl:when test="contains(marc:datafield[@tag='245'],'Film')">	
 				 					 <format><xsl:text>Film</xsl:text></format>
-				 					  <!-- <searchfilter><xsl:text>Film</xsl:text></searchfilter>-->
+				 					 <searchfilter><xsl:text>Film</xsl:text></searchfilter>
 				 					</xsl:when>
 				 				<xsl:otherwise>
 				 					 <format><xsl:text>Buch</xsl:text></format>
