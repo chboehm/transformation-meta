@@ -591,7 +591,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>		
-				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
+				<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>-->
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -799,7 +799,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Hochschulschrift</xsl:text></format>		
-				<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>	
+				<!--<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>	-->
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -886,7 +886,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>	
-				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	
+				<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	-->
 	<!--documentType-->
 				<xsl:choose>
 					<xsl:when test="Dokumentenart!=''">
@@ -1237,7 +1237,7 @@
 				<typeOfRessource><xsl:text>ton</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Tonträger</xsl:text></format>	
-				<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		
+				<!--<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>	-->	
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="ergänz__Angaben!=''">
@@ -1331,7 +1331,7 @@
 				<typeOfRessource><xsl:text>ton</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Tonträger</xsl:text></format>	
-				<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		
+				<!--<searchfilter><xsl:text>Tonträger</xsl:text></searchfilter>		-->
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="Objektart" /></documentType>-->
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1424,7 +1424,7 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Film</xsl:text></format>	
-				<searchfilter><xsl:text>Film</xsl:text></searchfilter>		
+				<!--<searchfilter><xsl:text>Film</xsl:text></searchfilter>		-->
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1520,7 +1520,7 @@
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Film</xsl:text></format>		
-				<searchfilter><xsl:text>Film</xsl:text></searchfilter>		
+				<!--<searchfilter><xsl:text>Film</xsl:text></searchfilter>	-->	
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="Objektart" /></documentType>-->
 				<xsl:if test="Anlass-Ereignis-!=''">
@@ -1762,7 +1762,7 @@
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>		
-				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
+				<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>-->
 	<!--documentType-->
 				<documentType><xsl:value-of select="Objektart" /></documentType>
 				<xsl:if test="Dokumentenart!=''">
