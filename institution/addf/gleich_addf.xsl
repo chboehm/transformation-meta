@@ -374,7 +374,7 @@
 				<xsl:choose>
 					<xsl:when test="Quellenang_x046x__x032x_Hochschulschriften">
 						<format><xsl:text>Hochschulschrift</xsl:text></format>
-						<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
+						<!--<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>-->
 						</xsl:when>
 					<xsl:when test="Quellenang_x046x__x032x_Monographien">
 						<format><xsl:text>Buch</xsl:text></format>
@@ -382,7 +382,7 @@
 						</xsl:when>
 					<xsl:when test="Quellenangabe_x032x_Aufsätze">
 						<format><xsl:text>Artikel</xsl:text></format>
-						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
+						<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>-->
 						</xsl:when>
 					<xsl:when test="//id[1]='11630'">
 						<format><xsl:text>Buch</xsl:text></format>
