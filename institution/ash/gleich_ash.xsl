@@ -258,7 +258,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Hochschulschrift</xsl:text></format>	
-				<!--<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>-->
+				<searchfilter><xsl:text>Hochschulschrift</xsl:text></searchfilter>
 	
 	<!--documentType-->
 				<documentTyp><xsl:text>Diplomarbeit</xsl:text></documentTyp>
@@ -566,7 +566,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Artikel</xsl:text></format>	
-				<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>-->
+				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 
 <!--TITLE-->
 
@@ -871,7 +871,7 @@
 	
 	<!--format Objektartinformationen-->
 				<format><xsl:text>Fotografie</xsl:text></format>	
-				<!--<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>-->
+				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>
 
 <!--TITLE-->
 
