@@ -1154,6 +1154,9 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 					<xsl:when test="(ISBN[string-length() != 0]) and (Hrsg_[string-length() != 0])">
 						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 						</xsl:when>
+					<xsl:when test="(ISBN[string-length() != 0]) and not(Hrsg_)">
+						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
+						</xsl:when>
 					<xsl:otherwise>
 						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 						</xsl:otherwise>
