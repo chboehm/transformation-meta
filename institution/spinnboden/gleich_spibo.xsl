@@ -220,6 +220,7 @@
 							<documentType>
 								<xsl:text>Zeitschriftenartikel</xsl:text>
 							</documentType>
+							<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 							<!--TITLE -->
 							<!--title Titelinformationen -->
 							<xsl:apply-templates select="Einzeltitel[1][string-length() != 0]" />
