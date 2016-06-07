@@ -596,7 +596,7 @@
 						</xsl:when>
 					<xsl:when test="Erscheinungsform[text()='Aufsatz']">
 						<format><xsl:text>Artikel</xsl:text></format>	
-						<!--<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>	-->
+						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:when test="Erscheinungsform[text()='Zeitschrift']">
 						<format><xsl:text>Periodika</xsl:text></format>	
