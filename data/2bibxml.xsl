@@ -109,7 +109,13 @@
     	
     	<!--Titelangaben-->
     	
-			<field name="title"><xsl:value-of select="dataset/title[normalize-space()]"/></field>
+			<field name="title">
+				<xsl:value-of select="dataset/title[normalize-space()]"/>
+				</field>
+                   	 	
+                   	 	<field name="title_sort">
+				<xsl:value-of select="dataset/title[normalize-space()]"/>
+				</field>
                    	 	
             		<xsl:apply-templates select="dataset/title_sub" />
             		
