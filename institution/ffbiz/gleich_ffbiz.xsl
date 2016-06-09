@@ -770,7 +770,7 @@
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Bildmaterial</xsl:text></format>	-->
 				<format><xsl:text>Fotografie</xsl:text></format>	
-				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>			
+				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
 				<!--<documentType><xsl:text>Fotografie</xsl:text></documentType>-->
@@ -922,7 +922,7 @@
 	<!--format Objektartinformationen-->
 				<!--<format><xsl:text>Film</xsl:text></format>	-->
 				<format><xsl:text>Film</xsl:text></format>	
-				<searchfilter><xsl:text>Film</xsl:text></searchfilter>			
+				<searchfilter><xsl:text>Film</xsl:text></searchfilter>
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
 				<!--<documentType><xsl:text>Film</xsl:text></documentType>-->
