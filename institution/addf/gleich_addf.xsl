@@ -706,19 +706,6 @@
 			</xsl:if>
 		</xsl:template>
 
-
-
-
-
-
-
-
-
-
-
-
-	
-	
 	
 	<xsl:template match="Ges_x046x_Titel_x032x_fortl_x046x__x032x_Werk_x032x_I">
 		<series>
@@ -789,10 +776,19 @@
 		</xsl:template>
 		
 	<xsl:template match="Quellenang_x046x__x032x_Monographien">
-		<sourceInfo>
-			<xsl:value-of select="normalize-space(.)" />
-			</sourceInfo>
-		</xsl:template>
+		<xsl:variable name="t1" select="normalize-space(substring-after(.,' : '))"/>
+		<xsl:variable name="t2" select="normalize-space(substring-before($t1,','))"/>
+		<!-- remove all digits in brackets -->
+		<xsl:variable name="t2Reg" select="replace($t2,'\[(.*?)\]','')"/>
+		<!-- remove all digts -->
+		<xsl:variable name="t3" select="replace($t2Reg,'[0-9]','')"/>
+		<placeOfPublication>
+			<xsl:value-of select="normalize-space(substring-before(.,' : '))" />
+		</placeOfPublication>
+		<publisher>
+			<xsl:value-of select="normalize-space($t3)" />
+		</publisher>
+	</xsl:template>
 	
 	<xsl:template match="Quellenang_x046x__x032x_Hochschulschriften">
 		<sourceInfo>
