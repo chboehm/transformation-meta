@@ -338,10 +338,11 @@
 			
 			<xsl:template match="mab331_hauptsachtitel">
 				<title>
-					<xsl:value-of select="normalize-space(.)" />
+					<xsl:value-of select="normalize-space(translate(., '¬', ''))" />
+					<!--<xsl:value-of select="normalize-space(.)" />-->
 					</title>
 				<title_short>
-					<xsl:value-of select="normalize-space(.)" />
+					<xsl:value-of select="normalize-space(translate(., '¬', ''))" />
 					</title_short>
 				<xsl:if test="../mab335_zusatz_hauptsachtitel[string-length() != 0]">
 					<title_sub>
