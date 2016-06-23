@@ -339,10 +339,10 @@
 				<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
 				
 				<xsl:choose>
-					<xsl:when test="Objektart[text()='Periodika']">
+					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
 						<recordType><xsl:text>library</xsl:text></recordType>	
 						</xsl:when>
-					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
+					<xsl:when test="Objektart[text()='Periodika']">
 						<recordType><xsl:text>library</xsl:text></recordType>	
 						</xsl:when>
 					<xsl:otherwise>

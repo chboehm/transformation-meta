@@ -40,6 +40,7 @@
 				<xsl:value-of select="dataset/title_sub[normalize-space()]"/><xsl:text> </xsl:text>
 				<xsl:for-each select="dataset/formerTitle"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
 				<xsl:for-each select="dataset/upcomingTitle"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
+				<xsl:for-each select="dataset/alternativeTitle"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
 				<xsl:for-each select="dataset/author"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
 				<xsl:for-each select="dataset/editor"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
 				<xsl:for-each select="dataset/contributor"><xsl:value-of select="." /></xsl:for-each><xsl:text> </xsl:text>
@@ -126,6 +127,8 @@
     			<xsl:apply-templates select="dataset/upcomingTitle" />
     			
     			<xsl:apply-templates select="dataset/alternativeTitle" />
+    			
+    			<xsl:apply-templates select="dataset/originalTitle" />
     			
     	<!--beteiligte Personen-->	
     			<xsl:if test="dataset/author[1]">
