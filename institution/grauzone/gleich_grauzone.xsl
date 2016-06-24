@@ -345,7 +345,7 @@
 								</institutionFull>
 								<institutionID>grauzone</institutionID>
 								<collection>
-									<xsl:text>GrauZone</xsl:text>
+									<xsl:text>grauzone</xsl:text>
 								</collection>
 								<isil>
 									<xsl:text>DE-B1541</xsl:text>
@@ -1592,7 +1592,7 @@
 								</institutionFull>
 								<institutionID>grauzone</institutionID>
 								<collection>
-									<xsl:text>GrauZone</xsl:text>
+									<xsl:text>grauzone</xsl:text>
 								</collection>
 								<isil>
 									<xsl:text>DE-B1541</xsl:text>
@@ -1869,7 +1869,7 @@
 								</institutionFull>
 								<institutionID>grauzone</institutionID>
 								<collection>
-									<xsl:text>GrauZone</xsl:text>
+									<xsl:text>grauzone</xsl:text>
 								</collection>
 								<isil>
 									<xsl:text>DE-B1541</xsl:text>
