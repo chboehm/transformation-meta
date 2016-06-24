@@ -92,7 +92,7 @@
 					</institutionID>
 						
 			<!--collection-->				
-				<collection><xsl:text>Stichwort</xsl:text></collection>
+				<collection><xsl:text>stichwort</xsl:text></collection>
 	
 			<!--isil-->					
 				<isil><xsl:text>AT-STICHWORT</xsl:text></isil>
@@ -222,7 +222,7 @@
 					</institutionID>
 						
 			<!--collection-->				
-				<collection><xsl:text>Stichwort</xsl:text></collection>
+				<collection><xsl:text>stichwort</xsl:text></collection>
 	
 			<!--isil-->					
 				<isil><xsl:text>AT-STICHWORT</xsl:text></isil>
@@ -360,7 +360,7 @@
 					</institutionID>
 						
 			<!--collection-->				
-				<collection><xsl:text>Stichwort</xsl:text></collection>
+				<collection><xsl:text>stichwort</xsl:text></collection>
 	
 			<!--isil-->					
 				<isil><xsl:text>AT-STICHWORT</xsl:text></isil>
@@ -568,7 +568,7 @@
 							<xsl:text>stichwort</xsl:text>
 							</institutionID>
 						
-<!--collection-->				<collection><xsl:text>Stichwort</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>stichwort</xsl:text></collection>
 	
 <!--isil-->					<isil><xsl:text>AT-STICHWORT</xsl:text></isil>
 	

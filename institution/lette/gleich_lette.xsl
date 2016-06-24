@@ -80,7 +80,7 @@
 							<xsl:text>lette</xsl:text>
 							</institutionID>
 						
-<!--collection-->				<collection><xsl:text>LetteVerein</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>lette</xsl:text></collection>
 	
 <!--isil-->					<!--<isil><xsl:text>ISIL DE-Sa24</xsl:text></isil>-->
 	

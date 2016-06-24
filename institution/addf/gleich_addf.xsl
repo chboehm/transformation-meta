@@ -109,7 +109,7 @@
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
-				<collection><xsl:text>ADDF</xsl:text></collection>
+				<collection><xsl:text>addf</xsl:text></collection>
 				<isil><xsl:text>DE-Ks16</xsl:text></isil>
 				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/archiv-der-deutschen-frauenbewegung/</xsl:text></link>
 				</institution>
@@ -357,7 +357,7 @@
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
-				<collection><xsl:text>ADDF</xsl:text></collection>
+				<collection><xsl:text>addf</xsl:text></collection>
 				<isil><xsl:text>DE-Ks16</xsl:text></isil>
 				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/archiv-der-deutschen-frauenbewegung/</xsl:text></link>
 				<geoLocation>

@@ -62,7 +62,7 @@
 			<institutionShortname><xsl:text>Cid Fraen an Gender</xsl:text></institutionShortname>
 			<institutionFull><xsl:text>Frauen- und Genderbibliothek Cid</xsl:text></institutionFull>
 			<institutionID><xsl:text>cid</xsl:text></institutionID>
-			<collection><xsl:text>CID</xsl:text></collection>
+			<collection><xsl:text>cid</xsl:text></collection>
 			<isil><xsl:text>ZDB-LU-100</xsl:text></isil>
 			<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/luxemburg/cid-fraen-an-gender/</xsl:text></link>
 			<geoLocation>
@@ -151,7 +151,7 @@
 			<institutionShortname><xsl:text>Cid Fraen an Gender</xsl:text></institutionShortname>
 			<institutionFull><xsl:text>Frauen- und Genderbibliothek Cid</xsl:text></institutionFull>
 			<institutionID><xsl:text>cid</xsl:text></institutionID>
-			<collection><xsl:text>CID</xsl:text></collection>
+			<collection><xsl:text>cid</xsl:text></collection>
 			<isil><xsl:text>ZDB-LU-100</xsl:text></isil>
 			<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/luxemburg/cid-fraen-an-gender/</xsl:text></link>
 			<geoLocation>

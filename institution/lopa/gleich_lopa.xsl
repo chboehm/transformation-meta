@@ -169,7 +169,7 @@
 						
 						<institutionID>lopa</institutionID>
 						
-<!--collection-->				<collection><xsl:text>Louise-Otto-Peters-Archiv</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>lopa</xsl:text></collection>
 	
 <!--isil-->					<isil><xsl:text>DE-L324</xsl:text></isil>
 	

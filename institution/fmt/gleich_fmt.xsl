@@ -54,7 +54,7 @@
 		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
 		<institutionID><xsl:text>fmt</xsl:text></institutionID>
-		<collection><xsl:text>FMT</xsl:text></collection>
+		<collection><xsl:text>fmt</xsl:text></collection>
 		<isil><xsl:text>DE-Kn184</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
 		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
@@ -161,7 +161,7 @@
 		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
 		<institutionID><xsl:text>fmt</xsl:text></institutionID>
-		<collection><xsl:text>FMT</xsl:text></collection>
+		<collection><xsl:text>fmt</xsl:text></collection>
 		<isil><xsl:text>DE-Kn184</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
 		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
@@ -256,7 +256,7 @@
 		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
 		<institutionID><xsl:text>fmt</xsl:text></institutionID>
-		<collection><xsl:text>FMT</xsl:text></collection>
+		<collection><xsl:text>fmt</xsl:text></collection>
 		<isil><xsl:text>DE-Kn184</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
 		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
@@ -349,7 +349,7 @@
 		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
 		<institutionID><xsl:text>fmt</xsl:text></institutionID>
-		<collection><xsl:text>FMT</xsl:text></collection>
+		<collection><xsl:text>fmt</xsl:text></collection>
 		<isil><xsl:text>DE-Kn184</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
 		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
@@ -513,7 +513,7 @@
 		<institutionShortname><xsl:text>FrauenMediaTurm</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenMediaTurm, Das Archiv und Dokumentationszentrum</xsl:text></institutionFull>
 		<institutionID><xsl:text>fmt</xsl:text></institutionID>
-		<collection><xsl:text>FMT</xsl:text></collection>
+		<collection><xsl:text>fmt</xsl:text></collection>
 		<isil><xsl:text>DE-Kn184</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauenmediaturm/</xsl:text></link>
 		<geoLocation><latitude>50.93252</latitude><longitude>6.96420</longitude></geoLocation>
@@ -677,7 +677,7 @@
 	
 	<!--collection-->
 				<collection>
-					<xsl:text>FMT</xsl:text>
+					<xsl:text>fmt</xsl:text>
 					</collection>
 	<!--isil-->
 				<isil>
