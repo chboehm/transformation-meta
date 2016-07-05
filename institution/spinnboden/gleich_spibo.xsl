@@ -262,9 +262,6 @@
 							<xsl:if test="s_x046x__x032x_ST[string-length() != 0]">
 								<sourceInfo>
 									<xsl:value-of select="//Objekt[id=$relatedID]/Sammeltitel_x032x_-Zs" />
-									<!--<xsl:text> </xsl:text> <xsl:if test="Jahrgang"> <xsl:text> </xsl:text> <xsl:value-of select="Jahrgang" /> </xsl:if> 
-										<xsl:if test="Jahr"> <xsl:text>(</xsl:text> <xsl:value-of select="Jahr" /> <xsl:text>)</xsl:text> </xsl:if> <xsl:if test="Heftnummer_x032x_-Z"> 
-										<xsl:value-of select="Heftnummer_x032x_-Z" /> </xsl:if> -->
 								</sourceInfo>
 							</xsl:if>
 						</xsl:element><!--closing tag dataset -->
@@ -1128,6 +1125,9 @@
 		<title_short>
 			<xsl:value-of select="normalize-space(.)" />
 		</title_short>
+		<title_sort>
+			<xsl:value-of select="normalize-space(.)" />
+		</title_sort>
 		<xsl:if test="../Untertitel[string-length() != 0]">
 			<title_sub>
 				<xsl:value-of select="normalize-space(../Untertitel[1])" />
@@ -1156,6 +1156,9 @@
 		<title_short>
 			<xsl:value-of select="normalize-space(.)" />
 		</title_short>
+		<title_sort>
+			<xsl:value-of select="normalize-space(.)" />
+		</title_sort>
 		<xsl:if test="../Untertitel[string-length() != 0]">
 			<title_sub>
 				<xsl:value-of select="normalize-space(../Untertitel[1])" />
@@ -1170,6 +1173,9 @@
 		<title_short>
 			<xsl:value-of select="normalize-space(.)" />
 		</title_short>
+		<title_sort>
+			<xsl:value-of select="normalize-space(.)" />
+		</title_sort>
 		<xsl:if test="../Untertitel[string-length() != 0]">
 			<title_sub>
 				<xsl:value-of select="normalize-space(../Untertitel[1])" />
@@ -1219,14 +1225,17 @@
 		</xsl:if>
 	</xsl:template>
 
-
 	<xsl:template match="Hefttitel_x032x_-Zh[1]">
 		<title>
 			<xsl:value-of select="normalize-space(.)" />
-			<xsl:text> (</xsl:text>
-			<xsl:value-of select="Jahr" />
-			<xsl:text>)</xsl:text>
-			<xsl:value-of select="Heftnummer_x032x_-Z" />
+			<xsl:if test="../Jahr[string-length() != 0]">
+				<xsl:text> (</xsl:text>
+				<xsl:value-of select="../Jahr" />
+				<xsl:text>)</xsl:text>
+			</xsl:if>
+			<xsl:if test="../Heftnummer_x032x_-Z[string-length() != 0]">
+				<xsl:value-of select="../Heftnummer_x032x_-Z" />
+			</xsl:if>
 		</title>
 		<title_short>
 			<xsl:value-of select="normalize-space(.)" />
