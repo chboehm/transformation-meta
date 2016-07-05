@@ -83,7 +83,7 @@
 					</institutionID>
 			
 			<!--collection-->				
-				<collection><xsl:text>GReTA</xsl:text></collection>
+				<collection><xsl:text>genderbib</xsl:text></collection>
 	
 			<!--isil-->
 				<isil><xsl:text>DE-B1542</xsl:text></isil>
@@ -245,7 +245,7 @@
 					</institutionID>
 			
 			<!--collection-->				
-				<collection><xsl:text>GReTA</xsl:text></collection>
+				<collection><xsl:text>genderbib</xsl:text></collection>
 	
 			<!--isil-->
 				<isil><xsl:text>DE-B1542</xsl:text></isil>
@@ -591,7 +591,7 @@
 							<xsl:text>genderbib</xsl:text>
 							</institutionID>
 			
-<!--collection-->				<collection><xsl:text>GReTA</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>genderbib</xsl:text></collection>
 	
 <!--isil-->					<isil><xsl:text>DE-B1542</xsl:text></isil>
 	

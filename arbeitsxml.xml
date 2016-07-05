@@ -98,22 +98,30 @@
 
 					<physical/>		<!--Seiten oder Umfang-->
 					<dimension/>		<!--Angabe der physischen Ausmaße eines Dokumentes / Kiste-->
+					<specificMaterialDesignation>	<!--Beigaben-->
 					<runTime/>		<!--Laufzeit Video zb. 60min-->
 
 		<!--CONTENTRELATED INFORMATION-->
 		
 					<language/>		<!--Sprachangabe in vorgebener Form z.b. deutsch-->
 					<subjectTopic/>		<!--Inhaltsschlagworte-->
+					<translatedTopic/>
 					<subjectPerson/>	<!--Personenschlagworte z.B. um wen geht es im Werk-->
 					<subjectGeographic/>	<!--geografische Schlagworte z.B. Land oder Region-->
 					<description/>		<!--Beschreibungen Annotationen-->
 					<listOfContents/>	<!--Inhaltsangaben-->
 					<annotation/>		<!--weitere Anmerkungen-->
+					
 			
 			<!--DETAILS FOR JOURNAL RELATED CONTENT-->
 		
 					<issue/>		<!--Heft-->
+					<specialIssue/>		<!--Sonderheft-->
 					<volume/>		<!--Jahrgang-->
+					<publicationFrequency/>	<!--Erscheinungsweise-->
+					<collectionHolding/>	<!--Bestandsangabe-->
+					<outOfStocks/>		<!--Bestandslücken-->
+					<contentMatter/>	<!--Inhalt Thema Zeitschriftenheft -->
 		 
 		<!--OTHER-->
 					<project/>		<!--Teil eines inhaltlichen Projektes-->

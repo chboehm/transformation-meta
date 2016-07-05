@@ -80,7 +80,7 @@
 							<xsl:text>lette</xsl:text>
 							</institutionID>
 						
-<!--collection-->				<collection><xsl:text>LetteVerein</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>lette</xsl:text></collection>
 	
 <!--isil-->					<!--<isil><xsl:text>ISIL DE-Sa24</xsl:text></isil>-->
 	
@@ -338,10 +338,11 @@
 			
 			<xsl:template match="mab331_hauptsachtitel">
 				<title>
-					<xsl:value-of select="normalize-space(.)" />
+					<xsl:value-of select="normalize-space(translate(., '¬', ''))" />
+					<!--<xsl:value-of select="normalize-space(.)" />-->
 					</title>
 				<title_short>
-					<xsl:value-of select="normalize-space(.)" />
+					<xsl:value-of select="normalize-space(translate(., '¬', ''))" />
 					</title_short>
 				<xsl:if test="../mab335_zusatz_hauptsachtitel[string-length() != 0]">
 					<title_sub>

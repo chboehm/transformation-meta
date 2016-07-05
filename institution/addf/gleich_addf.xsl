@@ -109,7 +109,7 @@
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
-				<collection><xsl:text>ADDF</xsl:text></collection>
+				<collection><xsl:text>addf</xsl:text></collection>
 				<isil><xsl:text>DE-Ks16</xsl:text></isil>
 				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/archiv-der-deutschen-frauenbewegung/</xsl:text></link>
 				</institution>
@@ -295,7 +295,7 @@
 						</is_hierarchy_title>
 					
 					
-					<hierarchy_sequence>
+					<hierarchy_sequence>substring()
 						<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"/>
 						<xsl:value-of select="translate(prefTerm, translate(.,'0123456789', ''), '')"/>
 						<!--<xsl:text> </xsl:text>
@@ -339,10 +339,10 @@
 				<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
 				
 				<xsl:choose>
-					<xsl:when test="Objektart[text()='Periodika']">
+					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
 						<recordType><xsl:text>library</xsl:text></recordType>	
 						</xsl:when>
-					<xsl:when test="Objektart[text()='Monografien/Aufsätze']">
+					<xsl:when test="Objektart[text()='Periodika']">
 						<recordType><xsl:text>library</xsl:text></recordType>	
 						</xsl:when>
 					<xsl:otherwise>
@@ -357,7 +357,7 @@
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
-				<collection><xsl:text>ADDF</xsl:text></collection>
+				<collection><xsl:text>addf</xsl:text></collection>
 				<isil><xsl:text>DE-Ks16</xsl:text></isil>
 				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/archiv-der-deutschen-frauenbewegung/</xsl:text></link>
 				<geoLocation>

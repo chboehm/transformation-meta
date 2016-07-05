@@ -1284,7 +1284,7 @@
 			</institutionID>
 			<!--collection -->
 			<collection>
-				<xsl:text>Spinnboden</xsl:text>
+				<xsl:text>spinnboden</xsl:text>
 			</collection>
 			<!--isil -->
 			<isil>

@@ -61,7 +61,7 @@
 		<institutionShortname><xsl:text>FrauenGenderBibliothek Saar</xsl:text></institutionShortname>
 		<institutionFull><xsl:text>FrauenGenderBibliothek Saar</xsl:text></institutionFull>
 		<institutionID><xsl:text>saar</xsl:text></institutionID>
-		<collection><xsl:text>Saar</xsl:text></collection>
+		<collection><xsl:text>saar</xsl:text></collection>
 		<isil><xsl:text>ISIL DE-Sa24</xsl:text></isil>
 		<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/frauengenderbibliothek-saar/</xsl:text></link>
 		<geoLocation>
@@ -232,7 +232,7 @@
 							<xsl:text>saar</xsl:text>
 							</institutionID>
 						
-<!--collection-->				<collection><xsl:text>Saar</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>saar</xsl:text></collection>
 	
 <!--isil-->					<isil><xsl:text>ISIL DE-Sa24</xsl:text></isil>
 	

@@ -289,7 +289,7 @@
 						
 						<institutionID><xsl:text>ffbiz</xsl:text></institutionID>
 						
-<!--collection-->				<collection><xsl:text>FFBIZ</xsl:text></collection>
+<!--collection-->				<collection><xsl:text>ffbiz</xsl:text></collection>
 	
 <!--isil-->					<isil><xsl:text>DE-B1535</xsl:text></isil>
 	
