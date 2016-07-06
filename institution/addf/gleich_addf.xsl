@@ -300,7 +300,6 @@
 						<!--<xsl:value-of select="notation"></xsl:value-of>
 						<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"/>
 						<xsl:value-of select="translate(prefTerm, translate(.,'0123456789', ''), '')"/>
-						<!--<xsl:text> </xsl:text>
 						<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"/>-->
 						</hierarchy_sequence>
 						
