@@ -195,8 +195,10 @@
 		<xsl:variable name="id" select="id" />
 		
 		<!--<xsl:if test="objektart[text()='Zeitschriften']">-->
-		<!--<xsl:if test="not(objektart[text()='Zeitschriften'])">-->
+		<!---->
 		<!--<xsl:if test="objektart[text()='Akten, Graue Materialien, ZD']">-->
+		
+		<xsl:if test="not(objektart[text()='Fotografien'])">
 		
 		<xsl:element name="record">
 			<xsl:attribute name="id"><xsl:value-of select="$id"></xsl:value-of></xsl:attribute>	
@@ -684,7 +686,7 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<format><xsl:text>Visuelle Materialien</xsl:text></format>-->
+				<format><xsl:text>Visuelle Materialien</xsl:text></format>
 				<searchfilter><xsl:text>Ansichtskarte</xsl:text></searchfilter>	
 	<!--documentType-->
 				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
@@ -768,12 +770,8 @@
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>bild</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
-				<!--<format><xsl:text>Bildmaterial</xsl:text></format>	-->
 				<format><xsl:text>Fotografie</xsl:text></format>	
 				<searchfilter><xsl:text>Fotografie</xsl:text></searchfilter>
-	<!--documentType-->
-				<!--<documentType><xsl:value-of select="objektart" /></documentType>-->
-				<!--<documentType><xsl:text>Fotografie</xsl:text></documentType>-->
 
 <!--TITLE-->
 
@@ -1354,7 +1352,7 @@
 <!--ENDE_____________________________ENDE___________________________________ENDE-->
 
 		</xsl:element>
-		<!--</xsl:if>-->
+		</xsl:if>
 	</xsl:template>
 	
 <!--Templates-->
@@ -1519,7 +1517,7 @@
 		</xsl:template>
 	
 	<xsl:template match="Bemerkung">
-		<xsl:choose>
+		<!--<xsl:choose>
 			<xsl:when test="../objektart[text()='Ansichtskarten']">
 				<specificMaterialDesignation>
 					<xsl:if test="../Bildfarbe"><xsl:value-of select="../Bildfarbe" />
@@ -1540,7 +1538,6 @@
 						<xsl:value-of select="." />
 						<xsl:text> - </xsl:text>
 						</xsl:for-each>
-					<!--<xsl:value-of select="." />-->
 					</specificMaterialDesignation>
 				</xsl:when>
 			<xsl:when test="../objektart[text()='Nachlässe']">
@@ -1569,7 +1566,7 @@
 					<xsl:value-of select="." />
 					</description>
 				</xsl:otherwise>
-			</xsl:choose>
+			</xsl:choose>-->
 		</xsl:template>
 	
 	<xsl:template match="Band">
