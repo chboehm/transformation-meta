@@ -54,6 +54,9 @@
 				<!--author Autorinneninformation-->
 					<author/>		
 
+				<!-- provenance Herkunftsangabe -->
+					</provenance>
+					
 				<!--editor Herausgeberinneninformationen-->
 					<editor/>
 
@@ -113,7 +116,7 @@
 					<annotation/>		<!--weitere Anmerkungen-->
 					
 			
-			<!--DETAILS FOR JOURNAL RELATED CONTENT-->
+		<!--DETAILS FOR JOURNAL RELATED CONTENT-->
 		
 					<issue/>		<!--Heft-->
 					<specialIssue/>		<!--Sonderheft-->
