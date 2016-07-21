@@ -1082,10 +1082,10 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 					<is_hierarchy_title>
 						<xsl:choose>
 							<xsl:when test="Einzeltitel[string-length() != 0]">
-								<xsl:value-of select="normalize-space(Einzeltitel)"/>
+								<xsl:value-of select="normalize-space(Einzeltitel[1])"/>
 								</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="normalize-space(Sammeltitel)"/>
+								<xsl:value-of select="normalize-space(Sammeltitel[1])"/>
 								</xsl:otherwise>
 							</xsl:choose>
 						</is_hierarchy_title>
