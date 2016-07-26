@@ -1093,10 +1093,10 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 					<hierarchy_sequence>
 						<xsl:choose>
 							<xsl:when test="Einzeltitel[string-length() != 0]">
-								<xsl:value-of select="normalize-space(substring(Einzeltitel,1,3))"/>
+								<xsl:value-of select="normalize-space(substring(Einzeltitel[1],1,3))"/>
 								</xsl:when>
 							<xsl:otherwise>
-								<xsl:value-of select="normalize-space(substring(Sammeltitel,1,3))"/>
+								<xsl:value-of select="normalize-space(substring(Sammeltitel[1],1,3))"/>
 								</xsl:otherwise>
 							</xsl:choose>
 						</hierarchy_sequence>
