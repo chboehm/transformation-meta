@@ -604,25 +604,7 @@
 			
 </xsl:element>
 
-
-
-<!--dataset_______________________________dataset_______________________________dataset-->
-<!--dataset_______________________________dataset_______________________________dataset-->
-<!--dataset_______________________________dataset_______________________________dataset-->
-<!--dataset_______________________________dataset_______________________________dataset-->
-<!--dataset_______________________________dataset_______________________________dataset-->	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-			
 <!--Buch__________________________Monographie___________________________Sammelband-->
-
 
 <xsl:if test="objektart[text()='Buch']">
 
@@ -677,7 +659,8 @@ den Datenbestand angezeigt-->
 
 	<!--title Titelinformationen-->
 				<xsl:apply-templates select="Sachtitel[1]"/>
-
+	<!-- originalTitle Originaltitel-->
+				<xsl:apply-templates select="Organ_x046x_-titel"/>
 <!--RESPONSIBLE-->
 
 	<!--author Autorinneninformation-->
@@ -771,15 +754,6 @@ den Datenbestand angezeigt-->
 		</xsl:element>	
 	</xsl:if>				
 </xsl:if>
-
-
-
-
-
-
-
-
-
 
 <!--Hochschularbeit_____________________Magistraarbeit_____________________Abschlussarbeit-->
 
@@ -3062,6 +3036,14 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
+<!-- Template Orignialtitel-->
+	<xsl:template match="Organ_x046x_-titel">
+		<originalTitle>
+			<xsl:value-of select="."/>
+		</originalTitle>
+	</xsl:template>
+	
 
 <!--Template Ortsangabe-->
 	<xsl:template match="Ort[1]">
