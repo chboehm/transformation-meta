@@ -764,6 +764,14 @@
 		<xsl:for-each select=".">
 			<field name="title_alt">
 				<xsl:value-of select="normalize-space(.)" />
+			</field>
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="alternativeTitle">
+		<xsl:for-each select=".">
+			<field name="title_alt">
+				<xsl:value-of select="normalize-space(.)" />
 				</field>
 			</xsl:for-each>
 		</xsl:template>
@@ -772,16 +780,9 @@
 		<xsl:for-each select=".[text()!='']">
 			<field name="topic">
 				<xsl:value-of select="normalize-space(.)" />
-				</field>
-			
-			<!--<xsl:variable name="topic" select="." />
-			
-				<xsl:copy-of select="document('../anreicherung/thesaurus.xml')/root/term[usedTerm=$topic]/field">
-				</xsl:copy-of>-->
-				
-			
-			</xsl:for-each>
-		</xsl:template>
+			</field>
+		</xsl:for-each>
+	</xsl:template>
 		
 	<xsl:template match="subjectGeographic">
 		<xsl:for-each select=".[text()!='']">
