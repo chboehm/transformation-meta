@@ -768,9 +768,9 @@
 		</xsl:for-each>
 	</xsl:template>
 	
-	<xsl:template match="alternativeTitle">
+	<xsl:template match="originalTitle">
 		<xsl:for-each select=".">
-			<field name="title_alt">
+			<field name="originalTitle">
 				<xsl:value-of select="normalize-space(.)" />
 				</field>
 			</xsl:for-each>
