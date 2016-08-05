@@ -128,33 +128,15 @@
 	</xsl:if>
 	</xsl:template>
 	
-	
-	
-	
-	
 <!--citavi_______________________________citavi_______________________________citavi-->
-<!--citavi_______________________________citavi_______________________________citavi-->
-<!--citavi_______________________________citavi_______________________________citavi-->
-<!--citavi_______________________________citavi_______________________________citavi-->
-<!--citavi_______________________________citavi_______________________________citavi-->
-<!--citavi_______________________________citavi_______________________________citavi-->
-
-
 <xsl:template match="object">
-	
 	<xsl:element name="record">
-		
 <!--vufind_______________________________vufind_______________________________vufind-->
 <!--institution_______________________________institution_______________________________institution-->		
-		
 		<xsl:apply-templates select="objektnummer" />
-			
 <!--dataset_______________________________dataset_______________________________dataset-->
-
 		<xsl:element name="dataset">
-		
 <!--FORMAT-->
-
 	<!--typeOfRessource-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 	<!--format Objektartinformationen-->
@@ -184,17 +166,8 @@
 				<xsl:apply-templates select="autorin" />
 				<xsl:apply-templates select="autorin2" />
 				<xsl:apply-templates select="autorin3" />
-				
-	<!--editor-->	
-				<xsl:apply-templates select="herausgeberin" />
-				
 	<!--series-->
 				<xsl:apply-templates select="untertitel1" />
-				
-	
-
-<!--IDENTIFIER-->
-
 	<!--ISBN-->
 				<xsl:apply-templates select="isbn_issn" />				
 
@@ -406,9 +379,9 @@
 		<xsl:for-each select=".">
 			<publisher>
 				<xsl:value-of select="normalize-space(.)" />
-				</publisher>
-			</xsl:for-each>
-		</xsl:template>
+			</publisher>
+		</xsl:for-each>
+	</xsl:template>
 	
 	<xsl:template match="Herausgeber">
 		<xsl:for-each select="tokenize(.,';')">
