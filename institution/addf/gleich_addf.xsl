@@ -11,18 +11,13 @@
 	exclude-result-prefixes="xs xdt err fn">
 
 	<xsl:output method="xml" indent="yes"/>
-		
-	
-
 
 <!--root knoten-->
 	<xsl:template match="AddF-Kassel">
 		<xsl:element name="catalog">
 			<xsl:apply-templates select="//Datensatz" />
-			<!--<xsl:apply-templates select="Datensatz[1]/id" />-->
-			</xsl:element>
-		</xsl:template>
-	
+		</xsl:element>
+	</xsl:template>
 	
 	<xsl:template match="Thesaurus">
 		<xsl:element name="catalog">
@@ -31,134 +26,105 @@
 			</xsl:element>
 		</xsl:template>
 	
-
-
-
-
 <!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-<!--KLassifikation______________________Klassifikation-->
-
-
 	<xsl:template match="concept">
-		
 		<xsl:element name="record">
-			
-			
 			<xsl:variable name="top">
-						<xsl:choose>
-							<xsl:when test="not(broader)">
-								<xsl:value-of select="notation" />
-								</xsl:when>
-							<xsl:when test="not(contains(broader,'.'))">
-								<xsl:value-of select="broader" />
-								</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="substring-before(broader,'.')" />
-								</xsl:otherwise>
-							</xsl:choose>
-						</xsl:variable>
-					
-					<xsl:variable name="broader" select="broader" />
+				<xsl:choose>
+					<xsl:when test="not(broader)">
+						<xsl:value-of select="notation" />
+					</xsl:when>
+					<xsl:when test="not(contains(broader,'.'))">
+						<xsl:value-of select="broader" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="substring-before(broader,'.')" />
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+				
+			<xsl:variable name="broader" select="broader" />
 			
-			
-		<vufind>
+			<vufind>
 				<id>			
 					<xsl:choose>
-					
 					<!--wenn kein Punkt in der Notation-->
 						<xsl:when test="not(contains(notation,'.'))">
 							<xsl:if test="useFor">
 								<xsl:value-of select="normalize-space(substring-before(useFor[1],' '))"/>
-								</xsl:if>
+							</xsl:if>
 							<xsl:if test="not(useFor)">
 								<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-								</xsl:if>
-							</xsl:when>
-					<!--andernfalls-->
+							</xsl:if>
+						</xsl:when>
+						<!--andernfalls-->
 						<xsl:otherwise>
 							<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
 							<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-							</xsl:otherwise>
-						</xsl:choose>
-					<!--<xsl:text>_</xsl:text>-->
+						</xsl:otherwise>
+					</xsl:choose>
 					<xsl:text>addf</xsl:text>
-					</id>
+				</id>
 				
 				<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
 				<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
-				
 				
 				<recordType>
 					<xsl:choose>
 						<xsl:when test="not(contains(notation,'.'))">
 							<xsl:text>archive</xsl:text>
-							</xsl:when>
+						</xsl:when>
 						<xsl:otherwise>
 							<xsl:text>systematics</xsl:text>
-							</xsl:otherwise>
-						</xsl:choose>
-					</recordType>	
-				</vufind>
+						</xsl:otherwise>
+					</xsl:choose>
+				</recordType>	
+			</vufind>
 
-		<institution>
+			<institution>
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
 				<collection><xsl:text>addf</xsl:text></collection>
 				<isil><xsl:text>DE-Ks16</xsl:text></isil>
 				<link><xsl:text>http://www.ida-dachverband.de/einrichtungen/deutschland/archiv-der-deutschen-frauenbewegung/</xsl:text></link>
-				</institution>
+			</institution>
 			
-		<dataset>
+			<dataset>
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-				
 				<xsl:choose>
-						<xsl:when test="not(contains(notation,'.'))">
-							<xsl:choose>
-								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Themen')">
-									<format>
-										<xsl:text>Archivgut</xsl:text>
-										</format>
-									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
-									</xsl:when>
-								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Personen')">
-									<format>
-										<xsl:text>Archivgut</xsl:text>
-										</format>
-									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
-									</xsl:when>
-								<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Körperschaften')">
-									<format>
-										<xsl:text>Archivgut</xsl:text>
-										</format>
-									<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
-									</xsl:when>
-								<xsl:otherwise>
-									<format>
-										<xsl:text>Archivgut</xsl:text>
-										</format>
-									<searchfilter><xsl:text>Nachlass / Vorlass</xsl:text></searchfilter>
-									</xsl:otherwise>
-								</xsl:choose>
-							
-							
+					<xsl:when test="not(contains(notation,'.'))">
+						<xsl:choose>
+							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Themen')">
+								<format>
+									<xsl:text>Archivgut</xsl:text>
+								</format>
+								<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
 							</xsl:when>
-						<xsl:otherwise>
-							
+							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Personen')">
+								<format>
+									<xsl:text>Archivgut</xsl:text>
+								</format>
+								<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
+							</xsl:when>
+							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Körperschaften')">
+								<format>
+									<xsl:text>Archivgut</xsl:text>
+								</format>
+								<searchfilter><xsl:text>Bestandsübersicht</xsl:text></searchfilter>
+							</xsl:when>
+							<xsl:otherwise>
+								<format>
+									<xsl:text>Archivgut</xsl:text>
+								</format>
+								<searchfilter><xsl:text>Nachlass / Vorlass</xsl:text></searchfilter>
 							</xsl:otherwise>
 						</xsl:choose>
+					</xsl:when>
+				</xsl:choose>
 			
-			<!--Title-->
+				<!--Title-->
 				<xsl:apply-templates select="prefTerm" />
-				
-				<!--<top>
-				<xsl:value-of select="$top"></xsl:value-of>
-				</top>-->
 				
 				<xsl:if test="$broader[string-length() != 0]">
 					<sourceInfo>
@@ -166,43 +132,34 @@
 						</sourceInfo>
 						</xsl:if>
 		
-				</dataset>
+			</dataset>
 			
-		<functions>
+			<functions>
 				<hierarchyFields>
-					
-					<!--<top><xsl:value-of select="$top"></xsl:value-of></top>
-					
-					<broader><xsl:value-of select="$broader"></xsl:value-of></broader>-->
-			
-			<!--hierarchy_top-->
-					
+					<!--hierarchy_top-->
 					<hierarchy_top_id>
-						
 						<xsl:choose>
 							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Personen')">
 								<xsl:text>SammlungenPersonen</xsl:text>
-								</xsl:when>
+							</xsl:when>
 							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Themen')">
 								<xsl:text>SammlungenThemen</xsl:text>
-								</xsl:when>
+							</xsl:when>
 							<xsl:when test="contains(//concept[1]/prefTerm,'Sammlungen Körperschaften')">
 								<xsl:text>SammlungenKrperschaften</xsl:text>
-								</xsl:when>
+							</xsl:when>
 							<xsl:when test="not(broader)">
 								<xsl:value-of select="normalize-space(substring-before(useFor[1],' '))"/>
-								</xsl:when>
+							</xsl:when>
 							<xsl:when test="broader">
 								<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
-								</xsl:when>
+							</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="translate(prefTerm, '. /äüö,', '')"></xsl:value-of>
-								</xsl:otherwise>
-							</xsl:choose>
-						
-							<xsl:text>addf</xsl:text>
-						
-						</hierarchy_top_id>
+							</xsl:otherwise>
+						</xsl:choose>
+						<xsl:text>addf</xsl:text>
+					</hierarchy_top_id>
 					
 					<hierarchy_top_title>
 						
@@ -224,18 +181,13 @@
 								</xsl:when>
 							<xsl:otherwise>
 								<xsl:value-of select="prefTerm"></xsl:value-of>
-								</xsl:otherwise>
-							</xsl:choose>
-						
-					
-						</hierarchy_top_title>
-						
+							</xsl:otherwise>
+						</xsl:choose>
+					</hierarchy_top_title>
+
 			<!--hierarchy_parent-->
-					
 					<xsl:if test="contains(notation,'.')">
-					
 						<hierarchy_parent_id>
-							
 							<xsl:choose>
 								<xsl:when test="//concept[notation=$broader]/prefTerm='Sammlungen Körperschaften'">
 									<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /äüö,', '')" />
@@ -248,26 +200,24 @@
 									</xsl:when>
 								<xsl:otherwise>
 									<xsl:value-of select="substring-before(//concept[notation=$top]/useFor[1],' ')" />
-									</xsl:otherwise>
-								</xsl:choose>
+								</xsl:otherwise>
+							</xsl:choose>
 							
 							<xsl:if test="contains($broader,'.')">
 								<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /äüö,', '')" />
-								</xsl:if>
+							</xsl:if>
 								
-								<xsl:text>addf</xsl:text>
+							<xsl:text>addf</xsl:text>
 							
-							</hierarchy_parent_id>
+						</hierarchy_parent_id>
 					
 						<hierarchy_parent_title>
-							
 							<xsl:value-of select="//concept[notation=$broader]/prefTerm" />
-							
-							</hierarchy_parent_title>
+						</hierarchy_parent_title>
 						
-						</xsl:if>
+					</xsl:if>
 			
-			<!--is_hierarchy-->
+					<!--is_hierarchy-->
 					
 					<is_hierarchy_id>
 					
@@ -312,29 +262,12 @@
 		
 		</xsl:template>
 	
-	
-	
-	
-	
-	
 <!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-<!--Datensatz__________________________Datensatz-->
-	
-	
-	
-
 	<xsl:template match="Datensatz">
-		
 		<xsl:if test="id">
+			<xsl:element name="record">
 		
-		<xsl:element name="record">
-		
-		<vufind>
+			<vufind>
 				<id><xsl:value-of select="id" /><xsl:text>addf</xsl:text></id>
 				<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
 				<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
@@ -350,11 +283,9 @@
 						<recordType><xsl:text>archive</xsl:text></recordType>	
 						</xsl:otherwise>
 					</xsl:choose>
-				
-						
-				</vufind>
+			</vufind>
 			
-		<institution>
+			<institution>
 				<institutionShortname><xsl:text>Archiv der deutschen Frauenbewegung</xsl:text></institutionShortname>
 				<institutionFull><xsl:text>Stiftung Archiv der deutschen Frauenbewegung</xsl:text></institutionFull>
 				<institutionID><xsl:text>addf</xsl:text></institutionID>
@@ -364,15 +295,14 @@
 				<geoLocation>
 					<latitude>51.3259450</latitude>
 					<longitude>9.5036040</longitude>
-					</geoLocation>
-				</institution>
+				</geoLocation>
+			</institution>
 		
-		<dataset>
+			<dataset>
 
-<!--Format-->
-
+				<!--Format-->
 				<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
-				
+			
 				<xsl:choose>
 					<xsl:when test="Quellenang_x046x__x032x_Hochschulschriften">
 						<format><xsl:text>Hochschulschrift</xsl:text></format>
@@ -412,6 +342,7 @@
 	<!--title Titelinformationen-->	
 		
 				<xsl:apply-templates select="Titel[string-length() != 0]" />
+				<xsl:apply-templates select="Einheitssachtitel[string-length() != 0]" />
 				<xsl:apply-templates select="Hauptsachtitel[string-length() != 0]" />
 				<xsl:apply-templates select="Zusatz_x032x_zum_x032x_Hauptsachtitel[string-length() != 0]" />
 				<xsl:apply-templates select="Zeitschriftentitel[1][string-length() != 0]" />
@@ -1056,7 +987,10 @@
 	<xsl:template match="Titel">
 		<title><xsl:value-of select="normalize-space(.)" /></title>
 		<title_short><xsl:value-of select="normalize-space(.)" /></title_short>
-		</xsl:template>
+	</xsl:template>
+	<xsl:template match="Einheitssachtitel">
+		<originalTitle><xsl:value-of select="normalize-space(.)" /></originalTitle>
+	</xsl:template>
 	
 	<xsl:template match="Hauptsachtitel">
 		<title><xsl:value-of select="normalize-space(replace(.,'_',''))"/><!--<xsl:value-of select="normalize-space(.)" />--></title>
