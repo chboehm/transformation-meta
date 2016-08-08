@@ -746,7 +746,7 @@
 	
 	<xsl:template match="formerTitle">
 		<xsl:for-each select=".">
-			<field name="title_old">
+			<field name="formerTitle">
 				<xsl:value-of select="normalize-space(.)" />
 				</field>
 			</xsl:for-each>
@@ -754,7 +754,7 @@
 	
 	<xsl:template match="upcomingTitle">
 		<xsl:for-each select=".">
-			<field name="title_new">
+			<field name="upcomingTitle">
 				<xsl:value-of select="normalize-space(.)" />
 				</field>
 			</xsl:for-each>
@@ -772,9 +772,9 @@
 		<xsl:for-each select=".">
 			<field name="originalTitle">
 				<xsl:value-of select="normalize-space(.)" />
-				</field>
-			</xsl:for-each>
-		</xsl:template>
+			</field>
+		</xsl:for-each>
+	</xsl:template>
 	
 	<xsl:template match="subjectTopic">
 		<xsl:for-each select=".[text()!='']">
