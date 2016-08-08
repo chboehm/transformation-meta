@@ -18,8 +18,6 @@
 	
 <!--Nicht dargestellte Zeichen (sog. "Whitespace")  werden im XML Dokument entfernt um Speicherplatz zu sparen-->
 	<xsl:strip-space elements="*"/>	
-
-
 <!--Der Hauptknoten-->	
 	<xsl:template match="FFBIZ">
 		<xsl:element name="catalog">
@@ -27,8 +25,6 @@
 			<xsl:apply-templates select="Objekt" />
 		</xsl:element>
 	</xsl:template>
-
-
 
 <xsl:template match="erfasstam">
 	
@@ -38,7 +34,6 @@
 			(notation|broader='1.2') or
 			(notation|broader='1.3') or
 			(notation|broader='1.10')">
-		
 	
 	<xsl:element name="record">
 	
@@ -1863,10 +1858,10 @@
 		</xsl:template>
 	
 	<xsl:template match="Einheitssachtitel">
-		<alternativeTitle>
+		<originalTitle>
 			<xsl:value-of select="replace(.,'_','')"/>
-				</alternativeTitle>
-		</xsl:template>
+		</originalTitle>
+	</xsl:template>
 	
 	<xsl:template match="Titel_x132x_nderungen">
 		<alternativeTitle>
