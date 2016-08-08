@@ -355,6 +355,7 @@
 			
 			<!--editor-->
 				<xsl:apply-templates select="HerausgeberIn[string-length() != 0]" />
+				<xsl:apply-templates select="hrsg_x046x__x032x_Körperschaft[string-length() != 0]" />
 			
 			<!--contributor-->
 				<xsl:apply-templates select="beteiligte_x032x_Personen[string-length() != 0]" />
@@ -903,8 +904,13 @@
 	<xsl:template match="HerausgeberIn">
 		<editor>
 			<xsl:value-of select="normalize-space(.)" />
-			</editor>
-		</xsl:template>
+		</editor>
+	</xsl:template>
+	<xsl:template match="hrsg_x046x__x032x_Körperschaft">
+		<publisher>
+			<xsl:value-of select="normalize-space(.)" />
+		</publisher>
+	</xsl:template>
 	
 	<xsl:template match="VerfasserIn">
 		<xsl:for-each select="tokenize(.,';')">
