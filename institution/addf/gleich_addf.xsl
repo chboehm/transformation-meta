@@ -389,7 +389,11 @@
 				<xsl:apply-templates select="Verlag[string-length() != 0]" />	
 			
 			<!--ort/verlag-->
-				<!--<xsl:apply-templates select="Ersch_Ort_Verlag[string-length() != 0]" />	-->
+			<xsl:choose>
+				<xsl:when test="Objektart[text()='Periodika']">
+					<xsl:apply-templates select="Ersch_Ort_Verlag[string-length() != 0]" />
+				</xsl:when>
+			</xsl:choose>
 			
 			<!--edition Ausgabe-->
 				<xsl:apply-templates select="Ausgabebezeichnung[string-length() != 0]" />	
@@ -403,27 +407,11 @@
 		<xsl:variable name="topId" select="//id[1]" />
 		
 		<sourceInfo>
-						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
-						<xsl:value-of select="Thesaurus_x032x_Akten" />
-						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />
-						<xsl:value-of select="Thesaurus_x032x_SL_x032x_Personen" />
-						
-						
-						<!--<xsl:choose>
-							<xsl:when test="$topId='11181'">
-								<xsl:text>Sammlungen Personen</xsl:text>
-								</xsl:when>
-							<xsl:when test="$topId='11184'">
-								<xsl:text>Sammlungen Themen</xsl:text>
-								</xsl:when>
-							<xsl:when test="$topId='11198'">
-								<xsl:text>Sammlungen Körperschaften</xsl:text>
-								</xsl:when>
-							
-							</xsl:choose>-->
-						
-						
-						</sourceInfo>
+			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
+			<xsl:value-of select="Thesaurus_x032x_Akten" />
+			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />
+			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Personen" />
+		</sourceInfo>
 						
 <!--PHYSICAL INFORMATION-->
 			
@@ -790,9 +778,11 @@
 			<xsl:text>vermerke:</xsl:text>
 				<xsl:value-of select="../Fu_x225x_noten" />
 				<xsl:text>:vermerke</xsl:text>
-			<xsl:text>erschienen:</xsl:text>
+			<!-- 
+				<xsl:text>erschienen:</xsl:text>
 				<xsl:value-of select="../Ersch_Ort_Verlag" />
 				<xsl:text>:erschienen</xsl:text>
+			-->
 			<xsl:text>beigaben:</xsl:text>
 				<xsl:value-of select="../Beigaben" />
 				<xsl:text>:beigaben</xsl:text>
@@ -882,18 +872,16 @@
 			<xsl:value-of select="normalize-space(.)" />
 			</annotation>
 			</xsl:if>
-		</xsl:template>
+	</xsl:template>
 	
 	<xsl:template match="Ersch_Ort_Verlag">
-		<annotation>
-			<xsl:text>Ort / Verlag: </xsl:text>
-			<xsl:value-of select="normalize-space(.)" />
-			<xsl:if test="../Fu_x225x_noten[string-length() != 0]">
-				<xsl:text> Fußnoten: </xsl:text>
-				<xsl:value-of select="../Fu_x225x_noten"/>
-				</xsl:if>
-			</annotation>
-		</xsl:template>
+		<placeOfPublication>
+			<xsl:value-of select="substring-before(.,' : ')" />
+		</placeOfPublication>
+		<publisher>
+			<xsl:value-of select="substring-after(.,' : ')" />
+		</publisher>
+	</xsl:template>
 	
 	<xsl:template match="beteiligte_x032x_Personen">
 		<contributor>
