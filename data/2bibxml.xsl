@@ -272,6 +272,7 @@
 			
 			<xsl:apply-templates select="dataset/specialIssue" />
 			<xsl:apply-templates select="dataset/publicationFrequency" />
+			<xsl:apply-templates select="dataset/insertOf" />
 			<xsl:apply-templates select="dataset/outOfStocks" />
 			
 			
@@ -511,7 +512,11 @@
 	
 	<xsl:template match="publicationFrequency">
 		<field name="publicationFrequency"><xsl:value-of select="."/></field>
-		</xsl:template>
+	</xsl:template>
+	
+	<xsl:template match="insertOf">
+		<field name="insertOf"><xsl:value-of select="."/></field>
+	</xsl:template>
 	
 	<xsl:template match="specialIssue">
 		<field name="specialIssue"><xsl:value-of select="."/></field>

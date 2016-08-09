@@ -392,6 +392,8 @@
 			<xsl:choose>
 				<xsl:when test="Objektart[text()='Periodika']">
 					<xsl:apply-templates select="Ersch_Ort_Verlag[string-length() != 0]" />
+					<xsl:apply-templates select="Erscheinungsweise[string-length() != 0]" />
+					<xsl:apply-templates select="Beilage_x032x_zu[string-length() != 0]" />
 				</xsl:when>
 			</xsl:choose>
 			
@@ -881,6 +883,18 @@
 		<publisher>
 			<xsl:value-of select="substring-after(.,' : ')" />
 		</publisher>
+	</xsl:template>
+	
+	<xsl:template match="Erscheinungsweise">
+		<publicationFrequency>
+			<xsl:value-of select="normalize-space(.)" />
+		</publicationFrequency>
+	</xsl:template>
+	
+	<xsl:template match="Beilage_x032x_zu">
+		<insertOf>
+			<xsl:value-of select="normalize-space(.)" />
+		</insertOf>
 	</xsl:template>
 	
 	<xsl:template match="beteiligte_x032x_Personen">
