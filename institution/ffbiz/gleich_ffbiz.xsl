@@ -587,14 +587,18 @@
 						<typeOfRessource>
 							<xsl:text>bild</xsl:text>
 						</typeOfRessource>
-						<!--format Objektartinformationen -->
-						<!--<format><xsl:text>Film</xsl:text></format> -->
 						<format>
 							<xsl:text>Film</xsl:text>
 						</format>
 						<searchfilter>
 							<xsl:text>Film</xsl:text>
 						</searchfilter>
+						<!--documentType -->
+						<xsl:if test="Filmgenre">
+							<documentType>
+								<xsl:value-of select="Filmgenre" />
+							</documentType>
+						</xsl:if>
 						<!--TITLE -->
 						<!--title Titelinformationen -->
 						<xsl:apply-templates select="Filmtitel[1]" />
@@ -613,11 +617,18 @@
 						<!--subject Deskriptoren -->
 						<xsl:apply-templates select="Schlagworte_x032x_Archiv" />
 						<xsl:apply-templates select="Person" />
+						<xsl:apply-templates select="DarstellerIn"/>
+						<xsl:apply-templates select="RegisseurIn"/>
 						<!--description -->
 						<xsl:apply-templates select="Bemerkung[1]" />
+						<xsl:apply-templates select="Serientitel" />
 						<!--OTHER -->
 						<!--shelfMark Signatur -->
 						<xsl:apply-templates select="Signatur" />
+						<xsl:apply-templates select="Erscheinungsform"/>
+						<xsl:apply-templates select="Land_x047x_Region"/>
+						<xsl:apply-templates select="Ort"/>
+						<xsl:apply-templates select="Produktionsfirma_x047x_Urheber_x032x_"/>
 					</xsl:element>
 				</xsl:if>
 
@@ -629,8 +640,6 @@
 						<typeOfRessource>
 							<xsl:text>ton</xsl:text>
 						</typeOfRessource>
-						<!--format Objektartinformationen -->
-						<!--<format><xsl:text>Tonträger</xsl:text></format> -->
 						<format>
 							<xsl:text>Tonträger</xsl:text>
 						</format>
@@ -646,6 +655,8 @@
 						<!--TITLE -->
 						<!--title Titelinformationen -->
 						<xsl:apply-templates select="Titel_x047x_Thema" />
+						<!-- Untertitel -->
+						
 						<!--RESPONSIBLE -->
 						<!--author Autorinneninformation -->
 						<xsl:apply-templates select="AutorIn" />
@@ -666,11 +677,21 @@
 						<!--subject Deskriptoren -->
 						<xsl:apply-templates select="Schlagworte_x032x_Archiv" />
 						<xsl:apply-templates select="Person" />
+						<!-- subjectGeographic -->
+						<xsl:apply-templates select="Kontinent"/>
+						<xsl:apply-templates select="Land_x047x_Region"/>
 						<!--description -->
 						<xsl:apply-templates select="Beschreibung" />
 						<!--OTHER -->
 						<!--shelfMark Signatur -->
 						<xsl:apply-templates select="Signatur" />
+						<!-- runTime -->
+						<xsl:apply-templates select="L_x132x_nge"/>
+						<!-- annotation -->
+						<xsl:apply-templates select="Sender"/>
+						<xsl:apply-templates select="Serie_x047x_Reihe"/>
+						<xsl:apply-templates select="Aufnahmeort_x047x_-anlass"/>
+						<xsl:apply-templates select="Typ_x047x_Genre"/>
 					</xsl:element>
 				</xsl:if>
 
@@ -1097,7 +1118,7 @@
 
 	<xsl:template match="L_x132x_nge">
 		<runTime>
-			<xsl:value-of select="normalize-space(.)" />
+			<xsl:value-of select="replace(., '&lt;/?\w+[^&lt;]*&gt;', '')" />
 		</runTime>
 	</xsl:template>
 
@@ -1304,9 +1325,18 @@
 	</xsl:template>
 
 	<xsl:template match="Titel_x047x_Thema">
-		<title>
-			<xsl:value-of select="replace(.,'_','')" />
-		</title>
+		<xsl:choose>
+			<xsl:when test="../Untertitel[1]">
+				<title_sub>
+					<xsl:value-of select="replace(../Untertitel[1],'_','')" />
+				</title_sub>
+			</xsl:when>
+			<xsl:otherwise>
+				<title>
+					<xsl:value-of select="replace(.,'_','')" />
+				</title>
+			</xsl:otherwise>
+		</xsl:choose>
 		<title_short>
 			<xsl:value-of select="replace(.,'_','')" />
 		</title_short>
@@ -1400,4 +1430,68 @@
 		</entity>
 	</xsl:template>
 
+	<xsl:template match="Sender">
+		<annotation>
+			<xsl:text>Sender: </xsl:text>
+			<xsl:value-of select="replace(.,'_','')"/>
+		</annotation>
+	</xsl:template>
+	
+	<xsl:template match="Serie_x047x_Reihe">
+		<annotation>
+			<xsl:text>Serie/Reihe: </xsl:text>
+			<xsl:value-of select="replace(.,'_','')"/>
+		</annotation>
+	</xsl:template>
+	
+	<xsl:template match="Aufnahmeort_x047x_-anlass">
+		<annotation>
+			<xsl:text>Aufnahmeort/Anlass: </xsl:text>
+			<xsl:value-of select="replace(.,'_','')"/>
+		</annotation>
+	</xsl:template>
+	
+	<xsl:template match="Typ_x047x_Genre">
+		<annotation>
+			<xsl:text>Typ/Genre: </xsl:text>
+			<xsl:value-of select="replace(.,'_','')"/>
+		</annotation>
+	</xsl:template>
+	
+	<xsl:template match="DarstellerIn">
+		<xsl:for-each select=".">
+			<contributor>
+				<xsl:value-of select="." />
+				<xsl:text> [Darst.]</xsl:text>
+			</contributor>
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="RegisseurIn">
+		<xsl:for-each select=".">
+			<contributor>
+				<xsl:value-of select="." />
+				<xsl:text> [Regie]</xsl:text>
+			</contributor>
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="Produktionsfirma_x047x_Urheber_x032x_">
+		<contributor>
+			<xsl:value-of select="." />
+		</contributor>
+	</xsl:template>
+	
+	<xsl:template match="Erscheinungsform">
+		<physical>
+			<xsl:value-of select="." />
+		</physical>
+	</xsl:template>
+	
+	<xsl:template match="Serientitel">
+		<annotation>
+			<xsl:text>Serientitel: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
 </xsl:stylesheet>
