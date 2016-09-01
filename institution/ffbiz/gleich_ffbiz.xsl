@@ -337,10 +337,14 @@
 						<!--TITLE -->
 						<!--title Titelinformationen -->
 						<xsl:apply-templates select="Titel_x032x_" />
+						<xsl:apply-templates select="Titel_x132x_nderungen" />
 						<!--IDENTIFIER -->
 						<!--ISBN -->
 						<xsl:apply-templates select="ISSN" />
 						<xsl:apply-templates select="ZDB-ID" />
+						<!-- publicationFrequency -->
+						<xsl:apply-templates select="Erscheinungsweise"/>
+						<xsl:apply-templates select="Erscheinungszeitraum"/>
 						<!--subjectTopic Deskriptoren -->
 						<xsl:apply-templates select="Schlagworte_x032x_Archiv" />
 						<!--description -->
@@ -906,9 +910,9 @@
 	</xsl:template>
 
 	<xsl:template match="ZDB-ID">
-		<zdbid>
+		<zdbId>
 			<xsl:value-of select="." />
-		</zdbid>
+		</zdbId>
 	</xsl:template>
 
 	<xsl:template match="ISSN">
@@ -1343,6 +1347,18 @@
 	</xsl:template>
 
 	<xsl:template match="Titel_x032x_">
+		<xsl:choose>
+			<xsl:when test="../Untertitel[1]">
+				<title_sub>
+					<xsl:value-of select="replace(../Untertitel[1],'_','')" />
+				</title_sub>
+			</xsl:when>
+			<xsl:otherwise>
+				<title>
+					<xsl:value-of select="replace(.,'_','')" />
+				</title>
+			</xsl:otherwise>
+		</xsl:choose>
 		<title>
 			<xsl:value-of select="replace(.,'_','')" />
 		</title>
@@ -1491,6 +1507,19 @@
 	<xsl:template match="Serientitel">
 		<annotation>
 			<xsl:text>Serientitel: </xsl:text>
+			<xsl:value-of select="." />
+		</annotation>
+	</xsl:template>
+	
+	<xsl:template match="Erscheinungsweise">
+		<publicationFrequency>
+			<xsl:value-of select="." />
+		</publicationFrequency>
+	</xsl:template>
+	
+	<xsl:template match="Erscheinungszeitraum">
+		<annotation>
+			<xsl:text>Erscheinungszeitraum: </xsl:text>
 			<xsl:value-of select="." />
 		</annotation>
 	</xsl:template>
