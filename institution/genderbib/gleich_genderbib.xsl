@@ -143,7 +143,7 @@
 	<!--issue Heft-->
 				<xsl:apply-templates select="../Heft-Nr_"/>
 
-	<!--volume Jahrgang-->
+	<!--volume Jahr_gang-->
 				<xsl:apply-templates select="../Jg_"/>
 				
 			</xsl:element>
