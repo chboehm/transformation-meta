@@ -19,17 +19,7 @@
 		</xsl:element>
 	</xsl:template>
 
-<!--root knoten-->
-<!--	<xsl:template match="genderbib">
-		<xsl:element name="catalog">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>-->
 
-
-
-<!--Zeitschrift-->
-<!--Zeitschrift-->
 <!--Zeitschrift-->
 
 	<xsl:template match="//tagesdatum">
@@ -45,7 +35,7 @@
 
 			<!--Identifikator-->
 				<id>
-					<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+					<xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
 					<xsl:text>genderbib</xsl:text>
 					</id>
 					
@@ -116,21 +106,21 @@
 				<xsl:choose>
 					<xsl:when test="contains(../Sammeltitel[1], ':')">
 						<title>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							</title>
 						<title_short>
-							<xsl:value-of select="normalize-space(substring-before(../Sammeltitel[1], ':'))"/>
+							<xsl:value-of select="normalize-space(substring-before(replace(../Sammeltitel[1],'_',''), ':'))"/>
 							</title_short>
 						<title_sub>
-							<xsl:value-of select="normalize-space(substring-after(../Sammeltitel[1], ':'))"/>
+							<xsl:value-of select="normalize-space(substring-after(replace(../Sammeltitel[1],'_',''), ':'))"/>
 							</title_sub>
 						</xsl:when>
 					<xsl:otherwise>
 						<title>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							</title>
 						<title_short>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							</title_short>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -162,14 +152,14 @@
 			
 			<hierarchyFields>
 				
-					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="../Sammeltitel" /></hierarchy_top_title>
+					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="replace(../Sammeltitel[1],'_','')" /></hierarchy_top_title>
 				
 					<is_hierarchy_id>
-						<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
 						<xsl:text>genderbib</xsl:text>
 						</is_hierarchy_id>
-					<is_hierarchy_title><xsl:value-of select="../Sammeltitel" /></is_hierarchy_title>
+					<is_hierarchy_title><xsl:value-of select="replace(../Sammeltitel[1],'_','')" /></is_hierarchy_title>
 					
 					<hierarchy_sequence>
 						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
@@ -205,7 +195,7 @@
 
 			<!--Identifikator-->
 				<id>
-					<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+					<xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
 					<xsl:value-of select="replace(../Jahr[1],'/','')"/>
 					<xsl:value-of select="replace(../Heft-Nr_[1],'/','')"/>
 					<xsl:text>genderbib</xsl:text>
@@ -288,11 +278,11 @@
 				<xsl:choose>
 					<xsl:when test="contains(../Sammeltitel[1], ':')">
 						<title>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							<xsl:value-of select="$title_edition" />
 							</title>
 						<title_short>
-							<xsl:value-of select="normalize-space(substring-before(../Sammeltitel[1], ':'))"/>
+							<xsl:value-of select="normalize-space(substring-before(replace(../Sammeltitel[1],'_',''), ':'))"/>
 							</title_short>
 						<title_sub>
 							<xsl:value-of select="normalize-space(substring-after(../Sammeltitel[1], ':'))"/>
@@ -300,11 +290,11 @@
 						</xsl:when>
 					<xsl:otherwise>
 						<title>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							<xsl:value-of select="$title_edition" />
 							</title>
 						<title_short>
-							<xsl:value-of select="../Sammeltitel[1]"/>
+							<xsl:value-of select="replace(../Sammeltitel[1],'_','')"/>
 							</title_short>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -336,19 +326,19 @@
 			
 			<hierarchyFields>
 				
-					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="../Sammeltitel" /></hierarchy_top_title>
+					<hierarchy_top_id><xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="replace(../Sammeltitel[1],'_','')" /></hierarchy_top_title>
 				
-					<hierarchy_parent_id><xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="../Sammeltitel" /></hierarchy_parent_title>
+					<hierarchy_parent_id><xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" /><xsl:text>genderbib</xsl:text></hierarchy_parent_id>
+					<hierarchy_parent_title><xsl:value-of select="replace(../Sammeltitel[1],'_','')" /></hierarchy_parent_title>
 					
 					<is_hierarchy_id>
-						<xsl:value-of select="translate(../Sammeltitel, '. ()/:-äüö,', '')" />
+						<xsl:value-of select="translate(../Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
 						<xsl:value-of select="replace(../Jahr[1],'/','')"/>
 						<xsl:value-of select="replace(../Heft-Nr_[1],'/','')"/>
 						<xsl:text>genderbib</xsl:text>
 						</is_hierarchy_id>
-					<is_hierarchy_title><xsl:value-of select="../Sammeltitel" /></is_hierarchy_title>
+					<is_hierarchy_title><xsl:value-of select="replace(../Sammeltitel[1],'_','')" /></is_hierarchy_title>
 					
 					<hierarchy_sequence>
 						<xsl:value-of select="../Jahr[1]"></xsl:value-of>
@@ -945,12 +935,6 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 						</xsl:when>
 					</xsl:choose>
 				
-	
-				<!--<xsl:choose>
-					<xsl:when test="Einzeltitel!=''"><xsl:apply-templates select="Einzeltitel[1]"/></xsl:when>
-					<xsl:otherwise><xsl:apply-templates select="Sammeltitel[1]"/></xsl:otherwise>
-					</xsl:choose>-->
-
 <!--RESPONSIBLE-->
 				
 	<!--author Autorinneninformation-->
@@ -990,7 +974,6 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 	<!--language Sprachangaben-->
 				<xsl:choose>
 					<xsl:when test="Sprache[1]"><xsl:apply-templates select="Sprache[1]"/></xsl:when>
-					<!--<xsl:otherwise><language>o. A.</language></xsl:otherwise>-->
 					</xsl:choose>
 	
 	<!--subjectTopic Deskriptoren-->
@@ -1020,61 +1003,53 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 						</shelfMark>
 					</xsl:if>
 
-<!--projectMark-->	
-				<!--<project>
-					<xsl:for-each select="tokenize(Deskriptoren1[1], ';')">
-						<xsl:variable name="topic" select="normalize-space(.)"/>
-							<xsl:if test="document('keywords.xml')/root/systemstelle/keyword=$topic">
-								<xsl:value-of select="document('keywords.xml')/root/systemstelle[keyword=$topic]/@id"/>
-								<xsl:text> </xsl:text>			
-								</xsl:if>
-						</xsl:for-each>
-					                      </project>-->
-</xsl:element>
+	</xsl:element>
 
-<xsl:element name="functions">
+	<xsl:element name="functions">
 			
 			<hierarchyFields>
-					<hierarchy_top_id>
-								<xsl:value-of select="translate(Sammeltitel, '. ()/:-äüö,', '')" />
-								<!--<xsl:value-of select="replace(Jahr[1],'/','')"/>
-								<xsl:value-of select="replace(Heft-Nr_[1],'/','')"/>-->
-								<xsl:text>genderbib</xsl:text>
-								</hierarchy_top_id>
-							<hierarchy_top_title><xsl:value-of select="Sammeltitel" /></hierarchy_top_title>
+			
+				<hierarchy_top_id>
+					<xsl:value-of select="translate(Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
+					<xsl:text>genderbib</xsl:text>
+					</hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="Sammeltitel" /></hierarchy_top_title>
 							
-							<hierarchy_parent_id>
-								<xsl:value-of select="translate(Sammeltitel, '. ()/:-äüö,', '')" />
-								<xsl:value-of select="replace(Jahr[1],'/','')"/>
-								<xsl:value-of select="replace(Heft-Nr_[1],'/','')"/>
-								<xsl:text>genderbib</xsl:text>
-								</hierarchy_parent_id>
-							<hierarchy_parent_title><xsl:value-of select="Sammeltitel" /></hierarchy_parent_title>
+				<hierarchy_parent_id>
+					<xsl:value-of select="translate(Sammeltitel, '_\&quot;;. ()/:-äüö,', '')" />
+					<xsl:value-of select="replace(Jahr[1],'/','')"/>
+					<xsl:value-of select="replace(Heft-Nr_[1],'/','')"/>
+					<xsl:text>genderbib</xsl:text>
+					</hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="Sammeltitel" /></hierarchy_parent_title>
 					
 				
-					<is_hierarchy_id><xsl:value-of select="id" /><xsl:text>genderbib</xsl:text></is_hierarchy_id>
-					<is_hierarchy_title>
-						<xsl:choose>
-							<xsl:when test="Einzeltitel[string-length() != 0]">
-								<xsl:value-of select="normalize-space(Einzeltitel[1])"/>
-								</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="normalize-space(Sammeltitel[1])"/>
-								</xsl:otherwise>
-							</xsl:choose>
-						</is_hierarchy_title>
+				<is_hierarchy_id><xsl:value-of select="id" /><xsl:text>genderbib</xsl:text></is_hierarchy_id>
+				
+				<is_hierarchy_title>
+					<xsl:choose>
+						<xsl:when test="Einzeltitel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(Einzeltitel[1])"/>
+							</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="normalize-space(Sammeltitel[1])"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</is_hierarchy_title>
 					
-					<hierarchy_sequence>
-						<xsl:choose>
-							<xsl:when test="Einzeltitel[string-length() != 0]">
-								<xsl:value-of select="normalize-space(substring(Einzeltitel[1],1,3))"/>
-								</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="normalize-space(substring(Sammeltitel[1],1,3))"/>
-								</xsl:otherwise>
-							</xsl:choose>
-						</hierarchy_sequence>
-					</hierarchyFields>
+				<hierarchy_sequence>
+					<xsl:choose>
+						<xsl:when test="Einzeltitel[string-length() != 0]">
+							<xsl:value-of select="normalize-space(substring(Einzeltitel[1],1,3))"/>
+							</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="normalize-space(substring(Sammeltitel[1],1,3))"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</hierarchy_sequence>
+			
+				</hierarchyFields>
+				
 			</xsl:element>
 
 </xsl:if>
