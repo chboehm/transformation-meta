@@ -913,21 +913,21 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 						<xsl:choose>
 							<xsl:when test="contains(Sammeltitel[1], ':')">
 								<title>
-									<xsl:value-of select="Sammeltitel[1]"/>
+									<xsl:value-of select="replace(Sammeltitel[1],'_','')"/>
 									</title>
 								<title_short>
-									<xsl:value-of select="normalize-space(substring-before(Sammeltitel[1], ':'))"/>
+									<xsl:value-of select="normalize-space(substring-before(replace(Sammeltitel[1],'_',''), ':'))"/>
 									</title_short>
 								<title_sub>
-									<xsl:value-of select="normalize-space(substring-after(Sammeltitel[1], ':'))"/>
+									<xsl:value-of select="normalize-space(substring-after(replace(Sammeltitel[1],'_',''), ':'))"/>
 									</title_sub>
 								</xsl:when>
 					<xsl:otherwise>
 						<title>
-							<xsl:value-of select="Sammeltitel[1]"/>
+							<xsl:value-of select="replace(Sammeltitel[1],'_','')"/>
 							</title>
 						<title_short>
-							<xsl:value-of select="Sammeltitel[1]"/>
+							<xsl:value-of select="replace(Sammeltitel[1],'_','')"/>
 							</title_short>
 						</xsl:otherwise>
 					</xsl:choose>
