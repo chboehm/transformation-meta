@@ -898,9 +898,19 @@
 	</xsl:template>
 	
 	<xsl:template match="beteiligte_x032x_Personen">
-		<contributor>
-			<xsl:value-of select="normalize-space(.)" />
-			</contributor>
+		<xsl:choose>
+			<xsl:when test="contains(.,'(')">
+				<contributor>
+					<xsl:value-of select="normalize-space(substring-before(.,'('))" />
+					</contributor>
+				<contributor_raw>
+					<xsl:value-of select="normalize-space(.)" />
+					</contributor_raw>
+				</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="normalize-space(.)" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:template>
 	
 	<xsl:template match="HerausgeberIn">
