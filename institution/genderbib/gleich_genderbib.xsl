@@ -361,12 +361,12 @@
 	<xsl:variable name="s_sachtitel" select="translate(s_x046x__x032x_Sachtitel[1], translate(.,'0123456789', ''), '')"/>
 			
 			
-			<xsl:if test="objektart[text()!='NutzerIn']">
 			
 			
+			<xsl:if test="objektart[text()='Online-Ressource']">
 			
 			<!--
-			
+			<xsl:if test="objektart[text()!='NutzerIn']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
 			<xsl:if test="objektart[text()='Zeitschrift']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
@@ -398,11 +398,11 @@
 			<xsl:for-each select="//datensatz[id=$s_sachtitel]">
 			
 			<xsl:text> editor:</xsl:text>
-				<xsl:value-of select="Hrsg_"></xsl:value-of>
+				<xsl:value-of select="Hrsg_x046x_"></xsl:value-of>
 				<xsl:text>:editor</xsl:text>
 			
 			<xsl:text> hrsg:</xsl:text>
-				<xsl:value-of select="Hrsg__Körperschaft"></xsl:value-of>
+				<xsl:value-of select="Hrsg_x046x__Körperschaft"></xsl:value-of>
 				<xsl:text>:hrsg</xsl:text>
 			
 			<xsl:text> contributor:</xsl:text>
@@ -618,7 +618,7 @@ den Datenbestand angezeigt-->
 	<!--searchfilter-->
 				
 				<!--<xsl:choose>
-					<xsl:when test="Hrsg_[string-length() != 0]">
+					<xsl:when test="Hrsg_x046x_[string-length() != 0]">
 						<searchfilter>
 							<xsl:text>Sammelband</xsl:text>
 							</searchfilter>
@@ -658,11 +658,11 @@ den Datenbestand angezeigt-->
 				<xsl:apply-templates select="Autorin"/>
 
 	<!--editor Herausgeberinneninformationen-->
-				<xsl:apply-templates select="Hrsg_"/>
+				<xsl:apply-templates select="Hrsg_x046x_"/>
 
 	<!--series Reiheninformation-->
 				<xsl:apply-templates select="Reihentitel"/>
-				<xsl:apply-templates select="Bd--ReihenNr_"/>
+				<xsl:apply-templates select="Bd-_x047x_ReihenNr_x046x_"/>
 
 <!--IDENTIFIER-->
 	
@@ -745,6 +745,12 @@ den Datenbestand angezeigt-->
 		</xsl:element>	
 	</xsl:if>				
 </xsl:if>
+
+
+
+
+
+
 
 <!--Hochschularbeit_____________________Magistraarbeit_____________________Abschlussarbeit-->
 
@@ -1068,7 +1074,8 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 
 <!--Online-Artikel_________________________Online-Artikel_______________________Online-Artikel-->
 
-<xsl:if test="objektart[text()='Online-Artikel']">
+<!-- <xsl:if test="objektart[text()='Online-Artikel']"> -->
+<xsl:if test="objektart[text()='Online-Ressource']">
 
 <!--Onlineartikel sind Datensätze die eine URL zum eigentlichen Artikel im Netz enthalten. Ob diese
 URLs noch stimmen kann hier nicht geprüft werden.-->
@@ -1098,13 +1105,13 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 					<xsl:when test="ISSN[string-length() != 0]">
 						<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 						</xsl:when>
-					<xsl:when test="(ISBN[string-length() != 0]) and (Hrsg_[string-length() = 0])">
+					<xsl:when test="(ISBN[string-length() != 0]) and (Hrsg_x046x_[string-length() = 0])">
 						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
-					<xsl:when test="(ISBN[string-length() != 0]) and (Hrsg_[string-length() != 0])">
+					<xsl:when test="(ISBN[string-length() != 0]) and (Hrsg_x046x_[string-length() != 0])">
 						<searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
 						</xsl:when>
-					<xsl:when test="(ISBN[string-length() != 0]) and not(Hrsg_)">
+					<xsl:when test="(ISBN[string-length() != 0]) and not(Hrsg_x046x_)">
 						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
 					<xsl:otherwise>
@@ -1113,7 +1120,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 					</xsl:choose>
 
 	<!--documentType-->
-				<documentType><xsl:text>Online-Artikel</xsl:text></documentType>
+				<documentType><xsl:text>Online-Ressource</xsl:text></documentType>
 				<xsl:apply-templates select="Dok-art"/>
 
 <!--TITLE-->
@@ -1131,11 +1138,6 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 							</title_short>
 						</xsl:when>
 					</xsl:choose>
-					
-	<!--title Titelinformationen-->
-				<!--<xsl:if test="Titel[1]">
-					<xsl:apply-templates select="Titel[1]"/>
-					</xsl:if>-->
 
 <!--RESPONSIBLE-->
 
@@ -1143,15 +1145,16 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<xsl:apply-templates select="Autorin"/>
 	
 	<!--editor Herausgeberinneninformationen-->
-				<xsl:apply-templates select="Hrsg_[1]"/>
+				<xsl:apply-templates select="Hrsg_x046x_[1]"/>
 		
 	<!--series Reiheninformation-->
 				<xsl:apply-templates select="Reihentitel"/>
+				<xsl:apply-templates select="Bd-_x047x_ReihenNr_x046x_"/>
 
 <!--IDENTIFIER-->
 
-	<!--Digitale_Dokumente-->
-				<xsl:apply-templates select="Digitale_Dokumente"/>
+	<!--Digitale_x032x_Dokumente-->
+				<xsl:apply-templates select="Digitale_x032x_Dokumente"/>
 
 <!--PUBLISHING-->
 	
@@ -1257,22 +1260,8 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 						</xsl:for-each>
 					</project>-->
 </xsl:element>
-<!--
-<xsl:element name="functions">-->
-	
-<!--loan-->			<!--<xsl:if test="Ausleihe_an[1]">
-					<xsl:apply-templates select="Ausleihe_an[1]"/>
-				</xsl:if>-->
-	
-<!--hierarchyFields--> 	<!--<xsl:if test="Sign_x046x_[1]">
-					<xsl:apply-templates select="Sign_x046x_[1]"/>
-				</xsl:if>-->
-
-<!--</xsl:element>	-->
 
 </xsl:if>
-
-
 
 
 
@@ -1312,7 +1301,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<xsl:apply-templates select="Autorin[1]"/>
 				
 	<!--editor Herausgeberinneninformationen-->
-				<xsl:apply-templates select="Hrsg_[1]"/>
+				<xsl:apply-templates select="Hrsg_x046x_[1]"/>
 
 <!--IDENTIFIER-->
 
@@ -1425,7 +1414,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 				<xsl:apply-templates select="Autorin[1]"/>
 
 	<!--editor Herausgeberinneninformationen-->
-				<xsl:apply-templates select="Hrsg_[1]"/>
+				<xsl:apply-templates select="Hrsg_x046x_[1]"/>
 
 	<!--series Reiheninformation-->
 				<xsl:apply-templates select="Reihentitel"/>		
@@ -1435,8 +1424,8 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 	<!--ISBN / ISSN-->
 				<xsl:apply-templates select="ISSN"/>
 
-	<!--Digitale_Dokumente-->
-				<xsl:apply-templates select="Digitale_Dokumente"/>
+	<!--Digitale_x032x_Dokumente-->
+				<xsl:apply-templates select="Digitale_x032x_Dokumente"/>
 
 <!--PUBLISHING-->
 	
@@ -2181,7 +2170,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 						</xsl:for-each>
 					</xsl:if>
 				
-				<xsl:apply-templates select="Hrsg_[1]"/>
+				<xsl:apply-templates select="Hrsg_x046x_[1]"/>
 				
 	<!--series Reiheninformation-->					
 				<xsl:if test="substring(substring-after($connect,'edition:'),1,1)!=':'">
@@ -2437,13 +2426,13 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</xsl:choose>	
 		</xsl:template>
 
-	<xsl:template match="Digitale_Dokumente">
+	<xsl:template match="Digitale_x032x_Dokumente">
 		<url>
 			<xsl:value-of select="." />
 			</url>
 		</xsl:template>
 	
-	<xsl:template match="Bd--ReihenNr_">
+	<xsl:template match="Bd-_x047x_ReihenNr_x046x_">
 		<volume>
 			<xsl:value-of select="." />
 			</volume>
@@ -2802,7 +2791,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:template>
 
 <!--Template Herausgeberinnen-->
-	<xsl:template match="Hrsg_">
+	<xsl:template match="Hrsg_x046x_">
 		<xsl:for-each select="tokenize(., ';')">
 			<xsl:if test="(not(contains(.,'o. A.'))) and not(contains(.,'u.a.'))">
 			<editor>
