@@ -12,10 +12,8 @@
 	<xsl:template match="genderbib">
 		<xsl:element name="catalog">
 			<xsl:apply-templates select="//datensatz" />
-			<xsl:apply-templates select="//Erf_-stelle[1]" />
+			<xsl:apply-templates select="//Erf_x046x_-stelle[1]" />
 			<xsl:apply-templates select="//tagesdatum[1]" />
-			<xsl:apply-templates select="//Erfassungsdatum[1]" />
-			<!--<xsl:apply-templates/>-->
 		</xsl:element>
 	</xsl:template>
 
@@ -181,7 +179,7 @@
 <!--Zeitschriftenheft-->
 <!--Zeitschriftenheft-->
 
-	<xsl:template match="//Erf_-stelle">
+	<xsl:template match="//Erf_x046x_-stelle">
 
 	<xsl:for-each select="../objektart[text()='Artikel']">
 	
@@ -360,13 +358,16 @@
 
 <!--Der Objektknoten-->
 	<xsl:template match="datensatz">
-	<xsl:variable name="s_sachtitel" select="translate(s__Sachtitel[1], translate(.,'0123456789', ''), '')"/>
+	<xsl:variable name="s_sachtitel" select="translate(s_x046x__x032x_Sachtitel[1], translate(.,'0123456789', ''), '')"/>
 			
 			
-			<xsl:if test="objektart[text()!='NutzerIn']">
+			
+			
+			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
 			
 			<!--
 			
+			<xsl:if test="objektart[text()!='NutzerIn']">
 			<xsl:if test="objektart[text()='Zeitschrift']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
 			<xsl:if test="objektart[text()='Zeitschrift/Heftitel']">
@@ -385,14 +386,14 @@
 <!--Variablen_______________________________________________________Variablen-->
 <!--Variablen_______________________________________________________Variablen-->
 
-		<xsl:variable name="s_sachtitel" select="translate(s__Sachtitel[1], translate(.,'0123456789', ''), '')"/>
+		<xsl:variable name="s_sachtitel" select="translate(s_x046x__x032x_Sachtitel[1], translate(.,'0123456789', ''), '')"/>
 		<xsl:variable name="z-ausgabe" select="Ausgabe"/>
 		<xsl:variable name="currentDate" select="current-date()"/>
 		
 	<xsl:variable name="connect">
 	
 		<xsl:choose>
-			<xsl:when test="s__Sachtitel">
+			<xsl:when test="s_x046x__x032x_Sachtitel">
 				
 			<xsl:for-each select="//datensatz[id=$s_sachtitel]">
 			
@@ -510,7 +511,7 @@
 				<xsl:text>:topic</xsl:text>
 			
 			<xsl:text> shelfMark:</xsl:text>
-				<xsl:value-of select="Sign_"></xsl:value-of>
+				<xsl:value-of select="Sign_x046x_"></xsl:value-of>
 				<xsl:text>:shelfMark</xsl:text>
 			</xsl:for-each>	
 			
@@ -616,7 +617,7 @@ den Datenbestand angezeigt-->
 				
 	<!--searchfilter-->
 				
-				<xsl:choose>
+				<!--<xsl:choose>
 					<xsl:when test="Hrsg_[string-length() != 0]">
 						<searchfilter>
 							<xsl:text>Sammelband</xsl:text>
@@ -627,10 +628,10 @@ den Datenbestand angezeigt-->
 							<xsl:text>Monografie</xsl:text>
 							</searchfilter>
 						</xsl:otherwise>
-				</xsl:choose>
+				</xsl:choose>  -->
 				
-				<!--<xsl:choose>
-					<xsl:when test="not(s__Aufsatz)">
+				<xsl:choose>
+					<xsl:when test="not(s_x046x__x032x_Aufsatz)">
 						<searchfilter>
 							<xsl:text>Monografie</xsl:text>
 							</searchfilter>
@@ -640,7 +641,7 @@ den Datenbestand angezeigt-->
 							<xsl:text>Sammelband</xsl:text>
 							</searchfilter>
 						</xsl:otherwise>
-				</xsl:choose>-->
+				</xsl:choose>
 				
 	<!--documentType-->		
 				<xsl:apply-templates select="Dok-art"/>
@@ -712,9 +713,9 @@ den Datenbestand angezeigt-->
 <!--OTHER-->
 			
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 				
@@ -730,7 +731,7 @@ den Datenbestand angezeigt-->
 					</project>-->
 </xsl:element>
 
-<xsl:if test="s__Aufsatz">
+<xsl:if test="s_x046x__x032x_Aufsatz">
 	<xsl:element name="functions">	
 			<hierarchyFields>
 				
@@ -839,9 +840,9 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 <!--OTHER-->
 	
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 
@@ -865,8 +866,8 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 					<xsl:apply-templates select="Ausleihe_an[1]"/>
 					</xsl:if>-->
 	
-<!--hierarchyFields--> 	<!--<xsl:if test="Sign_[1]">
-					<xsl:apply-templates select="Sign_[1]"/>
+<!--hierarchyFields--> 	<!--<xsl:if test="Sign_x046x_[1]">
+					<xsl:apply-templates select="Sign_x046x_[1]"/>
 					</xsl:if>-->
 
 <!--</xsl:element>	-->
@@ -997,9 +998,9 @@ Datensätzen ausgelesen, um welche Art von Hochschularbeit es sich handelt-->
 <!--OTHER-->
 					
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 
@@ -1238,9 +1239,9 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 <!--OTHER-->
 
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 
@@ -1263,8 +1264,8 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 					<xsl:apply-templates select="Ausleihe_an[1]"/>
 				</xsl:if>-->
 	
-<!--hierarchyFields--> 	<!--<xsl:if test="Sign_[1]">
-					<xsl:apply-templates select="Sign_[1]"/>
+<!--hierarchyFields--> 	<!--<xsl:if test="Sign_x046x_[1]">
+					<xsl:apply-templates select="Sign_x046x_[1]"/>
 				</xsl:if>-->
 
 <!--</xsl:element>	-->
@@ -1354,9 +1355,9 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 <!--OTHER-->		
 
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 
@@ -1368,8 +1369,8 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 					<xsl:apply-templates select="Ausleihe_an[1]"/>
 				</xsl:if>-->
 	
-<!--hierarchyFields--> 	<!--<xsl:if test="Sign_[1]">
-					<xsl:apply-templates select="Sign_[1]"/>
+<!--hierarchyFields--> 	<!--<xsl:if test="Sign_x046x_[1]">
+					<xsl:apply-templates select="Sign_x046x_[1]"/>
 				</xsl:if>
 -->
 <!--</xsl:element>	-->
@@ -1527,9 +1528,9 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 <!--OTHER-->
 
 	<!--shelfMark Signatur-->
-				<xsl:if test="Sign_[1]">
+				<xsl:if test="Sign_x046x_[1]">
 					<shelfMark>
-						<xsl:value-of select="Sign_[1]"/>
+						<xsl:value-of select="Sign_x046x_[1]"/>
 						</shelfMark>
 					</xsl:if>
 
@@ -1729,20 +1730,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 					<xsl:value-of select="$title" />
 					</title_short>
 				
-				<!--<title>
-					<xsl:value-of select="Sachtitel[1]"/>
-					</title>
-				
-				<title_short>
-					<xsl:value-of select="Sachtitel"/>
-					</title_short>
-				
-				<xsl:if test="Inhalt-Thema">
-					<title_sub>
-						<xsl:value-of select="replace(Inhalt-Thema[1],'_','')"/>
-						</title_sub>
-					</xsl:if>-->
-				
 				<xsl:apply-templates select="Titeländg_" />
 				
 <!--RESPONSIBLE-->
@@ -1771,9 +1758,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 								</issn>
 							</xsl:when>
 						<xsl:otherwise>
-							<!--<issn>
-								<xsl:text>o. A.</xsl:text>
-								</issn>-->
+							
 							</xsl:otherwise>
 						</xsl:choose>
 
@@ -1793,9 +1778,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 								</zdbId>
 							</xsl:when>
 						<xsl:otherwise>
-							<!--<zdbId>
-								<xsl:text>o. A.</xsl:text>
-								</zdbId>-->
+							
 							</xsl:otherwise>
 						</xsl:choose>
 
@@ -1817,9 +1800,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 								</publisher>
 							</xsl:when>
 						<xsl:otherwise>
-							<!--<publisher>
-								<xsl:text>o. A.</xsl:text>
-								</publisher>-->
 							</xsl:otherwise>
 						</xsl:choose>
 					
@@ -1839,9 +1819,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 								</placeOfPublication>
 							</xsl:when>
 						<xsl:otherwise>
-							<!--<placeOfPublication>
-								<xsl:text>o. A.</xsl:text>
-								</placeOfPublication>-->
 							</xsl:otherwise>
 						</xsl:choose>
 					
@@ -1855,7 +1832,14 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 						<xsl:when test="not(J_)">				
 							<displayPublishDate>
 								<xsl:variable name="z-jahr1" select="substring-after($z-ausgabe,'(')"/>
-								<xsl:value-of select="substring-before($z-jahr1,')')"/>
+								<xsl:choose>
+									<xsl:when test="$z-jahr1">
+										<xsl:value-of select="substring-before($z-jahr1,')')"/>
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="Ausgabe"></xsl:value-of>
+										</xsl:otherwise>
+									</xsl:choose>
 								</displayPublishDate>
 							</xsl:when>
 						</xsl:choose>
@@ -1870,7 +1854,14 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 						<xsl:when test="not(J_)">				
 							<publishDate>
 								<xsl:variable name="z-jahr1" select="substring-after($z-ausgabe,'(')"/>
-								<xsl:value-of select="substring-before($z-jahr1,')')"/>
+								<xsl:choose>
+									<xsl:when test="$z-jahr1">
+										<xsl:value-of select="substring-before($z-jahr1,')')"/>
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="Ausgabe"></xsl:value-of>
+										</xsl:otherwise>
+									</xsl:choose>
 								</publishDate>
 							</xsl:when>
 						</xsl:choose>
@@ -1906,11 +1897,14 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 						<xsl:when test="H">
 							<xsl:apply-templates select="H[1]" />
 							</xsl:when>
-						<xsl:when test="Ausgabe">
+						<xsl:when test="contains(Ausgabe,')')">
 							<issue>
 								<xsl:value-of select="substring-after(Ausgabe,')')" />
 								</issue>
 							</xsl:when>
+						<xsl:otherwise>
+							
+							</xsl:otherwise>
 						</xsl:choose>
 					<!--<xsl:apply-templates select="H[1]" />-->
 
@@ -1923,9 +1917,9 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 <!--OTHER-->
 
 	<!--shelfMark-->
-					<xsl:if test="Sign_">
+					<xsl:if test="Sign_x046x_">
 						<shelfMark>
-							<xsl:value-of select="Sign_" />
+							<xsl:value-of select="Sign_x046x_" />
 							</shelfMark>	
 						</xsl:if>
 
@@ -1951,11 +1945,9 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 	<xsl:variable name="id_parent">
 		<xsl:value-of select="//datensatz[s__Ausgabe=$reference]/id" />
 		</xsl:variable>
-	<!--<variable><xsl:valuect="$reference" /></variable>
-	<reference><xsl:value-of select="//datensatz[s__Ausgabe=$reference]/id"></xsl:value-of></reference>-->
 	
 	<xsl:choose>
-		<xsl:when test="((s__Aufsatz_Z) or (s__Aufsatz)) and ($id_parent[string-length() = 0])">
+		<xsl:when test="((s_x046x__x032x_Aufsatz_Z) or (s_x046x__x032x_Aufsatz)) and ($id_parent[string-length() = 0])">
 			<functions>
 				<hierarchyFields>
 					<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
@@ -1996,7 +1988,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</xsl:otherwise>
 		</xsl:choose>
 	
-	<!--<xsl:if test="(s__Aufsatz_Z) or (s__Aufsatz)">
+	<!--<xsl:if test="(s_x046x__x032x_Aufsatz_Z) or (s_x046x__x032x_Aufsatz)">
 		<functions>
 			<hierarchyFields>
 				<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
@@ -2021,7 +2013,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:if>-->
 	
 	
-	<!--<xsl:choosesl:when test="((s__Aufsatz_Z) or (s__Aufsatz)) and ($id_parent[string-length() = 0])">
+	<!--<xsl:choosesl:when test="((s_x046x__x032x_Aufsatz_Z) or (s_x046x__x032x_Aufsatz)) and ($id_parent[string-length() = 0])">
 			<functions>
 				<hierarchyFields>
 					<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
@@ -2064,9 +2056,9 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:if>-->
 	
 	
-	<!--<xsl:if test="(s__ST) or (s__Aufsatz_Z) or (s__Aufsatz)">
+	<!--<xsl:if test="(s__ST) or (s_x046x__x032x_Aufsatz_Z) or (s_x046x__x032x_Aufsatz)">
 		<xsl:variable name="s_ST" select="translate(s__ST, translate(.,'0123456789', ''), '')"/>
-		<xsl:variable name="s_Aufsatz" select="translate(s__Aufsatz_Z, translate(.,'0123456789', ''), '')"/>
+		<xsl:variable name="s_Aufsatz" select="translate(s_x046x__x032x_Aufsatz_Z, translate(.,'0123456789', ''), '')"/>
 		<xsl:variable name="title">
 					<xsl:choose>
 					<xsl:when test="Inhalt-Thema[string-length() != 0]">
@@ -2081,7 +2073,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			<hierarchyFields>
 				
 				
-				<xsl:if test="s__Aufsatz">
+				<xsl:if test="s_x046x__x032x_Aufsatz">
 				<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
 				<hierarchy_top_title><xsl:value-of select="$title" />
 					
@@ -2097,9 +2089,9 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</functions>
 		</xsl:if>-->
 	
-	<!--<xsl:if test="(s__ST) or (s__Aufsatz_Z)">
+	<!--<xsl:if test="(s__ST) or (s_x046x__x032x_Aufsatz_Z)">
 		<xsl:variable name="s_ST" select="translate(s__ST, translate(.,'0123456789', ''), '')"/>
-		<xsl:variable name="s_Aufsatz" select="translate(s__Aufsatz_Z, translate(.,'0123456789', ''), '')"/>
+		<xsl:variable name="s_Aufsatz" select="translate(s_x046x__x032x_Aufsatz_Z, translate(.,'0123456789', ''), '')"/>
 		<functions>
 			<hierarchyFields>
 				<xsl:if test="s__ST">
@@ -2122,7 +2114,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 					</hierarchy_parent_title>
 					</xsl:if>
 				
-				<xsl:if test="s__Aufsatz_Z">
+				<xsl:if test="s_x046x__x032x_Aufsatz_Z">
 				<hierarchy_top_id><xsl:value-of select="id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
 				<hierarchy_top_title><xsl:value-of select="Sachtitel" />
 					<xsl:if test="Ausgabe">
@@ -2158,10 +2150,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 
 <xsl:element name="dataset">
 	
-	<!--<connect>
-	<xsl:value-of select="$connect"/>
-		</connect>-->
-		
 <!--FORMAT-->
 
 	<!--typeOfRessource-->
@@ -2171,10 +2159,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 				<format><xsl:text>Artikel</xsl:text></format>
 				
 				<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
-	
-	<!--documentType Objektartinformationen-->
-
-				<!--<enrichYear><xsl:text>true</xsl:text></enrichYear>-->
 
 <!--TITLE-->
 			
@@ -2253,31 +2237,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 							</xsl:for-each>
 					</xsl:if>
 				
-				
-				<!--<xsl:choose>
-					<xsl:when test="substring(substring-after($connect,'displayPublishDate:'),1,1)!=':'">
-						<displayPublishDate>
-							<xsl:value-of select="substring-before(substring-after($connect,'displayPublishDate:'),':displayPublishDate')" />
-							</displayPublishDate>
-						
-						<xsl:variable name="publishDate" select="substring-before(substring-after($connect,'publishDate:'),':publishDate')" />
-							<xsl:for-each select="tokenize($publishDate,';')">
-								<publishDate>
-									<xsl:value-of select="."/>
-									</publishDate>
-								</xsl:for-each>
-						</xsl:when>
-					<xsl:otherwise>
-						<xsl:variable name="ausgabe" select="substring-before(substring-after($connect,'ausgabe:'),':ausgabe')" />
-						<displayPublishDate>							
-							<xsl:value-of select="substring-after(substring-before($ausgabe,')'),'(')"></xsl:value-of>
-							</displayPublishDate>
-						<publishDate>
-							<xsl:value-of select="substring-after(substring-before($ausgabe,')'),'(')"></xsl:value-of>
-							</publishDate>
-						</xsl:otherwise>
-					</xsl:choose>-->
-				
 	<!--placeOfPublication angabe-->
 				<xsl:if test="substring(substring-after($connect,'placeOfPublication:'),1,1)!=':'">
 					<placeOfPublication>
@@ -2316,13 +2275,13 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 							<xsl:value-of select="substring-before(substring-after($connect,'issue:'),':issue')" />
 							</issue>
 						</xsl:when>
-					<xsl:when test="substring(substring-after($connect,'ausgabe:'),1,1)!=':'">
-						<!--<xsl:value-of select="substring-before(substring-after($connect,'ausgabe:'),':ausgabe')" />-->
+					<!--<xsl:when test="substring(substring-after($connect,'ausgabe:'),1,1)!=':'">
 						<xsl:variable name="ausgabe" select="substring-before(substring-after($connect,'ausgabe:'),':ausgabe')" />
 						<issue>							
 							<xsl:value-of select="substring-after($ausgabe,')')"></xsl:value-of>
 							</issue>
-						</xsl:when>
+						</xsl:when>-->
+					<xsl:otherwise></xsl:otherwise>
 					</xsl:choose>
 
 	<!--Volume-->
@@ -2342,7 +2301,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 
 </xsl:element>
 
-<xsl:if test="s__Sachtitel">
+<xsl:if test="s_x046x__x032x_Sachtitel">
 <xsl:element name="functions">
 	<!--<xsl:variable name="sachtitel" select="//datensatz[id=$s_sachtitel]/Sachtitel[1]" />
 	<xsl:variable name="heftthema" select="//datensatz[id=$s_sachtitel]/Inhalt-Thema" />
@@ -2602,7 +2561,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</xsl:element>	
 		</xsl:template>
 
-	<xsl:template match="s__Aufsatz_Z">
+	<xsl:template match="s_x046x__x032x_Aufsatz_Z">
 		<xsl:variable name="relatedID" select="translate(., translate(.,'0123456789', ''), '')"/>
 		<xsl:element name="functions">	
 			<hierarchyFields>
@@ -2632,7 +2591,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 			</xsl:element>	
 		</xsl:template>
 
-	<xsl:template match="s__Aufsatz">
+	<xsl:template match="s_x046x__x032x_Aufsatz">
 		<xsl:variable name="relatedID" select="translate(../s__Zeitschriftentitel, translate(.,'0123456789', ''), '')"/>
 		<xsl:element name="functions">	
 			<hierarchyFields>
@@ -2686,7 +2645,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:template>
 
 <!--Template Deskriptoren-->
-	<xsl:template match="Deskriptoren1[1]">
+	<xsl:template match="Deskriptoren1">
 		
 		<!--<xsl:variable name="mapping">
 				<xsl:for-each select="document('translation/GIB_VUFGAM_keywords_translation.xml')/ooo_calc_export/ooo_sheet/ooo_row[position()>1]/column_2">
@@ -3153,49 +3112,6 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 				</xsl:choose>
 		</xsl:template>
 
-	<!--<xsl:template match="Jahr[1]">
-		<xsl:variable name="jear" select=".[1]"/>
-			<xsl:choose>
-				<xsl:when test="string-length($jear) &gt; 7">
-					<publishDate>
-						<xsl:value-of select="substring-before(.[1], '/')"/>
-						</publishDate>
-					<publishDate>
-						<xsl:value-of select="substring-after(.[1], '/')"/>
-						</publishDate>
-					</xsl:when>
-				<xsl:when test="Jahr[1]=''">
-					<publishDate>
-						<xsl:text>o. A.</xsl:text>
-						</publishDate>
-					</xsl:when>
-				<xsl:when test="(contains(.[1], '[')) or (contains(.[1], '(')) or (contains(.[1], 'ca'))">
-					<publishDate>
-						<xsl:value-of select="normalize-space(translate(.[1], translate(.,'0123456789', ''), ''))"/>
-						</publishDate>
-					</xsl:when>
-				<xsl:when test="matches(.[1],'[a-z]')">
-					<publishDate>
-						<xsl:text>o. A.</xsl:text>
-						</publishDate>
-					</xsl:when>
-				<xsl:when test="(matches(.[1],'/'))">
-					<publishDate>
-						<xsl:value-of select="substring-before(.[1], '/')"/>
-						</publishDate>
-					<publishDate>
-						<xsl:value-of select="substring(.[1], 1,2)"/>
-						<xsl:value-of select="substring-after(.[1], '/')"/>
-						</publishDate>
-					</xsl:when>
-				<xsl:otherwise>
-					<publishDate>
-						<xsl:value-of select=".[1]"/>
-						</publishDate>
-					</xsl:otherwise>
-				</xsl:choose>
-		</xsl:template>-->
-
 <!--Template Ausleihe-->
 	<xsl:template match="Ausleihe_an[1]">
 		<xsl:if test=".[1]">
@@ -3235,10 +3151,10 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:template>
 
 <!--Template Hierarchy-->
-	<xsl:template match="Sign_[1]">
+	<xsl:template match="Sign_x046x_[1]">
 			<xsl:variable name="zTitel" select="replace(replace(../s__Zeitschriftentitel[1], '[^0-9]', ''), '^1', '')"/>
 			<xsl:variable name="z-ausgabe" select="../Ausgabe[1]"/>
-			<xsl:variable name="s_sachtitel" select="replace(replace(../s__Sachtitel[1], '[^0-9]', ''), '^1', '')"/>
+			<xsl:variable name="s_sachtitel" select="replace(replace(../s_x046x__x032x_Sachtitel[1], '[^0-9]', ''), '^1', '')"/>
 			<xsl:variable name="shelfMark1">
 				<xsl:choose>
 					<xsl:when test="substring(.[1],1,3)='III'">
@@ -3279,7 +3195,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 	<xsl:element name="hierarchyFields">
 		
 	<!--für Sammelbände-->
-		<xsl:if test="../s__Aufsatz">
+		<xsl:if test="../s_x046x__x032x_Aufsatz">
 			<hierarchy_top_id><xsl:value-of select="../id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
             		<hierarchy_top_title>
             			<xsl:value-of select="../Sachtitel[1]"/>
