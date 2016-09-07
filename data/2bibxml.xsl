@@ -291,9 +291,9 @@
 								<xsl:when test="dataset/editor[1]">
 									<xsl:value-of select="ida:normalize-author(dataset/editor[1])"/>
 								</xsl:when>
-								<xsl:when test="dataset/contributor[1]">
+								<!-- <xsl:when test="dataset/contributor[1]">
 									<xsl:value-of select="ida:normalize-author(dataset/contributor[1])"/>
-								</xsl:when>
+								</xsl:when> -->
 								<xsl:when test="dataset/publisher[1]">
 									<xsl:value-of select="ida:normalize-author(dataset/publisher[1])"/>
 								</xsl:when>
