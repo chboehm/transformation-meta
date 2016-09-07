@@ -363,10 +363,11 @@
 			
 			
 			
-			<xsl:if test="objektart[text()='Online-Ressource']">
+			<xsl:if test="objektart[text()!='NutzerIn']">
 			
 			<!--
-			<xsl:if test="objektart[text()!='NutzerIn']">
+			<xsl:if test="objektart[text()='Online-Ressource']">
+			
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
 			<xsl:if test="objektart[text()='Zeitschrift']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])">
@@ -1526,7 +1527,7 @@ URLs noch stimmen kann hier nicht geprüft werden.-->
 </xsl:element>
 
 
-<xsl:if test="s__Ausgabe">
+<xsl:if test="s_x046x__x032x_Ausgabe">
 	<xsl:element name="functions">	
 			<hierarchyFields>
 				
@@ -1645,7 +1646,7 @@ Zeitschriften/Hefttiteln angereichert. Eine Zeitschrift kann nicht ausgeliehen w
 				
 </xsl:element>
 
-<xsl:if test="s__Ausgabe">
+<xsl:if test="s_x046x__x032x_Ausgabe">
 	<xsl:element name="functions">	
 			<hierarchyFields>
 				
@@ -1932,7 +1933,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:variable>
 	
 	<xsl:variable name="id_parent">
-		<xsl:value-of select="//datensatz[s__Ausgabe=$reference]/id" />
+		<xsl:value-of select="//datensatz[s_x046x__x032x_Ausgabe=$reference]/id" />
 		</xsl:variable>
 	
 	<xsl:choose>
@@ -2611,7 +2612,7 @@ Im Gegensatz zur Zeitschrift ist ein Hefttitel ausleihbar.-->
 		</xsl:template>
 
 
-	<xsl:template match="s__Ausgabe">
+	<xsl:template match="s_x046x__x032x_Ausgabe">
 		<functions>
 			<hierarchyFields>
 				<hierarchy_top_id><xsl:value-of select="../id"/><xsl:text>genderbib</xsl:text></hierarchy_top_id>
