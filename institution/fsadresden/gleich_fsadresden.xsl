@@ -5,21 +5,6 @@
 	<xsl:template match="*[not(node())]"/>-->
 	<!--Nicht dargestellte Zeichen (sog. "Whitespace")  werden im XML Dokument entfernt um Speicherplatz zu sparen-->
 	<xsl:strip-space elements="*"/>
-	
-	
-<!--root knoten-->
-	<!--<xsl:template match="ROWSET">
-		<xsl:element name="catalog">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>-->
-	
-<!--root knoten-->
-	<!--<xsl:template match="ExportRoot">
-		<xsl:element name="catalog">
-			<xsl:apply-templates/>
-		</xsl:element>
-	</xsl:template>-->
 
 <xsl:template match="*">
 		<xsl:element name="catalog">
@@ -76,6 +61,11 @@
 	
 	<!--recordType-->
 				<xsl:choose>
+					<xsl:when test="contains(AdministrativeData/EditForm, 'Bücher / Druckschrften')">
+						<recordType>
+							<xsl:text>library</xsl:text>
+							</recordType>
+						</xsl:when>
 					<xsl:when test="@Level='Bestand'">
 						<recordType>
 							<xsl:text>systematics</xsl:text>
@@ -163,6 +153,14 @@
 	
 	<!--format Objektartinformationen-->
 				<xsl:choose>
+					<xsl:when test="contains(AdministrativeData/EditForm, 'Bücher / Druckschrften')">
+						<format>
+						<xsl:text>Buch</xsl:text>
+							</format>
+						<searchfilter>
+							<xsl:text>Monografie</xsl:text>
+							</searchfilter>
+						</xsl:when>
 					<xsl:when test="@Level='Bestand'">
 						<format>
 							<xsl:text>Archivgut</xsl:text>
@@ -323,7 +321,8 @@
 
 <!--OTHER-->
 				<shelfMark>
-					<xsl:value-of select="@IdName"></xsl:value-of>
+					<!-- <xsl:value-of select="@IdName"></xsl:value-of> -->
+					<xsl:value-of select="DetailData/DataElement[@ElementName='Signatur']/ElementValue"></xsl:value-of>
 					</shelfMark>
 				
 		
