@@ -391,7 +391,25 @@
 			</functions>
 		</xsl:if>
 
-	
+		<xsl:if test="@Level='Dokument'">
+		<xsl:variable name="related" select="@ParentId" />
+		<functions>
+			<hierarchyFields>
+			
+				 <hierarchy_top_id><xsl:value-of select="//Record[@Level='Bestand']/@Id" /><xsl:text>fsadresden</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="//Record[@Level='Bestand']/DetailData/DataElement[@ElementName='Titel']/ElementValue/TextValue" /></hierarchy_top_title>
+				
+				<hierarchy_parent_id><xsl:value-of select="@ParentId" /><xsl:text>fsadresden</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="//Record[@Id=$related]/DetailData/DataElement[@ElementName='Titel']/ElementValue/TextValue" /></hierarchy_parent_title>
+				
+				<is_hierarchy_id><xsl:value-of select="$id"></xsl:value-of><xsl:text>fsadresden</xsl:text></is_hierarchy_id>
+				<is_hierarchy_title><xsl:value-of select="DetailData/DataElement[@ElementName='Titel']/ElementValue/TextValue" /></is_hierarchy_title>
+				
+				<hierarchy_sequence><xsl:value-of select="$id"/></hierarchy_sequence>
+				
+				</hierarchyFields>
+			</functions>
+		</xsl:if>
 
 
 </xsl:element>
