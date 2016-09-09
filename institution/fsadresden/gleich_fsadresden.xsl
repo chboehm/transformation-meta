@@ -158,7 +158,20 @@
 						<xsl:text>Buch</xsl:text>
 							</format>
 						<searchfilter>
-							<xsl:text>Monografie</xsl:text>
+						<xsl:variable name="title">
+									<xsl:value-of select="DetailData/DataElement[@ElementName='Titel']/ElementValue/TextValue" />
+									<xsl:value-of select="DetailData/DataElement[@ElementName='Untertitel']/ElementValue/TextValue" />
+									<xsl:value-of select="DetailData/DataElement[@ElementName='Titelzusätze']/ElementValue/TextValue" />
+									</xsl:variable>
+							<xsl:choose>
+								<xsl:when test="contains($title,'Broschüre')">
+									<xsl:text>Broschüre</xsl:text>
+									</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>Monografie</xsl:text>		
+									</xsl:otherwise>
+								</xsl:choose>
+							
 							</searchfilter>
 						</xsl:when>
 					<xsl:when test="contains(AdministrativeData/EditForm, 'Akte')">
@@ -216,7 +229,6 @@
 	<!--author-->
 				<xsl:if test="not(DetailData/DataElement[@ElementName='Enthält']) and DetailData/DataElement[@ElementName='Autoren u. sonst. beteiligte Personen']">
 					<description>
-						<xsl:text>Mitwirkende: </xsl:text>
 						<xsl:value-of select="DetailData/DataElement[@ElementName='Autoren u. sonst. beteiligte Personen']/ElementValue/TextValue" />
 						</description>
 					</xsl:if>
@@ -269,7 +281,19 @@
 					<xsl:choose>
 						<xsl:when test="contains(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,',')">
 							<publisher>
-								<xsl:value-of select="normalize-space(substring-before(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,','))"></xsl:value-of>
+								<xsl:variable name="publisher">
+									<xsl:value-of select="normalize-space(substring-before(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,','))"></xsl:value-of>
+									</xsl:variable>
+								<xsl:choose>
+									<xsl:when test="contains($publisher,'Druck:')">
+										<!-- <xsl:value-of select="normalize-space(substring-before(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,','))"></xsl:value-of> -->
+										<xsl:value-of select="normalize-space(substring-after($publisher,'Druck:'))"></xsl:value-of>
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="normalize-space(substring-before(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,','))"></xsl:value-of>
+										</xsl:otherwise>
+									</xsl:choose>
+								
 								</publisher>
 							<placeOfPublication>
 								<xsl:value-of select="normalize-space(substring-after(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue,','))"></xsl:value-of>
@@ -277,7 +301,14 @@
 							</xsl:when>
 						<xsl:otherwise>
 							<publisher>
-								<xsl:value-of select="normalize-space(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue)"></xsl:value-of>
+								<xsl:choose>
+									<xsl:when test="contains(DetailData/DataElement[@ElementName='Verlagsort / Verlag'],'Druck:')">
+										<xsl:value-of select="normalize-space(substring-after(DetailData/DataElement[@ElementName='Verlagsort / Verlag'],'Druck:'))"></xsl:value-of>
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="normalize-space(DetailData/DataElement[@ElementName='Verlagsort / Verlag']/ElementValue/TextValue)"></xsl:value-of>
+										</xsl:otherwise>
+									</xsl:choose>
 								</publisher>
 							</xsl:otherwise>
 						</xsl:choose>
@@ -317,7 +348,7 @@
 				<xsl:if test="DetailData/DataElement[@ElementName='Enthält']">
 				<description>
 					<xsl:if test="DetailData/DataElement[@ElementName='Autoren u. sonst. beteiligte Personen']">
-						<xsl:text>Mitwirkende: </xsl:text>
+						
 						<xsl:value-of select="DetailData/DataElement[@ElementName='Autoren u. sonst. beteiligte Personen']/ElementValue/TextValue"></xsl:value-of>
 						</xsl:if>
 					<xsl:value-of select="DetailData/DataElement[@ElementName='Enthält']/ElementValue/TextValue"></xsl:value-of>
