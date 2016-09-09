@@ -161,6 +161,14 @@
 							<xsl:text>Monografie</xsl:text>
 							</searchfilter>
 						</xsl:when>
+					<xsl:when test="contains(AdministrativeData/EditForm, 'Akte')">
+						<format>
+							<xsl:text>Archivgut</xsl:text>
+							</format>
+						<searchfilter>
+							<xsl:text>Akte</xsl:text>
+							</searchfilter>
+						</xsl:when>
 					<xsl:when test="@Level='Bestand'">
 						<format>
 							<xsl:text>Archivgut</xsl:text>
@@ -236,20 +244,9 @@
 
 	<!--displayDate-->
 	<!--publishDate Jahresangabe-->
-				<!--<xsl:if test="@Level='Bestand'">	
-					<displayPublishDate>
-						<xsl:value-of select="translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/FromDate, translate(.,'0123456789', ''), '')"></xsl:value-of>
-						<xsl:text> - </xsl:text>
-						<xsl:value-of select="translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/ToDate, translate(.,'0123456789', ''), '')"></xsl:value-of>
-						</displayPublishDate>
-					<publishDate>
-						<xsl:value-of select="translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/ToDate, translate(.,'0123456789', ''), '')"></xsl:value-of>
-						</publishDate>
-					</xsl:if>-->
 				
 				<xsl:if test="DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/FromDate!=''">	
 					<displayPublishDate>
-						<!--<xsl:value-of select="translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/FromDate, translate(.,'0123456789', ''), '')"></xsl:value-of>-->
 						<xsl:value-of select="substring(translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/FromDate, translate(.,'0123456789', ''), ''),1,4)"></xsl:value-of>
 						<xsl:if test="translate(DetailData/DataElement[@ElementName='Entstehungszeitraum']/ElementValue/DateRange/ToDate, translate(.,'0123456789', ''), '')">
 						<xsl:text> - </xsl:text>
@@ -301,7 +298,15 @@
 	<!--physical-->	
 				<xsl:if test="DetailData/DataElement[@ElementName='Seitenzahl']">
 					<physical>
-						<xsl:value-of select="DetailData/DataElement[@ElementName='Seitenzahl']/ElementValue/TextValue"></xsl:value-of>
+						<xsl:choose>
+							<xsl:when test="contains(AdministrativeData/EditForm, 'Bücher / Druckschrften')">
+								<xsl:value-of select="translate(DetailData/DataElement[@ElementName='Seitenzahl']/ElementValue/TextValue, translate(.,'0123456789', ''), '')"/>
+								</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="DetailData/DataElement[@ElementName='Seitenzahl']/ElementValue/TextValue"></xsl:value-of>		
+								</xsl:otherwise>
+							</xsl:choose>
+						
 						</physical>
 					</xsl:if>	
 	
