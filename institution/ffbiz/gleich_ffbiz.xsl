@@ -892,7 +892,7 @@
 								<xsl:apply-templates select="Bestand" />
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:apply-templates select="Titel" />
+								<xsl:apply-templates select="Titel[1]" />
 							</xsl:otherwise>
 						</xsl:choose>
 						<!--PUBLISHING -->
