@@ -15,6 +15,7 @@
 <!--root knoten-->
 	<xsl:template match="AddF-Kassel">
 		<xsl:element name="catalog">
+			<!-- <xsl:apply-templates select="//Datensatz" /> -->
 			<xsl:apply-templates select="//Datensatz" />
 		</xsl:element>
 	</xsl:template>
@@ -312,6 +313,10 @@
 						<format><xsl:text>Buch</xsl:text></format>
 						<searchfilter><xsl:text>Monografie</xsl:text></searchfilter>
 						</xsl:when>
+					<xsl:when test="Objektart[text()='Nachlässe/Aktenbestände']">
+						<format><xsl:text>Archivgut</xsl:text></format>
+						<searchfilter><xsl:text>Akte</xsl:text></searchfilter>
+						</xsl:when>
 					<xsl:when test="Quellenangabe_x032x_Aufsätze">
 						<format><xsl:text>Artikel</xsl:text></format>
 						<searchfilter><xsl:text>Artikel</xsl:text></searchfilter>
@@ -413,6 +418,8 @@
 			<xsl:value-of select="Thesaurus_x032x_Akten" />
 			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />
 			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Personen" />
+			<xsl:value-of select="Aktenbestand" />
+			<xsl:value-of select="Nachlass" />
 		</sourceInfo>
 						
 <!--PHYSICAL INFORMATION-->
@@ -444,12 +451,14 @@
 				<xsl:apply-templates select="Bestand[string-length() != 0]" />	
 				<xsl:apply-templates select="Bestand_x032x_-_x032x_Hefttitel[string-length() != 0]" />	
 				
-				
-				<xsl:if test="Signatur">
-					<shelfMark><xsl:value-of select="Signatur" /></shelfMark>
-					</xsl:if>
+			<!-- Signatur -->
+				<shelfMark>
+					<xsl:value-of select="Signatur" />
+					<xsl:value-of select="Bestell-Signatur" />
+					</shelfMark>
 				
 				</dataset>
+	
 	
 	<xsl:if test="(not(Objektart[text()='Monografien/Aufsätze'])) and (not(Objektart[text()='Periodika']))">
 		
@@ -473,11 +482,11 @@
 								</xsl:when>
 							<xsl:when test="$topId='18769'">
 								<xsl:choose>
-									<xsl:when test="contains(Signatur,';')">
-										<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
+									<xsl:when test="contains(Bestell-Signatur,';')">
+										<xsl:value-of select="normalize-space(substring-before(Bestell-Signatur,';'))" />
 										</xsl:when>
 									<xsl:otherwise>
-										<xsl:value-of select="normalize-space(Signatur)"/>
+										<xsl:value-of select="normalize-space(Bestell-Signatur)"/>
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:when>
@@ -510,7 +519,7 @@
 								<xsl:text>Sammlungen Körperschaften</xsl:text>
 								</xsl:when>
 							<xsl:when test="$topId='18769'">
-								<xsl:value-of select="normalize-space(substring-before(Signatur,';'))" />
+								<xsl:value-of select="normalize-space(substring-before(Bestell-Signatur,';'))" />
 								</xsl:when>
 							<xsl:when test="Thesaurus_x032x_Klassifikation">
 								<xsl:value-of select="Thesaurus_x032x_Klassifikation" />				
@@ -529,6 +538,30 @@
 					<hierarchy_parent_id>
 						
 						<xsl:choose>
+							<xsl:when test="Klassifikation_x032x_Akten">
+								<xsl:choose>
+									<xsl:when test="contains(Bestell-Signatur,';')">
+										<xsl:value-of select="normalize-space(substring-before(Bestell-Signatur,';'))" />
+										
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="normalize-space(Bestell-Signatur)"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								<xsl:value-of select="translate(Klassifikation_x032x_Akten[1], '. /äüö,', '')" />			
+								</xsl:when>
+							<xsl:when test="Klassifikation_x032x_Nachlaesse">
+								<xsl:choose>
+									<xsl:when test="contains(Bestell-Signatur,';')">
+										<xsl:value-of select="normalize-space(substring-before(Bestell-Signatur,';'))" />
+										
+										</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="normalize-space(Bestell-Signatur)"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								<xsl:value-of select="translate(Klassifikation_x032x_Nachlaesse[1], '. /äüö,', '')" />			
+								</xsl:when>
 							<xsl:when test="Thesaurus_x032x_Akten">
 								<xsl:choose>
 									<xsl:when test="contains(Signatur,';')">
@@ -575,6 +608,12 @@
 					<hierarchy_parent_title>
 						
 						<xsl:choose>
+							<xsl:when test="Klassifikation_x032x_Akten">
+								<xsl:value-of select="Klassifikation_x032x_Akten" />			
+								</xsl:when>
+							<xsl:when test="Klassifikation_x032x_Nachlaesse">
+								<xsl:value-of select="Klassifikation_x032x_Nachlaesse" />			
+								</xsl:when>
 							<xsl:when test="Thesaurus_x032x_SL_x032x_Körperschaften">
 								<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />			
 								</xsl:when>
@@ -605,6 +644,12 @@
 		
 					<hierarchy_sequence>
 						<xsl:choose>
+							<xsl:when test="Klassifikation_x032x_Nachlaesse">
+								<xsl:value-of select="Klassifikation_x032x_Nachlaesse" />		
+								</xsl:when>
+							<xsl:when test="Klassifikation_x032x_Akten">
+								<xsl:value-of select="Klassifikation_x032x_Akten" />		
+								</xsl:when>
 							<xsl:when test="Thesaurus_x032x_Akten">
 								<xsl:value-of select="Thesaurus_x032x_Akten" />		
 								</xsl:when>
@@ -629,6 +674,9 @@
 			</xsl:element>
 			</xsl:if>
 		</xsl:template>
+
+
+<!-- Templates -->
 
 	
 	<xsl:template match="Ges_x046x_Titel_x032x_fortl_x046x__x032x_Werk_x032x_I">
