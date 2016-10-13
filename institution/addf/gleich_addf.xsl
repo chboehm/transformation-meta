@@ -428,7 +428,7 @@
 				<xsl:value-of select="Aktenbestand" />
 			</xsl:when>
 			</xsl:choose>
-			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" />
+			<!-- xsl:value-of select="Thesaurus_x032x_SL_x032x_Themen" /> -->
 			<xsl:value-of select="Thesaurus_x032x_Akten" />
 			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Körperschaften" />
 			<xsl:value-of select="Thesaurus_x032x_SL_x032x_Personen" />
