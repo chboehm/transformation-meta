@@ -58,7 +58,7 @@
 								<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')"></xsl:value-of>
 							</xsl:if>
 						</xsl:when>
-						<xsl:when test="contains($broader,'.')">
+						<xsl:when test="contains($broader,'.') and (not(contains(//concept[1]/prefTerm,'Sammlungen Personen')))">
 								<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /ÄÜÖäüö,', '')" />
 								<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')"></xsl:value-of>
 							</xsl:when>
@@ -240,7 +240,7 @@
 									<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')"></xsl:value-of>
 									</xsl:if>
 							</xsl:when>
-							<xsl:when test="contains($broader,'.')">
+							<xsl:when test="contains($broader,'.') and (not(contains(//concept[1]/prefTerm,'Sammlungen Personen')))">
 								<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '. /ÄÜÖäüö,', '')" />
 								<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')"></xsl:value-of>
 							</xsl:when>
