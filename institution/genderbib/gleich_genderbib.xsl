@@ -1747,7 +1747,7 @@
 						
 					<!--PUBLISHING -->
 
-						<!--displayDate / Publishdate -->
+						<!--displayDate /  Publishdate -->
 						<xsl:choose>
 							<xsl:when test="J_[2]">
 								<displayPublishDate>
@@ -1947,7 +1947,7 @@
 						
 						<!--PUBLISHING -->
 
-						<!--publisher Verlagsangabe -->
+						<!--publisher  Verlagsangabe -->
 						<xsl:choose>
 							<xsl:when test="Verlag">
 								<xsl:apply-templates select="Verlag[1]" />
