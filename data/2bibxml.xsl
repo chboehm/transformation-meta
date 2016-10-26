@@ -167,6 +167,12 @@
 			
 			<xsl:apply-templates select="dataset/zdbId" />
 			
+			<xsl:apply-templates select="dataset/journalCore" />
+			
+			<xsl:apply-templates select="dataset/issuesInstitutions" />
+			
+			<xsl:apply-templates select="dataset/issuesGlobal" />
+			
 			<xsl:apply-templates select="dataset/annotation[string-length() != 0]" />
 			
     			<xsl:apply-templates select="dataset/collectionHolding" />
@@ -634,6 +640,18 @@
 				<xsl:value-of select="." />
 				</field>
 			</xsl:for-each>
+		</xsl:template>
+	
+	<xsl:template match="journalCore">
+		<field name="journalCore"><xsl:value-of select="."/></field>
+		</xsl:template>
+	
+	<xsl:template match="issuesInstitutions">
+		<field name="issuesInstitutions"><xsl:value-of select="."/></field>
+		</xsl:template>
+		
+	<xsl:template match="issuesGlobal">
+		<field name="issuesGlobal"><xsl:value-of select="."/></field>
 		</xsl:template>
 	
 	<xsl:template match="language_code">
