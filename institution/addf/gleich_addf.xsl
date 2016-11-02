@@ -62,6 +62,12 @@
 			<xsl:value-of select="translate(substring-before(//concept[notation=$top]/useFor[1],' '), '. /ÄÜÖäüö,', '')" />
 		</xsl:when>
 		
+		<xsl:when test="(not(useFor)) and (not(contains(broader,'.')))">
+			<!-- <xsl:value-of select="translate(substring-before(//concept[notation=$broader]/prefTerm[1],' '), '. /ÄÜÖäüö,', '')" /> -->
+			<!-- <xsl:value-of select="translate(//concept[notation=$broader]/prefTerm[1], '. /ÄÜÖäüö,', '')" /> -->
+			<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')" />
+			</xsl:when>
+		
 		<xsl:when test="(not(useFor)) and (broader)">
 			<!-- <xsl:value-of select="translate(substring-before(//concept[notation=$broader]/prefTerm[1],' '), '. /ÄÜÖäüö,', '')" /> -->
 			<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm[1], '. /ÄÜÖäüö,', '')" />
