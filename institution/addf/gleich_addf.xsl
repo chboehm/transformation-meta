@@ -99,10 +99,12 @@
 		
 		<xsl:choose>
 		
+			<!-- SAMMLUNG ÜBERPUNKT -->
 			<xsl:when test="not(contains(notation,'.'))">
 				<xsl:value-of select="translate(substring-before(useFor,' '), '&lt;&gt;. /ÄÖÜäüö,', '')" />
 			</xsl:when>
 			
+			<!-- UNTEREBENEN -->
 			<xsl:otherwise>
 				<xsl:value-of select="translate(substring-before(//concept[notation=$top]/useFor[1],' '), '. /ÄÜÖäüö,', '')" />
 				<xsl:value-of select="translate(prefTerm, '. /ÄÖÜäüö,', '')" />
