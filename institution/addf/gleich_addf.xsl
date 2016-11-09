@@ -58,7 +58,7 @@
 			<xsl:variable name="topdog">
 				<xsl:value-of select="$first" />
 				<xsl:text>.</xsl:text>
-				<xsl:value-of select="$second"></xsl:value-of>
+				<!-- <xsl:value-of select="$second" /> -->
 				<xsl:value-of select="substring-before($second,'.')" />
 			</xsl:variable>
 			
@@ -81,13 +81,22 @@
 			
 			<!-- UNTERPUNKT ERSTE EBENE -->
 			<xsl:when test="useFor">
+				<!-- <xsl:value-of select="substring-before(translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', ''),' ')" />-->
 				<xsl:value-of select="translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
 			</xsl:when>
 			
 			<!-- UNTERPUNKT ZWEITE EBENE -->
 			<xsl:when test="not(useFor)">
-				<xsl:value-of select="translate(//concept[notation=$topdog]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
-				<xsl:value-of select="translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
+				<xsl:choose>
+					<xsl:when test="//concept[notation=$broader]/useFor">
+						<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+						<xsl:value-of select="translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="translate(//concept[notation=$topdog]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+						<xsl:value-of select="translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:when>
 			
 		</xsl:choose>
@@ -117,8 +126,18 @@
 
 	<xsl:text>addf</xsl:text>
 </id>
-			
 				
+				<first>
+					<xsl:value-of select="$first" />
+				</first>
+				
+				<second>
+					<xsl:value-of select="$second" />
+				</second>
+				
+				<topdog>
+					<xsl:value-of select="$topdog" />
+				</topdog>
 				
 				<recordCreationDate><xsl:value-of select="current-dateTime()"/></recordCreationDate>
 				<recordChangeDate><xsl:value-of select="current-dateTime()"/></recordChangeDate>
@@ -257,9 +276,17 @@
 									<xsl:when test="(useFor) or (not(contains(broader,'.')))">
 										<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
 									</xsl:when>
-									
 									<xsl:when test="not(useFor)">
-										<xsl:value-of select="translate(//concept[notation=$topdog]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+										<xsl:choose>
+											<xsl:when test="//concept[notation=$broader]/useFor">
+												<xsl:value-of select="translate(//concept[notation=$broader]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="translate(//concept[notation=$topdog]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+												<xsl:value-of select="translate(prefTerm, '&lt;&gt;. /ÄÖÜäüö,', '')" />
+											</xsl:otherwise>
+										</xsl:choose>
+										<!-- <xsl:value-of select="translate(//concept[notation=$topdog]/prefTerm[1], '&lt;&gt;. /ÄÖÜäüö,', '')" /> -->
 									</xsl:when>
 								</xsl:choose>
 							</xsl:when>
@@ -645,14 +672,40 @@
 							</xsl:choose>
 						</xsl:variable>
 						
+						<xsl:variable name="sammlung_person">
+									<xsl:choose>
+										<xsl:when test="contains(Sammlung,',')">
+											<xsl:value-of select="substring-before(Sammlung,',')" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="substring-before(Sammlung,' ')" />
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:variable>
+						
 						<xsl:choose>
 							
 							
 							<xsl:when test="Sammlung_x032x_Personen">
-								<xsl:value-of select="translate(Sammlung_x032x_Personen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+								<xsl:choose>
+									
+									<xsl:when test="not(contains(Sammlung_x032x_Personen, $sammlung_person))">
+										<xsl:value-of select="translate(Sammlung[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+										<xsl:value-of select="$signatur" />
+										<xsl:value-of select="translate(Sammlung_x032x_Personen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="translate(Sammlung_x032x_Personen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
+									</xsl:otherwise>
+								</xsl:choose>
+								<!-- <xsl:value-of select="translate(Sammlung_x032x_Personen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" /> -->
 							</xsl:when>
 								
 							<xsl:when test="Sammlung_x032x_Themen">
+							<xsl:if test="contains(Sammlung_x032x_Themen, $signatur)">
+							jajajaja
+							</xsl:if>
+							<test><xsl:value-of select="$signatur" /></test>
 								<xsl:choose>
 									<xsl:when test="contains(Sammlung_x032x_Themen, $signatur)">
 										<xsl:value-of select="translate(Sammlung_x032x_Themen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
