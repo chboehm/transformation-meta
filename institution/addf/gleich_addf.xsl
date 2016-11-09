@@ -109,7 +109,7 @@
 		
 			<!-- SAMMLUNG ÜBERPUNKT -->
 			<xsl:when test="not(contains(notation,'.'))">
-				<xsl:value-of select="translate(substring-before(useFor,' '), '&lt;&gt;. /ÄÖÜäüö,', '')" />
+				<xsl:value-of select="translate(substring-before(useFor[1],' '), '&lt;&gt;. /ÄÖÜäüö,', '')" />
 			</xsl:when>
 			
 			<!-- UNTEREBENEN -->
