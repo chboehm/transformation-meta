@@ -702,10 +702,6 @@
 							</xsl:when>
 								
 							<xsl:when test="Sammlung_x032x_Themen">
-							<xsl:if test="contains(Sammlung_x032x_Themen, $signatur)">
-							jajajaja
-							</xsl:if>
-							<test><xsl:value-of select="$signatur" /></test>
 								<xsl:choose>
 									<xsl:when test="contains(Sammlung_x032x_Themen, $signatur)">
 										<xsl:value-of select="translate(Sammlung_x032x_Themen[1], '&lt;&gt;. /ÄÖÜäüö,', '')" />
