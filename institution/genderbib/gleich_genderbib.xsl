@@ -17,8 +17,8 @@
 	<xsl:template match="genderbib">
 		<xsl:element name="catalog">
 			<xsl:apply-templates select="//datensatz" />
-			<xsl:apply-templates select="//Erf_x046x_-stelle[1]" />
-			<xsl:apply-templates select="//tagesdatum[1]" />
+			<!-- <xsl:apply-templates select="//Erf_x046x_-stelle[1]" /> -->
+			<!-- <xsl:apply-templates select="//tagesdatum[1]" /> -->
 		</xsl:element>
 	</xsl:template>
 
@@ -425,11 +425,14 @@
 			select="translate(s_x046x__x032x_Sachtitel[1], translate(.,'0123456789', ''), '')" />
 
 
+		
+		<xsl:if test="objektart[text()!='NutzerIn']">
+		
+		<!-- <xsl:if test="objektart[text()='Artikel']"> -->
 
-		<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel']) or (contains(objektart,'Einzeltitel'))">
-		<!-- <xsl:if test="objektart[text()!='NutzerIn']"> -->
-
-			<!-- <xsl:if test="objektart[text()='Online-Ressource']"> <xsl:if test="(objektart[text()='Zeitschrift']) 
+			<!-- 
+			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel']) or (contains(objektart,'Einzeltitel'))">
+			<xsl:if test="objektart[text()='Online-Ressource']"> <xsl:if test="(objektart[text()='Zeitschrift']) 
 				or (objektart[text()='Zeitschrift/Heftitel'])"> <xsl:if test="objektart[text()='Zeitschrift']"> 
 				<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])"> 
 				<xsl:if test="objektart[text()='Zeitschrift/Heftitel']"> <xsl:if test="contains(objektart,'Einzeltitel')"> -->
@@ -983,7 +986,7 @@
 
 					<xsl:element name="dataset">
 
-						<!--FORMAT -->
+					<!--FORMAT -->
 
 						<!--typeOfRessource -->
 						<typeOfRessource>
@@ -1003,7 +1006,7 @@
 							<xsl:text>Artikel (Aktenschrank)</xsl:text>
 						</documentType>
 
-						<!--TITLE -->
+					<!--TITLE -->
 
 						<!--title Titelinformationen -->
 						<xsl:choose>
@@ -1038,17 +1041,17 @@
 							</xsl:when>
 						</xsl:choose>
 
-						<!--RESPONSIBLE -->
+					<!--RESPONSIBLE -->
 
 						<!--author Autorinneninformation -->
 						<xsl:apply-templates select="Autorin[1]" />
 
 						<!--editor Herausgeberinneninformationen -->
-						<xsl:apply-templates select="Hrsg[1]" />
+						<xsl:apply-templates select="Hrsg_x046x_[1]" />
 
-						<!--IDENTIFIER -->
+					<!--IDENTIFIER -->
 
-						<!--PUBLISHING -->
+					<!--PUBLISHING -->
 
 						<!--displayDate -->
 						<displayPublishDate>
@@ -1063,19 +1066,24 @@
 
 						<!--publisher Verlagsangabe -->
 						<xsl:apply-templates select="Verlag" />
+						
+						<!-- sourceInfo -->
+						<!-- <sourceInfo>
+							<xsl:value-of select="alle_x032x_Titel"></xsl:value-of>
+							</sourceInfo> -->
 
-						<!--PHYSICAL INFORMATION -->
+					<!--PHYSICAL INFORMATION -->
 
 						<!--physical Seitenangabe -->
 						<xsl:if test="Seitenzahlen">
 							<physical>
 								<xsl:value-of
-									select="translate(Seitenzahlen, translate(.,'0123456789', ''), '')" />
+									select="translate(Seitenzahlen, translate(.,'-0123456789', ''), '')" />
 							</physical>
 						</xsl:if>
 						<!--<xsl:apply-templates select="Seitenzahlen" /> -->
 
-						<!--CONTENTRELATED INFORMATION -->
+					<!--CONTENTRELATED INFORMATION -->
 
 						<!--language Sprachangaben -->
 						<xsl:choose>
@@ -1094,7 +1102,7 @@
 						<!--subjectPerson Personenangaben -->
 						<xsl:apply-templates select="Personen" />
 
-						<!--DETAILS FOR JOURNAL RELATED CONTENT -->
+					<!--DETAILS FOR JOURNAL RELATED CONTENT -->
 
 						<!--issue Heft -->
 						<xsl:apply-templates select="Heft-Nr_" />
@@ -1102,7 +1110,7 @@
 						<!--volume Jahrgang -->
 						<xsl:apply-templates select="Jg_" />
 
-						<!--OTHER -->
+					<!--OTHER -->
 
 						<!--shelfMark Signatur -->
 						<xsl:if test="Sign_x046x_[1]">
@@ -1113,7 +1121,7 @@
 
 					</xsl:element>
 
-					<xsl:element name="functions">
+					<!-- <xsl:element name="functions">
 
 						<hierarchyFields>
 
@@ -1167,7 +1175,7 @@
 
 						</hierarchyFields>
 
-					</xsl:element>
+					</xsl:element> -->
 
 				</xsl:if>
 
@@ -1695,8 +1703,11 @@
 						ausgeliehen werden. -->
 
 					<xsl:element name="dataset">
-
-						<!--FORMAT -->
+						
+					<xsl:variable name="zdbid" select="normalize-space(translate(ZDB-ID[1], translate(.,'-0123456789x', ''), ''))" />
+							
+						
+					<!--FORMAT -->
 
 						<!--typeOfRessource -->
 						<typeOfRessource>
@@ -1713,7 +1724,7 @@
 							<xsl:text>Zeitschrift</xsl:text>
 						</searchfilter>
 
-						<!--TITLE -->
+					<!--TITLE -->
 
 						<!--title Titelinformationen -->
 						<xsl:apply-templates select="Zeitschr_x046x_-Titel" />
@@ -1728,22 +1739,24 @@
 						<xsl:apply-templates select="ISSN" />
 
 						<!--ZDB-ID -->
-						<xsl:apply-templates select="ZDB-ID" />
-				
-						<xsl:if test="ZDB-ID[string-length() != 0]">
+						<xsl:apply-templates select="ZDB-ID[1]" />
+										
+						<!-- <xsl:if test="$zdbid[string-length() != 0]">
+						wird durch die Gruppierungsfunktion abgedeckt.
 						<journalCore>
 							<xsl:text>Zeitschrift</xsl:text>
 							<xsl:text>, ZDB-ID </xsl:text>
-							<xsl:value-of select="normalize-space(ZDB-ID[1])" />
+							<xsl:value-of select="$zdbid" />
 						</journalCore>
 						
 						<issuesInstitutions>
 							<xsl:text>Zeitschriftenhefte</xsl:text>
 							<xsl:text>, ZDB-ID: </xsl:text>
-							<xsl:value-of select="normalize-space(ZDB-ID[1])" />
+							<xsl:value-of select="$zdbid" />
 							<xsl:text>, Genderbibliothek</xsl:text>
+							<xsl:value-of select="$zdbid" />
 						</issuesInstitutions>
-						</xsl:if>
+						</xsl:if> -->
 						
 					<!--PUBLISHING -->
 
@@ -1775,7 +1788,7 @@
 						<!--publisher Verlagsangabe -->
 						<!--<xsl:apply-templates select="Verlag[1]"/> -->
 
-						<!--PHYSICAL INFORMATION -->
+					<!--PHYSICAL INFORMATION -->
 
 						<!--CONTENTRELATED INFORMATION -->
 
@@ -1793,7 +1806,7 @@
 						<!--outOfStocks -->
 						<xsl:apply-templates select="Lückenangabe[string-length() != 0]" />
 
-						<!--OTHER -->
+					<!--OTHER -->
 
 						<!--shelfMark Signatur -->
 						<!--<xsl:apply-templates select="Standort[1]"/> -->
@@ -1849,6 +1862,8 @@
 						select="translate(s__ST[1], translate(.,'0123456789', ''), '')" />
 
 					<xsl:element name="dataset">
+
+					<xsl:variable name="zdbid" select="normalize-space(translate(ZDB-ID[1], translate(.,'-0123456789x', ''), ''))" />
 
 						<!--FORMAT -->
 
@@ -2628,7 +2643,7 @@
 	<xsl:template match="ZDB-ID">
 		<xsl:for-each select=".">
 			<zdbId>
-				<xsl:value-of select="normalize-space(.)" />
+				<xsl:value-of select="normalize-space(translate(., translate(.,'-0123456789x', ''), ''))" />
 			</zdbId>
 		</xsl:for-each>
 	</xsl:template>
