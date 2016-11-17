@@ -695,7 +695,7 @@
 					<timeSpanEnd><xsl:value-of select="datafield[@tag='425'][@ind1='c']" /></timeSpanEnd>
 				</timeSpan>	
 				</xsl:if>-->
-			<!--<xsl:apply-templates select="datafield[@tag='425'][1]" />	-->	
+			
 		
 	<!--publisher Verlag-->
 			<xsl:apply-templates select="datafield[@tag='412']" />
