@@ -130,18 +130,32 @@
 
 	<!--publishDate Jahresangabe-->				
 				<publishDate><xsl:value-of select="../datafield[@tag='425']" /></publishDate>
-
+				
+				<xsl:variable name="link_journal">
+					<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']" />
+				</xsl:variable>
+				<sourceInfo>
+					<xsl:value-of select="//document[@idn=$link_journal]/datafield[@tag='331']" />
+					<xsl:if test="//document[@idn=$link_journal]/datafield[@tag='335']">
+						<xsl:text> : </xsl:text>
+						<xsl:value-of select="//document[@idn=$link_journal]/datafield[@tag='335']" />
+					</xsl:if>
+				</sourceInfo>
+					
 		</xsl:element>
 
 <xsl:element name="functions">
 			
 			<hierarchyFields>
 				
-				<hierarchy_top_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+				<!-- <hierarchy_top_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title> -->
+				
+				<hierarchy_top_id><xsl:value-of select="$id" /></hierarchy_top_id>
 				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title>
 				
-				<hierarchy_parent_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
-				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title>
+				<!-- <hierarchy_parent_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title> -->
 				
 				<is_hierarchy_id>
 					<xsl:value-of select="$id" />
@@ -729,28 +743,7 @@
 	</xsl:element>
 	<!--END OF DATASETELEMENT-->
 
-<!--HIERARCHY-->
-	<xsl:if test="//document/datafield[@tag='QUE']/subfield[@code='L']=$id">
-		<xsl:element name="functions">	
-			<hierarchyFields>
-				
-					<!--<hierarchy_top_id><xsl:value-of select="datafield[@tag='GT1']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='GT1']/subfield[@code='a']" /></hierarchy_top_title>-->
-					
-					<hierarchy_top_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='331']" /></hierarchy_top_title>
-					
-					<!--<hierarchy_parent_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="datafield[@tag='331']" /></hierarchy_parent_title>-->
-					
-					<is_hierarchy_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></is_hierarchy_id>
-					<is_hierarchy_title><xsl:value-of select="datafield[@tag='331']" /></is_hierarchy_title>
-					
-					<hierarchy_sequence><xsl:value-of select="substring(datafield[@tag='331'],1,3)"/></hierarchy_sequence>
-					
-				</hierarchyFields>
-		</xsl:element>	
-	</xsl:if>
+
 	
 </xsl:if>
 
@@ -909,8 +902,11 @@
 	
 		
 			<hierarchyFields>
-					<hierarchy_top_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_top_title>
+					<!-- <hierarchy_top_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_top_title> -->
+				
+					<hierarchy_top_id><xsl:value-of select="$id_issue"/></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="$title" /><xsl:text> </xsl:text><xsl:value-of select="$year" /></hierarchy_top_title>
 				
 					<hierarchy_parent_id><xsl:value-of select="$id_issue"/></hierarchy_parent_id>
 					<hierarchy_parent_title><xsl:value-of select="$title" /><xsl:text> </xsl:text><xsl:value-of select="$year" /></hierarchy_parent_title>
