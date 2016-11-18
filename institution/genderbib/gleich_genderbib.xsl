@@ -977,7 +977,7 @@
 
 
 
-				<!--Artikel___________________________Aktenschrank___________________________Artikel -->
+<!--Artikel___________________________Aktenschrank___________________________Artikel -->
 
 				<xsl:if test="objektart[text()='Artikel']">
 
@@ -1190,7 +1190,7 @@
 
 
 
-				<!--Online-Artikel_________________________Online-Artikel_______________________Online-Artikel -->
+<!--Online-Artikel_________________________Online-Artikel_______________________Online-Artikel -->
 
 				<!-- <xsl:if test="objektart[text()='Online-Artikel']"> -->
 				<xsl:if test="objektart[text()='Online-Ressource']">
@@ -1409,7 +1409,7 @@
 
 
 
-				<!--Video/DVD____________________Video/DVD______________________________Video/DVD -->
+<!--Video/DVD____________________Video/DVD______________________________Video/DVD -->
 
 				<xsl:if test="objektart[text()='Video/DVD']">
 
@@ -1520,7 +1520,7 @@
 
 
 
-				<!--Online-Zeitschrift_________________________Online-Zeitschrift_______________________Online-Zeitschrift -->
+<!--Online-Zeitschrift_________________________Online-Zeitschrift_______________________Online-Zeitschrift -->
 
 				<xsl:if test="objektart[text()='Online-Zeitschrift']">
 
@@ -1693,7 +1693,7 @@
 
 
 
-				<!--Zeitschrift_____________________Zeitschrift______________________Zeitschrift -->
+<!--Zeitschrift_____________________Zeitschrift______________________Zeitschrift -->
 
 				<xsl:if test="objektart[text()='Zeitschrift']">
 
@@ -1849,7 +1849,7 @@
 
 
 
-				<!--Zeitschrift/Heftitel_____________________Zeitschrift/Heftitel______________________Zeitschrift/Heftitel -->
+<!--Zeitschrift/Heftitel_____________________Zeitschrift/Heftitel______________________Zeitschrift/Heftitel -->
 
 				<xsl:if test="objektart[text()='Zeitschrift/Heftitel']">
 
@@ -2126,7 +2126,7 @@
 						<xsl:value-of select="//datensatz[s_x046x__x032x_Ausgabe=$reference]/id" />
 					</xsl:variable>
 
-					<xsl:if test="s__Aufsatz">
+					<xsl:if test="s_x046x__x032x_Aufsatz">
 
 						<functions>
 							<hierarchyFields>
