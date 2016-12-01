@@ -130,18 +130,32 @@
 
 	<!--publishDate Jahresangabe-->				
 				<publishDate><xsl:value-of select="../datafield[@tag='425']" /></publishDate>
-
+				
+				<xsl:variable name="link_journal">
+					<xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']" />
+				</xsl:variable>
+				<sourceInfo>
+					<xsl:value-of select="//document[@idn=$link_journal]/datafield[@tag='331']" />
+					<xsl:if test="//document[@idn=$link_journal]/datafield[@tag='335']">
+						<xsl:text> : </xsl:text>
+						<xsl:value-of select="//document[@idn=$link_journal]/datafield[@tag='335']" />
+					</xsl:if>
+				</sourceInfo>
+					
 		</xsl:element>
 
 <xsl:element name="functions">
 			
 			<hierarchyFields>
 				
-				<hierarchy_top_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+				<!-- <hierarchy_top_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title> -->
+				
+				<hierarchy_top_id><xsl:value-of select="$id" /></hierarchy_top_id>
 				<hierarchy_top_title><xsl:value-of select="$title" /></hierarchy_top_title>
 				
-				<hierarchy_parent_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
-				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title>
+				<!-- <hierarchy_parent_id><xsl:value-of select="../datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
+				<hierarchy_parent_title><xsl:value-of select="$title" /></hierarchy_parent_title> -->
 				
 				<is_hierarchy_id>
 					<xsl:value-of select="$id" />
@@ -314,8 +328,8 @@
 
 	<!--title Titelinformationen-->	
 			<xsl:choose>
-				<xsl:when test="datafield[@tag='331']">
-					<xsl:apply-templates select="datafield[@tag='331']" />
+				<xsl:when test="datafield[@tag='245']">
+					<xsl:apply-templates select="datafield[@tag='245']" />
 					</xsl:when>
 				<xsl:otherwise>
 					<title>
@@ -347,7 +361,9 @@
 					(not(datafield[@tag='108']))">
 				<xsl:apply-templates select="datafield[@tag='359']" />
 				</xsl:if>
-	
+			
+			
+			
 	<!--entity Körperschaft-->
 			<xsl:apply-templates select="datafield[@tag='200']" />
 			
@@ -482,6 +498,7 @@
 			<xsl:apply-templates select="datafield[@tag='037']" />
 
 	<!--subjectTopic Deskriptoren-->
+			<xsl:apply-templates select="datafield[@tag='650']" />
 			<xsl:apply-templates select="datafield[@tag='THS']" />
 			<xsl:apply-templates select="datafield[@tag='710']" />
 			<xsl:apply-templates select="datafield[@tag='740']" />
@@ -655,32 +672,32 @@
 			<xsl:choose>
 				<xsl:when test="datafield[@tag='425'][@ind1='b']">
 					<displayPublishDate>
-						<xsl:value-of select="datafield[@tag='425'][@ind1='b']" />
-						<xsl:if test="datafield[@tag='425'][@ind1='c']">
+						<xsl:value-of select="datafield[@tag='425'][1][@ind1='b']" />
+						<xsl:if test="datafield[@tag='425'][1][@ind1='c']">
 							<xsl:text> - </xsl:text>
-							<xsl:value-of select="datafield[@tag='425'][@ind1='c']" />
+							<xsl:value-of select="datafield[@tag='425'][1][@ind1='c']" />
 							</xsl:if>
 						</displayPublishDate>
 					<publishDate>
-						<xsl:value-of select="translate(datafield[@tag='425'][@ind1='b'],translate(.,'0123456789', ''), '')"/>
+						<xsl:value-of select="translate(datafield[@tag='425'][1][@ind1='b'],translate(.,'0123456789', ''), '')"/>
 						<!--<xsl:value-of select="datafield[@tag='425'][@ind1='c']"/>-->
 						</publishDate>
 					</xsl:when>
-				<xsl:when test="datafield[@tag='425'][@ind1='a']">
+				<xsl:when test="datafield[@tag='425'][1][@ind1='a']">
 					<displayPublishDate>
-						<xsl:value-of select="datafield[@tag='425'][@ind1='a']"/>
+						<xsl:value-of select="datafield[@tag='425'][1][@ind1='a']"/>
 						</displayPublishDate>
 					<publishDate>
-						<xsl:value-of select="translate(datafield[@tag='425'][@ind1='a'], translate(.,'0123456789', ''), '')"/>
+						<xsl:value-of select="translate(datafield[@tag='425'][1][@ind1='a'], translate(.,'0123456789', ''), '')"/>
 						<!--<xsl:value-of select="datafield[@tag='425'][@ind1='a']"/>-->
 						</publishDate>
 					</xsl:when>
-				<xsl:when test="datafield[@tag='425'][@ind1=' ']">
+				<xsl:when test="datafield[@tag='425'][1][@ind1=' ']">
 					<displayPublishDate>
-						<xsl:value-of select="datafield[@tag='425'][@ind1=' ']"/>
+						<xsl:value-of select="datafield[@tag='425'][1][@ind1=' ']"/>
 						</displayPublishDate>
 					<publishDate>
-						<xsl:value-of select="translate(datafield[@tag='425'][@ind1=' '], translate(.,'0123456789', ''), '')"/>
+						<xsl:value-of select="translate(datafield[@tag='425'][1][@ind1=' '], translate(.,'0123456789', ''), '')"/>
 						<!--<xsl:value-of select="datafield[@tag='425'][@ind1=' ']"/>-->
 						</publishDate>
 					</xsl:when>
@@ -692,7 +709,7 @@
 					<timeSpanEnd><xsl:value-of select="datafield[@tag='425'][@ind1='c']" /></timeSpanEnd>
 				</timeSpan>	
 				</xsl:if>-->
-			<!--<xsl:apply-templates select="datafield[@tag='425'][1]" />	-->	
+			
 		
 	<!--publisher Verlag-->
 			<xsl:apply-templates select="datafield[@tag='412']" />
@@ -726,28 +743,7 @@
 	</xsl:element>
 	<!--END OF DATASETELEMENT-->
 
-<!--HIERARCHY-->
-	<xsl:if test="//document/datafield[@tag='QUE']/subfield[@code='L']=$id">
-		<xsl:element name="functions">	
-			<hierarchyFields>
-				
-					<!--<hierarchy_top_id><xsl:value-of select="datafield[@tag='GT1']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='GT1']/subfield[@code='a']" /></hierarchy_top_title>-->
-					
-					<hierarchy_top_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='331']" /></hierarchy_top_title>
-					
-					<!--<hierarchy_parent_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></hierarchy_parent_id>
-					<hierarchy_parent_title><xsl:value-of select="datafield[@tag='331']" /></hierarchy_parent_title>-->
-					
-					<is_hierarchy_id><xsl:value-of select="$id"/><xsl:text>frso</xsl:text></is_hierarchy_id>
-					<is_hierarchy_title><xsl:value-of select="datafield[@tag='331']" /></is_hierarchy_title>
-					
-					<hierarchy_sequence><xsl:value-of select="substring(datafield[@tag='331'],1,3)"/></hierarchy_sequence>
-					
-				</hierarchyFields>
-		</xsl:element>	
-	</xsl:if>
+
 	
 </xsl:if>
 
@@ -906,8 +902,11 @@
 	
 		
 			<hierarchyFields>
-					<hierarchy_top_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
-					<hierarchy_top_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_top_title>
+					<!-- <hierarchy_top_id><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='L']"/><xsl:text>frso</xsl:text></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="datafield[@tag='QUE']/subfield[@code='a']" /></hierarchy_top_title> -->
+				
+					<hierarchy_top_id><xsl:value-of select="$id_issue"/></hierarchy_top_id>
+					<hierarchy_top_title><xsl:value-of select="$title" /><xsl:text> </xsl:text><xsl:value-of select="$year" /></hierarchy_top_title>
 				
 					<hierarchy_parent_id><xsl:value-of select="$id_issue"/></hierarchy_parent_id>
 					<hierarchy_parent_title><xsl:value-of select="$title" /><xsl:text> </xsl:text><xsl:value-of select="$year" /></hierarchy_parent_title>
@@ -1023,23 +1022,23 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<!--ENDE_____________________________ENDE___________________________________ENDE-->
-<!--ENDE_____________________________ENDE___________________________________ENDE-->
-<!--ENDE_____________________________ENDE___________________________________ENDE-->
-			
 			
 		</xsl:element>
 		</xsl:if>
 	</xsl:template>
+
+
+
+
+
+
+
+
+<!--ENDE_____________________________ENDE___________________________________ENDE-->
+<!--ENDE_____________________________ENDE___________________________________ENDE-->
+<!--ENDE_____________________________ENDE___________________________________ENDE-->
+			
+
 
 	<xsl:template match="datafield[@tag='427']">
 		<collectionHolding>
@@ -1174,6 +1173,14 @@
 		<description>
 			<xsl:value-of  select="." />
 			</description>
+		</xsl:template>
+		
+	<xsl:template match="datafield[@tag='650']">
+		<xsl:for-each select=".">
+			<subjectTopic>
+				<xsl:value-of select="subfield[@code='a']" />
+				</subjectTopic>
+			</xsl:for-each>
 		</xsl:template>
 	
 	<xsl:template match="datafield[@tag='THS']">
@@ -1444,6 +1451,49 @@
 			
 			</alternativeTitle>
 		</xsl:template>
+	
+<xsl:template match="datafield[@tag='245']">
+	
+	<xsl:variable name="title_short">
+		<xsl:choose>
+			<xsl:when test="contains(subfield[@code='a'],'¬')">
+				<xsl:value-of select="normalize-space(replace(subfield[@code='a'],'¬',''))"/>
+			</xsl:when>
+			<xsl:when test="contains(subfield[@code='a'],'&gt;&gt;')">
+				<xsl:variable name="title" select="substring-after(substring-before(subfield[@code='a'],'&gt;&gt;'),'&lt;&lt;')"></xsl:variable>
+				<xsl:value-of select="normalize-space(replace(subfield[@code='a'],'&lt;&lt;(.*?)&gt;&gt;',$title))"></xsl:value-of>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="normalize-space(subfield[@code='a'])" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
+	<xsl:variable name="title_sub">
+			<xsl:value-of select="normalize-space(subfield[@code='b'])" />
+	</xsl:variable>
+		
+		<title>
+			<xsl:value-of select="normalize-space($title_short)"/>
+			<!-- <xsl:value-of select="normalize-space(replace(subfield[@code='a'],'¬',''))"/> -->
+			<xsl:if test="$title_sub[string-length() != 0]">
+			<xsl:text> : </xsl:text>
+			<xsl:value-of select="$title_sub"/>
+			</xsl:if>
+		</title>
+		
+		<title_short>
+			<xsl:value-of select="$title_short"/>
+		</title_short>
+		
+		<xsl:if test="$title_sub[string-length() != 0]">
+		<title_sub>
+			<xsl:value-of select="$title_sub"/>
+		</title_sub>
+		</xsl:if>
+		
+</xsl:template>
+	
 	
 	<xsl:template match="datafield[@tag='331']">
 		
