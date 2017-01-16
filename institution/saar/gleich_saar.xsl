@@ -5,10 +5,7 @@
 <xsl:stylesheet version="2.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:fn="http://www.w3.org/2005/xpath-functions"
-	xmlns:xdt="http://www.w3.org/2005/xpath-datatypes"
-	xmlns:err="http://www.w3.org/2005/xqt-errors"
-	exclude-result-prefixes="xs xdt err fn">
+	exclude-result-prefixes="xs">
 
 	<xsl:output method="xml" indent="yes"/>
 	
@@ -23,26 +20,12 @@
 		</xsl:element>
 	</xsl:template>
 
-
-
-
-<!--Zeitschrift aus Zeitschriftenausgabe-->	
-<!--Zeitschrift aus Zeitschriftenausgabe-->	
-<!--Zeitschrift aus Zeitschriftenausgabe-->	
-
+<!--Zeitschrift aus Zeitschriftenausgabe-->
 <xsl:template match="//Erfassungsdatum">
 
 	<!--<xsl:for-each select="contains(../Dokumentart,'Zeitschrift')">-->
 	
 	<xsl:if test="contains(../Dokumentart,'Zeitschrift')">
-	
-	<xsl:variable name="edition">
-		<xsl:value-of select="normalize-space(../Jahrgang__Bandangabe_der_Zeitschrift)" />
-		<xsl:text>(</xsl:text>
-		<xsl:value-of select="normalize-space(../Jahr)" />
-		<xsl:text>)</xsl:text>
-		<xsl:value-of select="normalize-space(../Heft-Nr._der_Zeitschrift)"></xsl:value-of>
-		</xsl:variable>
 	
 	<xsl:element name="record">
 	
@@ -139,7 +122,7 @@
 					<is_hierarchy_title><xsl:value-of select="normalize-space(../Zeitschriftentitel)" /></is_hierarchy_title>
 					
 					<hierarchy_sequence>
-						<xsl:value-of select="normalize-space(../Zeitschriftentitel)"></xsl:value-of>
+						<xsl:value-of select="normalize-space(../Zeitschriftentitel)"/>
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
@@ -262,11 +245,9 @@
 			<!--<xsl:apply-templates select="Erf.-stelle" />-->
 			
 			<!--vufind und institutionsblock werden hier eingefügt-->			
-			
 				<xsl:element name="dataset">
 
 <!--FORMAT-->
-				
 			<!--typeOfRessource-->
 					<typeOfRessource><xsl:text>text</xsl:text></typeOfRessource>
 			
@@ -279,6 +260,10 @@
 							<!--searchfilter-->
 							<searchfilter><xsl:text>Zeitschriftenheft</xsl:text></searchfilter>
 							</xsl:when>
+                        <xsl:when test="(contains(Dokumentart,'Aufsatzsammlung'))">
+                            <format><xsl:text>Buch</xsl:text></format>
+                            <searchfilter><xsl:text>Sammelband</xsl:text></searchfilter>
+                        </xsl:when>
 						<xsl:when test="(contains(Dokumentart,'Aufsatz')) or
 									(contains(Dokumentart,'Interview')) or
 									(contains(Dokumentart,'Artikel'))">
@@ -478,7 +463,7 @@
 						</is_hierarchy_title>
 					
 					<hierarchy_sequence>
-						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						<xsl:value-of select="normalize-space(Jahr)"/>
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
@@ -495,7 +480,7 @@
 						<xsl:value-of select="normalize-space(Titel)" />
 						<xsl:if test="Untertitel[string-length() != 0]">
 							<xsl:text> : </xsl:text>
-							<xsl:value-of select="normalize-space(Untertitel)"></xsl:value-of>
+							<xsl:value-of select="normalize-space(Untertitel)"/>
 							</xsl:if>
 						</hierarchy_top_title>
 						
@@ -522,14 +507,14 @@
 						</is_hierarchy_title>
 					
 					<hierarchy_sequence>
-						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						<xsl:value-of select="normalize-space(Jahr)"/>
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
 			</xsl:element>
 		</xsl:if>	
 		
-	<xsl:if test="contains(Dokumentart,'Aufsatz')">
+	<xsl:if test="Dokumentart = ' Aufsatz'">
 	<xsl:element name="functions">
 			
 		
@@ -543,14 +528,14 @@
 				<xsl:if test="contains(Dokumentart,'Sammelwerk')">
 				
 				<xsl:text> id:</xsl:text>
-				<xsl:value-of select="objektnummer"></xsl:value-of>
+				<xsl:value-of select="objektnummer"/>
 				<xsl:text>:id</xsl:text>
 				
 				<xsl:text> title:</xsl:text>
 				<xsl:value-of select="normalize-space(Titel)" />
 				<xsl:if test="Untertitel[string-length() != 0]">
 							<xsl:text> : </xsl:text>
-							<xsl:value-of select="normalize-space(Untertitel)"></xsl:value-of>
+							<xsl:value-of select="normalize-space(Untertitel)"/>
 							</xsl:if>
 				<xsl:text>:title</xsl:text>
 				
@@ -560,7 +545,7 @@
 				</xsl:variable>
 			
 			<connect>
-				<xsl:value-of select="$connect"></xsl:value-of>
+				<xsl:value-of select="$connect"/>
 				</connect>
 			
 			<xsl:if test="Signatur[string-length() != 0]">
@@ -601,7 +586,7 @@
 						</is_hierarchy_title>
 					
 					<hierarchy_sequence>
-						<xsl:value-of select="normalize-space(Jahr)"></xsl:value-of>
+						<xsl:value-of select="normalize-space(Jahr)"/>
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
@@ -917,7 +902,7 @@
 					<xsl:if test="(contains(../Dokumentart,'Zeitschrift')) or
 									(contains(../Dokumentart,'Zeitung'))">
 						<xsl:text> </xsl:text>
-						<xsl:value-of select="$edition"></xsl:value-of>
+						<xsl:value-of select="$edition"/>
 									</xsl:if>
 					</title>
 				<title_short>
