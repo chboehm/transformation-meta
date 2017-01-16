@@ -1657,6 +1657,7 @@
 									select="substring-before(substring-after($connect,'volume:'),':volume')" />
 							</volume>
 						</xsl:if>
+					
 					<!--OTHER -->
 
 						<!--shelfMark -->
