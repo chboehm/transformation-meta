@@ -534,9 +534,10 @@
 			
 		
 		<xsl:variable name="rel" select="Signatur" />
-			
+			<test><xsl:value-of select="$rel"></xsl:value-of></test>
 		<xsl:variable name="connect">
 				
+			
 			<xsl:for-each select="//object[Signatur=$rel]">
 					
 				<xsl:if test="contains(Dokumentart,'Sammelwerk')">
@@ -562,6 +563,7 @@
 				<xsl:value-of select="$connect"></xsl:value-of>
 				</connect>
 			
+			<xsl:if test="Signatur[string-length() != 0]">
 			<hierarchyFields>
 				
 					<hierarchy_top_id>
@@ -603,6 +605,7 @@
 						</hierarchy_sequence>
 				
 				</hierarchyFields>
+				</xsl:if>
 			</xsl:element>
 		</xsl:if>	
 		
