@@ -66,8 +66,9 @@
 				<xsl:value-of select="dataset/specialIssue" /><xsl:text> </xsl:text>
 				<xsl:value-of select="dataset/searchfilter" /><xsl:text> </xsl:text>
 				<xsl:for-each select="distinct-values(dataset/project)"><xsl:value-of select="." /><xsl:text> </xsl:text></xsl:for-each>
-                    			<xsl:for-each select="distinct-values(dataset/contentMatter)"><xsl:value-of select="." /><xsl:text> </xsl:text></xsl:for-each>
-                    			</field>
+                <xsl:for-each select="distinct-values(dataset/contentMatter)"><xsl:value-of select="." /><xsl:text> </xsl:text></xsl:for-each>
+			</field>
+
 <!--vufind-->
 		
 			<field name="id"><xsl:value-of select="vufind/id" /></field>
@@ -97,191 +98,175 @@
 			<field name="longitude"><xsl:value-of select="institution/geoLocation/longitude" /></field>
 			
 			<xsl:apply-templates select="institution/location[string-length() != 0]" />
-		
+			
+			<xsl:apply-templates select="dataset/url" />
+			
 <!--dataset-->
 			
+		<!-- RESSOURCE -->
+		
 			<xsl:apply-templates select="dataset/typeOfRessource" />
     			
-    			<xsl:apply-templates select="dataset/format" />
+    		<xsl:apply-templates select="dataset/format" />
     			
-    			<xsl:apply-templates select="dataset/searchfilter" />
+    		<xsl:apply-templates select="dataset/searchfilter" />
     			
-    			<xsl:apply-templates select="dataset/documentType[1]" />
+    		<xsl:apply-templates select="dataset/documentType[1]" />
     	
-    	<!--Titelangaben-->
+    	<!--TITELANGABEN-->
     	
 			<field name="title">
 				<xsl:value-of select="dataset/title[normalize-space()]"/>
-				</field>
+			</field>
                    	 	
-                   	 	<field name="title_sort">
+            <field name="title_sort">
 				<xsl:value-of select="dataset/title[normalize-space()]"/>
-				</field>
+			</field>
                    	 	
-            		<xsl:apply-templates select="dataset/title_sub" />
+            <xsl:apply-templates select="dataset/title_sub" />
             		
-            		<xsl:apply-templates select="dataset/title_short" />
+            <xsl:apply-templates select="dataset/title_short" />
     			
-    			<xsl:apply-templates select="dataset/formerTitle" />
+    		<xsl:apply-templates select="dataset/formerTitle" />
     			
-    			<xsl:apply-templates select="dataset/upcomingTitle" />
+    		<xsl:apply-templates select="dataset/upcomingTitle" />
     			
-    			<xsl:apply-templates select="dataset/alternativeTitle" />
+    		<xsl:apply-templates select="dataset/alternativeTitle" />
     			
-    			<xsl:apply-templates select="dataset/originalTitle" />
+    		<xsl:apply-templates select="dataset/originalTitle" />
     			
-    	<!--beteiligte Personen-->	
-    			<xsl:if test="dataset/author[1]">
+    	<!-- VERANTWORTLICH -->	
+    			
+    		<xsl:if test="dataset/author[1]">
 				<field name="author"><xsl:value-of select="dataset/author[1]" /></field>
-				</xsl:if>
+			</xsl:if>
 		
 			<xsl:for-each select="dataset/author[position()>=2]">
 				<field name="author_additional"><xsl:value-of select="." /></field>
-				</xsl:for-each>
+			</xsl:for-each>
 			
-    			<xsl:apply-templates select="dataset/editor" />
+    		<xsl:apply-templates select="dataset/editor" />
     			
 			<xsl:apply-templates select="dataset/contributor" />
 			
 			<xsl:apply-templates select="dataset/contributorNoFacet" />
     			
-    			<xsl:apply-templates select="dataset/entity" />
+    		<xsl:apply-templates select="dataset/entity" />
     			
-    			<xsl:apply-templates select="dataset/reviewer" />
+    		<xsl:apply-templates select="dataset/reviewer" />
     			
-    			<xsl:apply-templates select="dataset/series" />
+    		<xsl:apply-templates select="dataset/series" />
+    		
+    		<xsl:apply-templates select="dataset/seriesNr" />
     			
-    			<xsl:apply-templates select="dataset/seriesNr" />
-    			
-    			<xsl:apply-templates select="dataset/provenance" />
-    			
-    			<!--<xsl:if test="dataset/isbn">
-				<field name="isbn">	<xsl:value-of select="dataset/isbn" /></field>
-				</xsl:if>-->
+    		<xsl:apply-templates select="dataset/provenance" />
+    		
+    	<!-- IDENTIFIKATION  -->
+    	
 			<xsl:apply-templates select="dataset/isbn" />
 			
-			<!--<xsl:if test="dataset/issn">
-				<field name="issn">	<xsl:value-of select="dataset/issn" /></field>
-				</xsl:if>-->
 			<xsl:apply-templates select="dataset/issn" />
 			
 			<xsl:apply-templates select="dataset/zdbId" />
 			
-			<xsl:apply-templates select="dataset/journalCore" />
+		<!-- VERÖFFENTLICHUNGSANGABEN / PUBLISHING -->
 			
-			<xsl:apply-templates select="dataset/issuesInstitutions" />
-			
-			<xsl:apply-templates select="dataset/issuesGlobal" />
-			
-			<xsl:apply-templates select="dataset/annotation[string-length() != 0]" />
-			
-    			<xsl:apply-templates select="dataset/collectionHolding" />
+			<xsl:apply-templates select="dataset/displayPublishDate[1]" />	
     			
-    			<xsl:apply-templates select="dataset/displayPublishDate[1]" />	
-    			
-    			<xsl:apply-templates select="dataset/publishDate[1]" />
-    			<!--
-    			<xsl:if test="dataset/publishDate">
-                    			<field name="publishDate"><xsl:value-of select="dataset/publishDate"/></field>
-                			</xsl:if>-->
-                		
-                		<xsl:if test="dataset/timeSpan">
-                    			<field name="timeSpanStart"><xsl:value-of select="dataset/timeSpan/timeSpanStart"/></field>
-                    			<field name="timeSpanEnd"><xsl:value-of select="dataset/timeSpan/timeSpanEnd"/></field>
-                			</xsl:if>
-    			
-    			<xsl:apply-templates select="dataset/placeOfPublication" />
+   			<xsl:apply-templates select="dataset/publishDate[1]" />
+			
+			<xsl:apply-templates select="dataset/placeOfPublication" />
 			
 			<xsl:apply-templates select="dataset/publisher" />
+		
+			<xsl:apply-templates select="dataset/sourceInfo" />
+		
+		<!-- PHYSICAL INFORMATION -->
 			
 			<xsl:apply-templates select="dataset/physical" />
 			
 			<xsl:apply-templates select="dataset/dimension" />
 			
+			<xsl:apply-templates select="dataset/specificMaterialDesignation" />
+			
 			<xsl:apply-templates select="dataset/runTime" />
     			
-			<xsl:apply-templates select="dataset/specificMaterialDesignation" />
-    			
+		<!-- CONTENT RELATED INFORMATION -->
+		
 			<xsl:for-each select="dataset/language">
 				<xsl:variable name="test" select="." />
 					<field name="language">
 						<xsl:value-of select="document('../anreicherung/language.xml')/root/language[@use=$test]/@name"/>
-						</field>
+					</field>
 					<field name="language_code">
 						<xsl:value-of select="document('../anreicherung/language.xml')/root/language[@use=$test]/@code"/>
-						</field>
-				</xsl:for-each>
-			
+					</field>
+			</xsl:for-each>
+		
 			<xsl:apply-templates select="dataset/language_code" />
-			
+		
 			<xsl:apply-templates select="dataset/subjectTopic" />
 			
-                		<!--<xsl:apply-templates select="dataset/translatedTopic" />-->
-                		
-                		<xsl:if test="dataset/translatedTopic">
+			<xsl:if test="dataset/translatedTopic">
 				<xsl:for-each select="distinct-values(dataset/translatedTopic)">
 					<xsl:if test=".!=''">
 						<field name="translatedTopic"><xsl:value-of select="." /></field>
 						</xsl:if>
 					</xsl:for-each>
-				</xsl:if>
+			</xsl:if>
+		
+			<xsl:apply-templates select="dataset/subjectPerson" />
+			
+			<xsl:apply-templates select="dataset/subjectGeographic" />
+            
+            <xsl:apply-templates select="dataset/subjectName" />
                 		
-                		<!--<xsl:variable name="topic" select="dataset/subjectTopic" />
-                		<xsl:if test="document('../anreicherung/thesaurus.xml')/root/term/usedTerm=$topic">
-                			<xsl:for-each select="document('../anreicherung/thesaurus.xml')/root/term[usedTerm=$topic]/translatedTerm">
-                				<field name="translatedTerm">
-                					<xsl:value-of select="@lang"/>
-                					<xsl:text>: </xsl:text>
-                					<xsl:value-of select="."/>
-                					<xsl:text> (</xsl:text>
-                					<xsl:value-of select="../usedTerm"/>		
-                					<xsl:text>)</xsl:text>
-                					</field>
-                				</xsl:for-each>
-                			</xsl:if>-->
-                		
-                		<xsl:apply-templates select="dataset/subjectGeographic" />
-                		
-                		<xsl:apply-templates select="dataset/subjectPerson" />
+			<xsl:apply-templates select="dataset/description" />
                 			
-                		<xsl:apply-templates select="dataset/subjectName" />
-                		
-                		<xsl:apply-templates select="dataset/description" />
-                		
-                		<xsl:apply-templates select="dataset/shelfMark[1]" />
-                		
-                		<xsl:apply-templates select="dataset/issue" />
+            <xsl:apply-templates select="dataset/listOfContents" />
+            
+            <xsl:apply-templates select="dataset/annotation[string-length() != 0]" />
 			
+    		<xsl:apply-templates select="dataset/edition" />
+    	
+    	<!-- JOURNAL RELATED INFORMATION -->
+    		
+    		<xsl:apply-templates select="dataset/issue" />
+    		
+   			<xsl:apply-templates select="dataset/specialIssue" />
+
 			<xsl:apply-templates select="dataset/volume" />
+
+			<xsl:apply-templates select="dataset/publicationFrequency" />
 			
-			<xsl:apply-templates select="dataset/contentMatter" />
+			<xsl:apply-templates select="dataset/insertOf" />
 			
-			<xsl:if test="dataset/project">
+			<xsl:apply-templates select="dataset/collectionHolding" />
+			
+			<xsl:apply-templates select="dataset/outOfStocks" />
+    		
+    		<xsl:apply-templates select="dataset/contentMatter" />
+    		
+    	<!-- OTHER -->
+    		
+    		<xsl:if test="dataset/project">
 				<xsl:for-each select="distinct-values(dataset/project)">
 					<xsl:if test=".!=''">
 						<field name="project"><xsl:value-of select="." /></field>
-						</xsl:if>
-					</xsl:for-each>
-				</xsl:if>
-			
-			<xsl:apply-templates select="dataset/url" />
-			
-			<xsl:if test="dataset/relatedTo">
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:if>
+    		
+    		<xsl:apply-templates select="dataset/shelfMark[1]" />
+    		
+    		<xsl:if test="dataset/relatedTo">
 				<field name="relatedTo">
 					<xsl:value-of select="dataset/relatedTo"/>
-					</field>
-				</xsl:if>
-			
-			<xsl:apply-templates select="dataset/sourceInfo" />
-			
-			<xsl:apply-templates select="dataset/listOfContents" />
-			
-			<xsl:apply-templates select="dataset/specialIssue" />
-			<xsl:apply-templates select="dataset/publicationFrequency" />
-			<xsl:apply-templates select="dataset/insertOf" />
-			<xsl:apply-templates select="dataset/outOfStocks" />
-			
-			
+				</field>
+			</xsl:if>
+
+<!-- grouping -->
+
 			<field name="groupID">
 			<!-- 
 			     The groupID field is build using ida:build-group-id(<doc-id>,<format>,<normalized field>,<normalized field>,...) 
@@ -376,75 +361,11 @@
 						<xsl:value-of select="vufind/id"/>
 					</xsl:otherwise>
 				</xsl:choose>
-			</field>
-				
-			<xsl:apply-templates select="dataset/edition" />
-			
-			
+			</field>			
 			
 			<!--<xsl:apply-templates select="dataset/provenance" />-->
-			
-	<!--Anreicherung Artikel-->
-			<!--<xsl:if test="dataset/format='Artikel'">
-			<xsl:variable name="test" select="functions/hierarchyFields/hierarchy_parent_id" />
-			
-				<xsl:if test="//record[@id=$test]/dataset/displayPublishDate">
-					<field name="displayPublishDate"><xsl:value-of select="//record[@id=$test]/dataset/displayPublishDate"/></field>
-					</xsl:if>
-				<xsl:if test="//record[@id=$test]/dataset/placeOfPublication">
-					<field name="placeOfPublication"><xsl:value-of select="//record[@id=$test]/dataset/placeOfPublication"/></field>
-					</xsl:if>
-				<xsl:if test="//record[@id=$test]/dataset/publisher">
-					<field name="publisher"><xsl:value-of select="//record[@id=$test]/dataset/publisher"/></field>
-					</xsl:if>
-				<xsl:if test="//record[@id=$test]/functions/systematikFields/systematik_parent_id">
-					<field name="systematik_parent_id"><xsl:value-of select="//record[@id=$test]/functions/systematikFields/systematik_parent_id"/></field>
-					</xsl:if>
-				<xsl:if test="//record[@id=$test]/functions/systematikFields/systematik_parent_title">
-					<field name="systematik_parent_title"><xsl:value-of select="//record[@id=$test]/functions/systematikFields/systematik_parent_title"/></field>
-					</xsl:if>
-				
-				<xsl:if test="(not(dataset/language)) and (not(dataset/language_code))">
-				<xsl:choose>
-					<xsl:when test="//record[@id=$test]/dataset/language">
-						<xsl:for-each select="//record[@id=$test]/dataset/language">
-						<xsl:variable name="language" select="." />
-							<xsl:choose>
-								<xsl:when test="$language">
-									<field name="language">
-									<xsl:value-of select="document('../anreicherung/language.xml')/root/language[@use=$language]/@name"/>
-										</field>
-									<field name="language_code">
-									<xsl:value-of select="document('../anreicherung/language.xml')/root/language[@use=$language]/@code"/>
-										</field>
-									</xsl:when>
-								</xsl:choose>					
-							</xsl:for-each>
-						</xsl:when>
-					<xsl:otherwise>
-						<field name="language">
-							<xsl:text>o. A.</xsl:text>
-							</field>
-						</xsl:otherwise>	
-						</xsl:choose>
-						</xsl:if>
-				</xsl:if>-->
-				
-	
-	
 		
 <!--functions-->
-		
-		
-		
-		<xsl:if test="functions/loan/loanStatus">
-			<field name="loanStatus"><xsl:text>true</xsl:text></field>
-		</xsl:if>
-		
-		<xsl:if test="functions/loan/loanReturn">
-			<field name="loanReturn"><xsl:value-of select="functions/loan/loanReturn"/></field>
-		</xsl:if>
-		
 		
 		<xsl:if test="functions/systematikFields/systematik_parent_id">
 			<xsl:for-each select="functions/systematikFields/systematik_parent_id">
@@ -470,34 +391,30 @@
 			</xsl:for-each>
 		</xsl:if>
 		
-		 <xsl:if test="functions/hierarchyFields/hierarchy_parent_id">
+		<xsl:if test="functions/hierarchyFields/hierarchy_parent_id">
 		 	 <field name="hierarchy_parent_id"><xsl:value-of select="functions/hierarchyFields/hierarchy_parent_id"/></field>
-		 </xsl:if>
+		</xsl:if>
+		
 		<xsl:if test="functions/hierarchyFields/hierarchy_parent_title">
 			<field name="hierarchy_parent_title"><xsl:value-of select="functions/hierarchyFields/hierarchy_parent_title"/></field>
 		</xsl:if>
+		
 		<xsl:if test="functions/hierarchyFields/is_hierarchy_id">
 			 <field name="is_hierarchy_id"><xsl:value-of select="functions/hierarchyFields/is_hierarchy_id"/></field>
 		</xsl:if>
+		
 		<xsl:if test="functions/hierarchyFields/is_hierarchy_title">
 			<field name="is_hierarchy_title"><xsl:value-of select="functions/hierarchyFields/is_hierarchy_title"/></field>
 		</xsl:if>
+		
 		<xsl:if test="functions/hierarchyFields/hierarchy_sequence">
 			<field name="hierarchy_sequence"><xsl:value-of select="functions/hierarchyFields/hierarchy_sequence"/></field>
 		</xsl:if>
 
-	
-	
-
 	</doc>
-	
-	
-	
 	</xsl:for-each>
 	<commit/>
- 	<!--<optimize/>-->
-	
-</add>
+	</add>
 </xsl:template>
 	
 	<xsl:template match="searchfilter">
@@ -561,21 +478,10 @@
        					</xsl:if>
      				</xsl:for-each>
    			</xsl:variable>
-		<!--<xsl:variable name="the_min">
-     			<xsl:for-each select="../publishDate">
-       				<xsl:sort data-type="number" order="ascending"/>
-       				<xsl:if test="position()=1">
-       					<xsl:value-of select="."/>
-       					</xsl:if>
-     				</xsl:for-each>
-   			</xsl:variable>-->
 		
 		<field name="publishDateSort">
 				<xsl:value-of select="$the_max" />
 				</field>
-		<!--<field name="publishDateMin">
-				<xsl:value-of select="$the_min" />
-				</field>-->
 		</xsl:template>
 	
 	<xsl:template match="provenance">
