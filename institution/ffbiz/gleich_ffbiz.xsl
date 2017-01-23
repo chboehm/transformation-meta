@@ -1066,7 +1066,7 @@
 
 					<!--TITLE -->
 						<!--title Titelinformationen -->
-						<xsl:apply-templates select="Titel" />
+						<xsl:apply-templates select="Titel[1]" />
 
 					<!--OTHER -->
 
