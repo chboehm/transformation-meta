@@ -285,11 +285,16 @@
 
 	<xsl:template match="Objekt">
 		<xsl:variable name="id" select="id" />
-		<xsl:if test="not(objektart[text()='Fotografien'])">
-
+		
+		<xsl:if test="objektart[text()='Plakate']">
+		<!-- <xsl:if test="not(objektart[text()='Fotografie_n'])"> -->
+		
+		
 			<xsl:element name="record">
 				<xsl:attribute name="id"><xsl:value-of select="$id"></xsl:value-of></xsl:attribute>
-				<!--vufind_______________________________vufind_______________________________vufind -->
+
+<!--vufind_______________________________vufind_______________________________vufind -->
+
 				<xsl:element name="vufind">
 
 					<!--Identifikator -->
@@ -441,6 +446,44 @@
 						<!--shelfMark Signatur -->
 						<xsl:apply-templates select="Signatur" />
 					</xsl:element>
+					
+					<functions>
+						<hierarchyFields>
+						<xsl:variable name="bestand" select="translate(Bestand, '. /äüö,', '')" />
+						<xsl:variable name="klassifikation" select="translate(Klassifikation_x032x_Nachl_x132x_sse, '. /äüö,', '')" />
+						
+						<hierarchy_top_id>
+							<xsl:value-of select="$bestand" />
+							<xsl:text>ffbiz</xsl:text>
+						</hierarchy_top_id>
+						<hierarchy_top_title>
+							<xsl:value-of select="Bestand" />
+						</hierarchy_top_title>
+							
+						<hierarchy_parent_id>
+							<xsl:value-of select="$bestand" />
+							<xsl:value-of select="$klassifikation" />
+							<xsl:text>ffbiz</xsl:text>
+						</hierarchy_parent_id>
+						
+						<hierarchy_parent_title>
+							<xsl:value-of select="Klassifikation_x032x_Nachl_x132x_sse" />
+						</hierarchy_parent_title>
+						
+						<is_hierarchy_id>
+							<xsl:value-of select="id" />
+							<xsl:text>ffbiz</xsl:text>
+						</is_hierarchy_id>
+						<is_hierarchy_title>
+							<xsl:value-of select="Hauptsachtitel" />
+						</is_hierarchy_title>
+						<hierarchy_sequence>
+							<xsl:value-of select="Hauptsachtitel" />
+						</hierarchy_sequence>
+
+						</hierarchyFields>
+					</functions>
+					
 				</xsl:if>
 
 				<!--Zeitschriften________________Zeitschriften___________________________Zeitschriften -->
@@ -659,6 +702,44 @@
 						<xsl:apply-templates select="Signatur" />
 
 					</xsl:element>
+						
+					<functions>
+						<hierarchyFields>
+						<xsl:variable name="bestand" select="translate(Bestand, '. /äüö,', '')" />
+						<xsl:variable name="klassifikation" select="translate(Klassifikation_x032x_Nachl_x132x_sse, '. /äüö,', '')" />
+						
+						<hierarchy_top_id>
+							<xsl:value-of select="$bestand" />
+							<xsl:text>ffbiz</xsl:text>
+						</hierarchy_top_id>
+						<hierarchy_top_title>
+							<xsl:value-of select="Bestand" />
+						</hierarchy_top_title>
+							
+						<hierarchy_parent_id>
+							<xsl:value-of select="$bestand" />
+							<xsl:value-of select="$klassifikation" />
+							<xsl:text>ffbiz</xsl:text>
+						</hierarchy_parent_id>
+						
+						<hierarchy_parent_title>
+							<xsl:value-of select="Klassifikation_x032x_Nachl_x132x_sse" />
+						</hierarchy_parent_title>
+						
+						<is_hierarchy_id>
+							<xsl:value-of select="id" />
+							<xsl:text>ffbiz</xsl:text>
+						</is_hierarchy_id>
+						<is_hierarchy_title>
+							<xsl:value-of select="Einzeltitel" />
+						</is_hierarchy_title>
+						<hierarchy_sequence>
+							<xsl:value-of select="Einzeltitel" />
+						</hierarchy_sequence>
+
+						</hierarchyFields>
+					</functions>
+				
 				</xsl:if>
 
 				<!--Buttons und Sticker________Buttons und Sticker____________Buttons und Sticker -->
@@ -965,10 +1046,13 @@
 					</functions>
 				</xsl:if>
 
-				<!--Plakate________Plakate____________Plakate -->
+<!--Plakate________Plakate____________Plakate -->
+				
 				<xsl:if test="objektart[text()='Plakate']">
+				
 					<xsl:element name="dataset">
-						<!--FORMAT -->
+
+					<!--FORMAT -->
 						<!--typeOfRessource -->
 						<typeOfRessource>
 							<xsl:text>bild</xsl:text>
@@ -979,10 +1063,13 @@
 						<searchfilter>
 							<xsl:text>Plakat</xsl:text>
 						</searchfilter>
-						<!--TITLE -->
+
+					<!--TITLE -->
 						<!--title Titelinformationen -->
 						<xsl:apply-templates select="Titel" />
-						<!--OTHER -->
+
+					<!--OTHER -->
+
 						<!--shelfMark Signatur -->
 						<xsl:apply-templates select="Signatur" />
 						<!-- description Beschreibung -->
@@ -1010,7 +1097,7 @@
 						<xsl:apply-templates select="Anlass_x047x_Ereignis_x047x_Thema"/>
 					</xsl:element>
 				</xsl:if>
-				<!--ENDE_____PLAKATE__________ENDE___________________________________ENDE -->
+				
 			</xsl:element>
 		</xsl:if>
 	</xsl:template>
