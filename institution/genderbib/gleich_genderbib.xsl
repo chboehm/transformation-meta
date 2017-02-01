@@ -25,10 +25,11 @@
 		<xsl:variable name="s_sachtitel"
 			select="translate(s_x046x__x032x_Sachtitel[1], translate(.,'0123456789', ''), '')" />
 		
-		<xsl:if test="objektart[text()!='NutzerIn']">
+		<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel'])"> 
 
 
 			<!-- 
+			<xsl:if test="objektart[text()!='NutzerIn']">
 			<xsl:if test="objektart[text()='Artikel']">
 			<xsl:if test="(objektart[text()='Zeitschrift']) or (objektart[text()='Zeitschrift/Heftitel']) or (contains(objektart,'Einzeltitel'))">
 			<xsl:if test="objektart[text()='Online-Ressource']"> <xsl:if test="(objektart[text()='Zeitschrift']) 
@@ -1320,7 +1321,7 @@
 
 						<!--placeOfPublication Ortsangabe -->
 						<xsl:choose>
-							<xsl:when test="Ersch_x046x_-ort">
+							<xsl:when test="Ersch_x046x_-ort[1]">
 								<xsl:apply-templates select="Ersch_x046x_-ort" />
 							</xsl:when>
 							<xsl:when test="s__Zeitschriftentitel">
@@ -1338,51 +1339,52 @@
 						</xsl:choose>
 
 						<!--displayDate -->
-						<xsl:choose>
-							<xsl:when test="J_x046x_">
-								<displayPublishDate>
-									<xsl:value-of select="J_x046x_" />
-								</displayPublishDate>
-							</xsl:when>
-							<xsl:when test="not(J_x046x_)">
-								<displayPublishDate>
-									<xsl:variable name="z-jahr1"
-										select="substring-after($z-ausgabe,'(')" />
-									<xsl:choose>
-										<xsl:when test="$z-jahr1">
-											<xsl:value-of select="substring-before($z-jahr1,')')" />
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="Ausgabe"></xsl:value-of>
-										</xsl:otherwise>
-									</xsl:choose>
-								</displayPublishDate>
-							</xsl:when>
-						</xsl:choose>
-
+						<displayPublishDate>
+							<xsl:choose>
+								<xsl:when test="J_x046x_">								
+										<xsl:value-of select="J_x046x_" />
+								</xsl:when>
+								<xsl:when test="not(J_x046x_)">
+										<xsl:variable name="z-jahr1" select="substring-after($z-ausgabe,'(')" />
+										<xsl:choose>
+											<xsl:when test="$z-jahr1">
+												<xsl:value-of select="substring-before($z-jahr1,')')" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="Ausgabe"></xsl:value-of>
+											</xsl:otherwise>
+										</xsl:choose>
+								</xsl:when>
+							</xsl:choose>
+						</displayPublishDate>
+						
+						
 						<!--publishDate Jahresangabe -->
-						<xsl:choose>
-							<xsl:when test="J_x046x_">
-								<publishDate>
-									<xsl:value-of select="J_x046x_" />
-								</publishDate>
-							</xsl:when>
-							<xsl:when test="not(J_x046x_)">
-								<publishDate>
-									<xsl:variable name="z-jahr1"
-										select="substring-after($z-ausgabe,'(')" />
-									<xsl:choose>
-										<xsl:when test="$z-jahr1">
-											<xsl:value-of select="substring-before($z-jahr1,')')" />
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="Ausgabe"></xsl:value-of>
-										</xsl:otherwise>
-									</xsl:choose>
-								</publishDate>
-							</xsl:when>
-						</xsl:choose>
-
+						<publishDate>
+							<xsl:choose>
+								<xsl:when test="J_x046x_">
+										<xsl:value-of select="J_x046x_" />
+								</xsl:when>
+								<xsl:when test="contains(Ausgabe,'(')">
+									<xsl:variable name="z-jahr1" select="substring-after($z-ausgabe,'(')" />
+										<xsl:choose>
+											<xsl:when test="$z-jahr1">
+												<xsl:value-of select="substring-before($z-jahr1,')')" />
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="Ausgabe"></xsl:value-of>
+											</xsl:otherwise>
+										</xsl:choose>
+								</xsl:when>
+								<xsl:when test="contains(Ausgabe,'/')">
+									<xsl:value-of select="normalize-space(substring-after(Ausgabe,'/'))" />
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:text>0000</xsl:text>
+								</xsl:otherwise>						
+							</xsl:choose>
+						</publishDate>
+							
 						<!--sourceInfo -->
 						<xsl:variable name="zdbid" select="ZDB-ID" />
 
@@ -1429,7 +1431,7 @@
 						<xsl:apply-templates select="Jg-[1]" />
 
 						<!--contentMatter Inhalt und Thema -->
-						<xsl:apply-templates select="Inhalt_x047x_Thema" />
+						<!-- <xsl:apply-templates select="Inhalt_x047x_Thema" /> -->
 
 					<!--OTHER -->
 
@@ -1453,7 +1455,7 @@
 						</xsl:choose>
 					</xsl:variable>
 
-					<xsl:variable name="reference">
+					<!-- <xsl:variable name="reference">
 						<xsl:text>Objekt </xsl:text>
 						<xsl:value-of select="$id" />
 						<xsl:text> / ZiF                 </xsl:text>
@@ -1461,7 +1463,7 @@
 
 					<xsl:variable name="id_parent">
 						<xsl:value-of select="//datensatz[s_x046x__x032x_Ausgabe=$reference]/id" />
-					</xsl:variable>
+					</xsl:variable> -->
 
 					<xsl:if test="s_x046x__x032x_Aufsatz">
 
@@ -2211,28 +2213,56 @@
 	</xsl:template>
 
 	<xsl:template match="Geografika">
-		<xsl:for-each select="tokenize(., ';')">
-			<subjectGeographic>
-				<xsl:value-of select="normalize-space(.)" />
-			</subjectGeographic>
-		</xsl:for-each>
+		<xsl:choose>
+			<xsl:when test="contains(.,';')">
+				<xsl:for-each select="tokenize(.[1], ';')">
+					<subjectGeographic>
+						<xsl:value-of select="normalize-space(.)" />
+					</subjectGeographic>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<subjectGeographic>
+					<xsl:value-of select="normalize-space(.)" />
+				</subjectGeographic>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="Land">
-		<xsl:for-each select="tokenize(., ';')">
-			<subjectGeographic>
-				<xsl:value-of select="normalize-space(.)" />
-			</subjectGeographic>
-		</xsl:for-each>
+		<xsl:choose>
+			<xsl:when test="contains(.,';')">
+				<xsl:for-each select="tokenize(.[1], ';')">
+					<subjectGeographic>
+						<xsl:value-of select="normalize-space(.)" />
+					</subjectGeographic>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<subjectGeographic>
+					<xsl:value-of select="normalize-space(.)" />
+				</subjectGeographic>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<!--Template Personen -->
-	<xsl:template match="Personen[1]">
-		<xsl:for-each select="tokenize(.[1], ';')">
-			<subjectPerson>
-				<xsl:value-of select="normalize-space(.)" />
-			</subjectPerson>
-		</xsl:for-each>
+	<xsl:template match="Personen">
+		<xsl:choose>
+			<xsl:when test="contains(.,';')">
+				<xsl:for-each select="tokenize(.[1], ';')">
+					<subjectPerson>
+						<xsl:value-of select="normalize-space(.)" />
+					</subjectPerson>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<subjectPerson>
+					<xsl:value-of select="normalize-space(.)" />
+				</subjectPerson>
+			</xsl:otherwise>
+		</xsl:choose>
+		
 	</xsl:template>
 
 	<!--Template Autorin -->
@@ -2416,7 +2446,7 @@
 	</xsl:template>
 
 	<!--Template Erscheinungs Ortsangabe -->
-	<xsl:template match="Ersch_-ort[1]">
+	<xsl:template match="Ersch_x046x_-ort">
 		<xsl:choose>
 			<xsl:when test="(not(.)) or (contains(.[1], 'o.A.'))">
 				<placeOfPublication>
